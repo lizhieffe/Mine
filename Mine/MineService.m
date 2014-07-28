@@ -28,7 +28,7 @@
 
 - (NSString *)hostUrl
 {
-    return @"http://10.21.17.41:8080/UsherTestToolsServer/rest";
+    return @"http://localhost:8080/MineServer";
 }
 
 - (NSString *)apiPath

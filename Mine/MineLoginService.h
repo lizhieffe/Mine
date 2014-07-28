@@ -10,4 +10,6 @@
 
 @interface MineLoginService : MineService
 
+- (void)loginWithUsername:(NSString *)username passcode:(NSString *)passcode;
+
 @end

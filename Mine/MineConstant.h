@@ -11,8 +11,29 @@
 #pragma mark - notification name -
 
 extern NSString *const MineNotificationLoginDidSucceed;
+extern NSString *const MineNotificationSignUpDidSucceed;
 
 #pragma mark - request parameter -
 
 extern NSString *const MineRequestParameterUsername;
-extern NSString *const MineRequestParameterpasscode;
+extern NSString *const MineRequestParameterPasscode;
+extern NSString *const MineRequestParameterFirstname;
+extern NSString *const MineRequestParameterLastname;
+extern NSString *const MineRequestParameterGender;
+
+#pragma mark - response key -
+
+extern NSString *const MineResponseKeyErrorJson;
+extern NSString *const MineResponseKeyErrorCode;
+extern NSString *const MineResponseKeyErrorMsg;
+
+extern NSString *const MineResponseKeyResponse;
+
+#pragma mark - alert view title and body msg -
+
+extern NSString *const MineAlertViewTitleUserNotExist;
+extern NSString *const MineAlertViewMsgUserNotExist;
+
+extern NSString *const MineAlertViewTitleWrongPasscode;
+extern NSString *const MineAlertViewMsgWrongPasscode;
+

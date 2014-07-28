@@ -36,13 +36,13 @@
     [super updateParameters];
     
     [self.requestParameters setObject:_username forKey:MineRequestParameterUsername];
-    [self.requestParameters setObject:_passcode forKey:MineRequestParameterpasscode];
+    [self.requestParameters setObject:_passcode forKey:MineRequestParameterPasscode];
 }
 
 - (void (^)(NSMutableDictionary *json, NSURLResponse *response))completionBlockForSuccess
 {
     return ^(NSMutableDictionary *json, NSURLResponse *response) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:MineNotificationLoginDidSucceed object:self userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:MineNotificationLoginDidSucceed object:self userInfo:json];
     };
 }
 

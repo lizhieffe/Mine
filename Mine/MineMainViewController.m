@@ -7,8 +7,14 @@
 //
 
 #import "MineMainViewController.h"
+#import "MineLoginViewController.h"
+#import "MinePreferenceService.h"
+#import "MineCreateTransactionItemsViewController.h"
 
 @interface MineMainViewController ()
+
+@property (weak, nonatomic) IBOutlet UIButton *addNewTransactionBtn;
+- (IBAction)addNewTransactionBtnTapped:(id)sender;
 
 @end
 
@@ -26,13 +32,32 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    /**
+     display the login view controller first if there is no user logged in
+     */
+    if (![MinePreferenceService currentUserInfo]) {
+        [self presentLoginViewController];
+    }
 }
 
-- (void)didReceiveMemoryWarning
+- (void)presentLoginViewController
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self.view.hidden = YES;
+    UIViewController *loginViewController = [[MineLoginViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+    [navigationController setNavigationBarHidden:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self presentViewController:navigationController animated:NO completion:nil];
+    });
+}
+
+- (IBAction)addNewTransactionBtnTapped:(id)sender {
+    UIViewController *createTransactionItemsViewController = [[MineCreateTransactionItemsViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:createTransactionItemsViewController];
+    [navigationController setNavigationBarHidden:YES];
+    
+    [self presentViewController:navigationController animated:NO completion:nil];
 }
 
 @end

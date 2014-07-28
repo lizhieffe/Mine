@@ -8,7 +8,7 @@
             <connections>
                 <outlet property="activityIndicatorView" destination="kUN-c7-cwW" id="0G8-i5-J58"/>
                 <outlet property="loginButton" destination="Mcx-K8-zv5" id="HpP-bL-IJ8"/>
-                <outlet property="passwordTextField" destination="N8Q-dZ-UeO" id="KI8-vW-QfB"/>
+                <outlet property="passcodeTextField" destination="N8Q-dZ-UeO" id="Xaj-Y8-eJg"/>
                 <outlet property="scrollView" destination="Ded-Iv-0Fk" id="nZh-w5-VP0"/>
                 <outlet property="signupButton" destination="vUy-6c-tXZ" id="ObP-z8-4Jq"/>
                 <outlet property="usernameTextField" destination="ajc-uF-C7T" id="Tm9-Db-QDU"/>
@@ -59,6 +59,9 @@
                             <state key="normal" title="Sign up">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="signUpBtnTapped:" destination="-1" eventType="touchDown" id="28V-qJ-SSt"/>
+                            </connections>
                         </button>
                     </subviews>
                 </scrollView>
