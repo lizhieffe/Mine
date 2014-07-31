@@ -40,6 +40,9 @@
     [self updateLoginBtnWithStatus:NO];
     self.activityIndicatorView.hidden = YES;
     
+    if([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     /**
      add guesture to dismiss keyboard
      */
@@ -201,6 +204,12 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     [self adjustScrollView];
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    [self updateLoginBtnWithStatus:NO];
+    
+    return YES;
 }
 
 @end

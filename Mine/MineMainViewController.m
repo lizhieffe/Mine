@@ -13,8 +13,10 @@
 
 @interface MineMainViewController ()
 
+@property (strong, nonatomic) UIViewController *upViewController;
+@property (strong, nonatomic) UIViewController *downViewController;
+
 @property (weak, nonatomic) IBOutlet UIButton *addNewTransactionBtn;
-- (IBAction)addNewTransactionBtnTapped:(id)sender;
 
 @end
 
@@ -39,6 +41,50 @@
     if (![MinePreferenceService currentUserInfo]) {
         [self presentLoginViewController];
     }
+    
+    [self setUpViewController];
+    [self setDownViewController];
+}
+
+- (void)setUpViewController
+{
+    
+}
+
+- (void)setDownViewController
+{
+    UISwipeGestureRecognizer *swipeUpGusturRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeUpFrom:)];
+    swipeUpGusturRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
+    [self.view addGestureRecognizer:swipeUpGusturRecognizer];
+    
+    UIViewController *child = [[MineCreateTransactionItemsViewController alloc] init];
+    [self addSubController:child];
+    
+    _downViewController = child;
+}
+
+- (void)addSubController:(UIViewController *)child
+{
+    if (child && !child.parentViewController) {
+        [self addChildViewController:child];
+        [self.view addSubview:child.view];
+        [self.view sendSubviewToBack:child.view];
+        [child didMoveToParentViewController:self];
+        
+        CGRect newFrame = CGRectMake(0, 568, child.view.frame.size.width, child.view.frame.size.height);
+        child.view.frame = newFrame;
+    }
+}
+
+- (void)handleSwipeUpFrom:(UIGestureRecognizer *)recognizer
+{
+    [UIView animateWithDuration:2
+                     animations:^{
+                         self.downViewController.view.frame = [[UIApplication sharedApplication] keyWindow].frame;
+                     }
+                     completion:^(BOOL finished) {
+                         
+                     }];
 }
 
 - (void)presentLoginViewController
@@ -52,12 +98,5 @@
     });
 }
 
-- (IBAction)addNewTransactionBtnTapped:(id)sender {
-    UIViewController *createTransactionItemsViewController = [[MineCreateTransactionItemsViewController alloc] init];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:createTransactionItemsViewController];
-    [navigationController setNavigationBarHidden:YES];
-    
-    [self presentViewController:navigationController animated:NO completion:nil];
-}
 
 @end

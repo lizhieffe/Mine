@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *cellDescription;
 @property (weak, nonatomic) IBOutlet UILabel *cellPrice;
 
++ (MineTransactionItemCellTableViewCell *)generateCell;
 - (id)initWithDescription:(NSString *)description price:(NSNumber *)price;
 
 @end

@@ -10,7 +10,7 @@
 
 @implementation MineTransactionItem
 
-- (id)initWithDescription:(NSString *)description price:(NSNumber *)price
+- (id)initWithDescription:(NSString *)description price:(double)price
 {
     self = [super init];
     if (self) {

@@ -25,6 +25,11 @@
 		DC15A2201985F8BC007FA1AC /* MineTransactionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DC15A21F1985F8BC007FA1AC /* MineTransactionItem.m */; };
 		DC15A225198601A5007FA1AC /* MineTransactionItemCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC15A223198601A5007FA1AC /* MineTransactionItemCellTableViewCell.m */; };
 		DC15A226198601A5007FA1AC /* MineTransactionItemCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC15A224198601A5007FA1AC /* MineTransactionItemCellTableViewCell.xib */; };
+		DC15A229198755AF007FA1AC /* UITableView+Mine.m in Sources */ = {isa = PBXBuildFile; fileRef = DC15A228198755AF007FA1AC /* UITableView+Mine.m */; };
+		DC15A22D1987D236007FA1AC /* MineCreateTransactionLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC15A22B1987D236007FA1AC /* MineCreateTransactionLocationViewController.m */; };
+		DC15A22E1987D236007FA1AC /* MineCreateTransactionLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC15A22C1987D236007FA1AC /* MineCreateTransactionLocationViewController.xib */; };
+		DC15A2301987D408007FA1AC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC15A22F1987D408007FA1AC /* MapKit.framework */; };
+		DC15A2331988BB33007FA1AC /* MKMapView+Mine.m in Sources */ = {isa = PBXBuildFile; fileRef = DC15A2321988BB33007FA1AC /* MKMapView+Mine.m */; };
 		DCDF69AA1982831E0066FDCC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCDF69A91982831E0066FDCC /* Foundation.framework */; };
 		DCDF69AC1982831E0066FDCC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCDF69AB1982831E0066FDCC /* CoreGraphics.framework */; };
 		DCDF69AE1982831E0066FDCC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCDF69AD1982831E0066FDCC /* UIKit.framework */; };
@@ -84,6 +89,14 @@
 		DC15A222198601A5007FA1AC /* MineTransactionItemCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineTransactionItemCellTableViewCell.h; sourceTree = "<group>"; };
 		DC15A223198601A5007FA1AC /* MineTransactionItemCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineTransactionItemCellTableViewCell.m; sourceTree = "<group>"; };
 		DC15A224198601A5007FA1AC /* MineTransactionItemCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineTransactionItemCellTableViewCell.xib; sourceTree = "<group>"; };
+		DC15A227198755AF007FA1AC /* UITableView+Mine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Mine.h"; sourceTree = "<group>"; };
+		DC15A228198755AF007FA1AC /* UITableView+Mine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Mine.m"; sourceTree = "<group>"; };
+		DC15A22A1987D236007FA1AC /* MineCreateTransactionLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineCreateTransactionLocationViewController.h; sourceTree = "<group>"; };
+		DC15A22B1987D236007FA1AC /* MineCreateTransactionLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineCreateTransactionLocationViewController.m; sourceTree = "<group>"; };
+		DC15A22C1987D236007FA1AC /* MineCreateTransactionLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineCreateTransactionLocationViewController.xib; sourceTree = "<group>"; };
+		DC15A22F1987D408007FA1AC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		DC15A2311988BB33007FA1AC /* MKMapView+Mine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+Mine.h"; sourceTree = "<group>"; };
+		DC15A2321988BB33007FA1AC /* MKMapView+Mine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+Mine.m"; sourceTree = "<group>"; };
 		DCDF69A61982831E0066FDCC /* Mine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCDF69A91982831E0066FDCC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DCDF69AB1982831E0066FDCC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -110,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC15A2301987D408007FA1AC /* MapKit.framework in Frameworks */,
 				DCDF69AC1982831E0066FDCC /* CoreGraphics.framework in Frameworks */,
 				DCDF69AE1982831E0066FDCC /* UIKit.framework in Frameworks */,
 				DCDF69AA1982831E0066FDCC /* Foundation.framework in Frameworks */,
@@ -173,6 +187,10 @@
 			children = (
 				DC15A20E1985D990007FA1AC /* UIView+FindFirstResponder.h */,
 				DC15A20F1985D990007FA1AC /* UIView+FindFirstResponder.m */,
+				DC15A227198755AF007FA1AC /* UITableView+Mine.h */,
+				DC15A228198755AF007FA1AC /* UITableView+Mine.m */,
+				DC15A2311988BB33007FA1AC /* MKMapView+Mine.h */,
+				DC15A2321988BB33007FA1AC /* MKMapView+Mine.m */,
 			);
 			name = Addition;
 			sourceTree = "<group>";
@@ -209,6 +227,7 @@
 		DCDF69A81982831E0066FDCC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DC15A22F1987D408007FA1AC /* MapKit.framework */,
 				DCDF69A91982831E0066FDCC /* Foundation.framework */,
 				DCDF69AB1982831E0066FDCC /* CoreGraphics.framework */,
 				DCDF69AD1982831E0066FDCC /* UIKit.framework */,
@@ -287,6 +306,9 @@
 				DC15A2161985EFAC007FA1AC /* MineCreateTransactionItemsViewController.h */,
 				DC15A2171985EFAC007FA1AC /* MineCreateTransactionItemsViewController.m */,
 				DC15A2181985EFAC007FA1AC /* MineCreateTransactionItemsViewController.xib */,
+				DC15A22A1987D236007FA1AC /* MineCreateTransactionLocationViewController.h */,
+				DC15A22B1987D236007FA1AC /* MineCreateTransactionLocationViewController.m */,
+				DC15A22C1987D236007FA1AC /* MineCreateTransactionLocationViewController.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -378,6 +400,7 @@
 				DC15A1FA19844DF2007FA1AC /* MineMainViewController.xib in Resources */,
 				DC15A226198601A5007FA1AC /* MineTransactionItemCellTableViewCell.xib in Resources */,
 				DCDF69C21982831E0066FDCC /* Images.xcassets in Resources */,
+				DC15A22E1987D236007FA1AC /* MineCreateTransactionLocationViewController.xib in Resources */,
 				DCDF69E51982873F0066FDCC /* MineLoginViewController.xib in Resources */,
 				DCDF69B41982831E0066FDCC /* InfoPlist.strings in Resources */,
 				DC15A2091985C2D5007FA1AC /* MineSignUpViewController.xib in Resources */,
@@ -402,13 +425,16 @@
 			files = (
 				DC15A1FD19855697007FA1AC /* MineAlertViewUtil.m in Sources */,
 				DC15A2081985C2D5007FA1AC /* MineSignUpViewController.m in Sources */,
+				DC15A229198755AF007FA1AC /* UITableView+Mine.m in Sources */,
 				DC15A20C1985CC86007FA1AC /* MineSignUpService.m in Sources */,
+				DC15A2331988BB33007FA1AC /* MKMapView+Mine.m in Sources */,
 				DC15A1F519844A9C007FA1AC /* MineConstant.m in Sources */,
 				DC15A201198584FE007FA1AC /* MineUserInfo.m in Sources */,
 				DC15A20419858732007FA1AC /* MinePreferenceService.m in Sources */,
 				DCDF69E41982873F0066FDCC /* MineLoginViewController.m in Sources */,
 				DC15A1F919844DF2007FA1AC /* MineMainViewController.m in Sources */,
 				DC15A21D1985F7FC007FA1AC /* MineTransactionInfo.m in Sources */,
+				DC15A22D1987D236007FA1AC /* MineCreateTransactionLocationViewController.m in Sources */,
 				DC15A2101985D990007FA1AC /* UIView+FindFirstResponder.m in Sources */,
 				DC15A225198601A5007FA1AC /* MineTransactionItemCellTableViewCell.m in Sources */,
 				DC15A1F119844465007FA1AC /* MineLoginService.m in Sources */,

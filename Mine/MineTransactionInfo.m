@@ -34,7 +34,7 @@
 {
     double totalPrice = 0;
     for (MineTransactionItem *item in self.transactionItems) {
-        totalPrice = totalPrice + [item.price doubleValue];
+        totalPrice = totalPrice + item.price;
     }
     return totalPrice;
 }

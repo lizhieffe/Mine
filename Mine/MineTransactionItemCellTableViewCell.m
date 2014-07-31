@@ -8,7 +8,34 @@
 
 #import "MineTransactionItemCellTableViewCell.h"
 
+@interface MineTransactionItemCellTableViewCell ()
+
+@property (weak, nonatomic) IBOutlet UIView *border;
+
+@end
+
 @implementation MineTransactionItemCellTableViewCell
+
++ (MineTransactionItemCellTableViewCell *)generateCell {
+    
+    NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"MineTransactionItemCellTableViewCell" owner:self options:NULL];
+    NSEnumerator *nibEnumerator = [nibContents objectEnumerator];
+    MineTransactionItemCellTableViewCell *customCell = nil;
+    NSObject* nibItem = nil;
+    while ((nibItem = [nibEnumerator nextObject]) != nil) {
+        if ([nibItem isKindOfClass:[MineTransactionItemCellTableViewCell class]]) {
+            customCell = (MineTransactionItemCellTableViewCell *)nibItem;
+            break; // we have a winner
+        }
+    }
+    
+    int inset = 0;
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(inset, 43, customCell.bounds.size.width - 2 *inset, 1)];
+    lineView.backgroundColor = [UIColor blackColor];
+    [customCell addSubview:lineView];
+    
+    return customCell;
+}
 
 - (id)initWithDescription:(NSString *)description price:(NSNumber *)price
 {

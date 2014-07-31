@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+static double const PRICE_UNKNOWN = DBL_MIN;
+
 @interface MineTransactionItem : NSObject
 
 @property (nonatomic, strong) NSString *description;
-@property (nonatomic, assign) NSNumber *price;
+@property (nonatomic, assign) double price;
 
-- (id)initWithDescription:(NSString *)description price:(NSNumber *)price;
+- (id)initWithDescription:(NSString *)description price:(double)price;
 
 @end

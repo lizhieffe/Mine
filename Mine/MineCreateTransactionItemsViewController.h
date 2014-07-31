@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MineCreateTransactionItemsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface MineCreateTransactionItemsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 @end

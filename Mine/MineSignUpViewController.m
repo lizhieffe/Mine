@@ -49,6 +49,9 @@
     self.firstnameTextField.delegate = self;
     self.lastnameTextField.delegate = self;
     
+    if([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     /**
      add guesture to dismiss keyboard
      */
@@ -210,6 +213,12 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     [self adjustScrollView];
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    [self updateLoginBtnWithStatus:NO];
+    
+    return YES;
 }
 
 @end
