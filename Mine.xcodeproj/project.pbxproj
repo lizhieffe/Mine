@@ -97,6 +97,8 @@
 		DC15A22F1987D408007FA1AC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		DC15A2311988BB33007FA1AC /* MKMapView+Mine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+Mine.h"; sourceTree = "<group>"; };
 		DC15A2321988BB33007FA1AC /* MKMapView+Mine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+Mine.m"; sourceTree = "<group>"; };
+		DC15A234198B38BC007FA1AC /* MineCenterViewProtocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineCenterViewProtocal.h; sourceTree = "<group>"; };
+		DC15A236198B3907007FA1AC /* MineSideViewProtocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineSideViewProtocal.h; sourceTree = "<group>"; };
 		DCDF69A61982831E0066FDCC /* Mine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCDF69A91982831E0066FDCC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DCDF69AB1982831E0066FDCC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -205,6 +207,15 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		DC15A235198B38EF007FA1AC /* Protocal */ = {
+			isa = PBXGroup;
+			children = (
+				DC15A234198B38BC007FA1AC /* MineCenterViewProtocal.h */,
+				DC15A236198B3907007FA1AC /* MineSideViewProtocal.h */,
+			);
+			name = Protocal;
+			sourceTree = "<group>";
+		};
 		DCDF699D1982831E0066FDCC = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +292,7 @@
 		DCDF69DE198286C00066FDCC /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				DC15A235198B38EF007FA1AC /* Protocal */,
 				DC15A2211986017D007FA1AC /* View */,
 				DC15A20D1985D97C007FA1AC /* Addition */,
 				DC15A1FE198584EA007FA1AC /* Model */,

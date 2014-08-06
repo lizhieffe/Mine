@@ -12,6 +12,7 @@
 
 NSString *const MineNotificationLoginDidSucceed = @"MineNotificationLoginDidSucceed";
 NSString *const MineNotificationSignUpDidSucceed = @"MineNotificationSignUpDidSucceed";
+NSString *const MineNotificationDownViewDidHide = @"MineNotificationDownViewDidHide";
 
 #pragma mark - request parameter -
 

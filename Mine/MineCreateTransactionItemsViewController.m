@@ -16,6 +16,8 @@
 
 @interface MineCreateTransactionItemsViewController ()
 
+@property (strong, nonatomic) UIViewController <MineCenterViewProtocal> *centerViewController;
+
 @property (nonatomic, assign) BOOL keyboardOnScreen;
 @property (nonatomic, assign) NSInteger keyboardHeight;
 
@@ -38,10 +40,7 @@
 {
     [super viewDidLoad];
     
-    self.keyboardOnScreen = NO;
-    
     [self initTransaction];
-    [self updateUI];
     
     self.transactionItemsTableView.delegate = self;
     self.transactionItemsTableView.dataSource = self;
@@ -50,20 +49,45 @@
     
     [self.transactionItemPrice setKeyboardType:UIKeyboardTypeDecimalPad];
     
-    if([self respondsToSelector:@selector(edgesForExtendedLayout)])
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-    
-    /**
-     add guesture to dismiss keyboard
-     */
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(responseToTapGesture:)];
-    [self.view addGestureRecognizer:tapRecognizer];
+    [self addGestures];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetTransaction) name:MineNotificationDownViewDidHide object:nil];
+
 }
 
-- (void)responseToTapGesture:(UITapGestureRecognizer *)recognizer
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.navigationController.navigationBarHidden = YES;
+    self.keyboardOnScreen = NO;
+}
+
+- (void)addGestures
+{
+    /**
+     add guesture to dismiss keyboard
+     */
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+    [self.view addGestureRecognizer:tapRecognizer];
+    
+    /**
+     add gesture to go to center view controller
+     */
+    UISwipeGestureRecognizer *swipeDownGusturRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeDownFrom:)];
+    swipeDownGusturRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
+    [self.view addGestureRecognizer:swipeDownGusturRecognizer];
+}
+
+- (void)handleSwipeDownFrom:(UIGestureRecognizer *)recognizer
+{
+    [self hideKeyboard];
+    [self.centerViewController hideDownView];
+}
+
+- (void)handleTapGesture:(UITapGestureRecognizer *)recognizer
 {
     [self hideKeyboard];
 }
@@ -79,9 +103,15 @@
 - (void)initTransaction
 {
     self.transaction = [[MineTransactionInfo alloc] init];
+    [self updateUI];
+    [self clearTextFields];
 }
 
-
+- (void)resetTransaction
+{
+    [self initTransaction];
+    [self.navigationController popViewControllerAnimated:NO];
+}
 
 - (void)updateUI
 {
@@ -89,6 +119,12 @@
     self.transactionItemsPlaceHolder.hidden = !self.transactionItemsTableView.hidden;
     
     [self adjustTransactionItemsTableView];
+}
+
+- (void)clearTextFields
+{
+    self.transactionItemDescription.text = @"";
+    self.transactionItemPrice.text = @"";
 }
 
 - (void)adjustTransactionItemsTableView
@@ -141,16 +177,16 @@
     [self.transaction addTransactionItem:newItem];
     
     [self updateUI];
-    
-    self.transactionItemDescription.text = @"";
-    self.transactionItemPrice.text = @"";
+    [self clearTextFields];
 }
 
 - (IBAction)nextBtnTapped:(id)sender {
     [self hideKeyboard];
     
-    MineCreateTransactionLocationViewController *viewController = [[MineCreateTransactionLocationViewController alloc] init];
+    MineCreateTransactionLocationViewController <MineSideViewProtocal> *viewController = [[MineCreateTransactionLocationViewController alloc] init];
+    [viewController setCenterViewController:self.centerViewController];
     [self.navigationController pushViewController:viewController animated:YES];
+    viewController.transaction = self.transaction;
 }
 
 
@@ -174,7 +210,12 @@
     [self adjustScrollView];
 }
 
+#pragma mark - side view delegate -
 
+- (void)setCenterViewController:(UIViewController *)controller
+{
+    _centerViewController = controller;
+}
 
 #pragma mark - table view delegate -
 

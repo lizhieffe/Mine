@@ -16,6 +16,9 @@
 @property (strong, nonatomic) UIViewController *upViewController;
 @property (strong, nonatomic) UIViewController *downViewController;
 
+@property (assign, nonatomic) BOOL downViewInScreen;
+@property (assign, nonatomic) BOOL upViewInScreen;
+
 @property (weak, nonatomic) IBOutlet UIButton *addNewTransactionBtn;
 
 @end
@@ -41,50 +44,95 @@
     if (![MinePreferenceService currentUserInfo]) {
         [self presentLoginViewController];
     }
-    
-    [self setUpViewController];
-    [self setDownViewController];
 }
 
-- (void)setUpViewController
+- (void)viewWillAppear:(BOOL)animated
 {
-    
+    [self addUpViewController];
+    [self addDownViewController];
 }
 
-- (void)setDownViewController
+- (void)addUpViewController
+{
+    _upViewInScreen = NO;
+}
+
+- (void)addDownViewController
 {
     UISwipeGestureRecognizer *swipeUpGusturRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeUpFrom:)];
     swipeUpGusturRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
     [self.view addGestureRecognizer:swipeUpGusturRecognizer];
     
-    UIViewController *child = [[MineCreateTransactionItemsViewController alloc] init];
-    [self addSubController:child];
+    UIViewController <MineSideViewProtocal> *rootViewController = [[MineCreateTransactionItemsViewController alloc] init];
+    [rootViewController setCenterViewController:self];
+    UIViewController *child = [[UINavigationController alloc] initWithRootViewController:rootViewController];
+    
+    CGRect newFrame = CGRectMake(0, child.view.frame.size.height, child.view.frame.size.width, child.view.frame.size.height);
+    child.view.frame = newFrame;
     
     _downViewController = child;
+    
+    [self addSubController:child];
+    _downViewInScreen = NO;
 }
 
 - (void)addSubController:(UIViewController *)child
 {
     if (child && !child.parentViewController) {
         [self addChildViewController:child];
+        child.view.opaque = YES;
         [self.view addSubview:child.view];
         [self.view sendSubviewToBack:child.view];
         [child didMoveToParentViewController:self];
-        
-        CGRect newFrame = CGRectMake(0, 568, child.view.frame.size.width, child.view.frame.size.height);
-        child.view.frame = newFrame;
     }
+}
+
+- (void)showDownView
+{
+    [self.view bringSubviewToFront:self.downViewController.view];
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         self.downViewController.view.frame = [[UIScreen mainScreen] bounds];
+                     }
+                     completion:^(BOOL finished) {
+                         self.downViewInScreen = YES;
+                     }];
+}
+
+- (void)hideDownView
+{
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         self.downViewController.view.frame = [self downViewFrame];
+                     }
+                     completion:^(BOOL finished) {
+                         [self.view sendSubviewToBack:self.downViewController.view];
+                         self.downViewInScreen = NO;
+                         [[NSNotificationCenter defaultCenter] postNotificationName:MineNotificationDownViewDidHide object:self];
+                     }];
+}
+
+- (void)showUpView
+{
+    
+}
+
+- (void)hideUpView
+{
+    
+}
+
+- (CGRect)downViewFrame
+{
+    return CGRectMake(0, [[UIScreen mainScreen] bounds].size.height, self.downViewController.view.frame.size.width, self.downViewController.view.frame.size.height);
 }
 
 - (void)handleSwipeUpFrom:(UIGestureRecognizer *)recognizer
 {
-    [UIView animateWithDuration:2
-                     animations:^{
-                         self.downViewController.view.frame = [[UIApplication sharedApplication] keyWindow].frame;
-                     }
-                     completion:^(BOOL finished) {
-                         
-                     }];
+    if (!self.upViewInScreen && !self.downViewInScreen)
+        [self showDownView];
+    else if (self.upViewInScreen && !self.downViewInScreen)
+        [self hideUpView];
 }
 
 - (void)presentLoginViewController

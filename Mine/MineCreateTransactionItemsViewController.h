@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MineSideViewProtocal.h"
+#import "MineCenterViewProtocal.h"
 
-@interface MineCreateTransactionItemsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@interface MineCreateTransactionItemsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, MineSideViewProtocal>
 
 @end

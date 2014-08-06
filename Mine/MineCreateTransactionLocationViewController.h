@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "MineSideViewProtocal.h"
+#import "MineTransactionInfo.h"
 
-@interface MineCreateTransactionLocationViewController : UIViewController <MKMapViewDelegate, UITextFieldDelegate>
+@interface MineCreateTransactionLocationViewController : UIViewController <MKMapViewDelegate, UITextFieldDelegate, MineSideViewProtocal>
+
+@property (strong, nonatomic) MineTransactionInfo *transaction;
 
 @end

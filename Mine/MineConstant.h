@@ -12,6 +12,7 @@
 
 extern NSString *const MineNotificationLoginDidSucceed;
 extern NSString *const MineNotificationSignUpDidSucceed;
+extern NSString *const MineNotificationDownViewDidHide;
 
 #pragma mark - request parameter -
 

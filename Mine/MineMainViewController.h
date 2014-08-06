@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MineCenterViewProtocal.h"
 
-@interface MineMainViewController : UIViewController
+@interface MineMainViewController : UIViewController  <MineCenterViewProtocal>
 
 @end

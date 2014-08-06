@@ -9,8 +9,11 @@
 #import "MineCreateTransactionLocationViewController.h"
 #import "UIView+FindFirstResponder.h"
 #import "MKMapView+Mine.h"
+#import "MineCenterViewProtocal.h"
 
 @interface MineCreateTransactionLocationViewController ()
+
+@property (strong, nonatomic) UIViewController <MineCenterViewProtocal> *centerViewController;
 
 @property (strong, nonatomic) NSString *addressFromMap;
 @property (strong, nonatomic) NSString *addressInTextField;
@@ -75,17 +78,42 @@
     [self.datePicker setInputView:self.datePickerInput1];
     [self updateDatePickerTextField];
     
+    [self addGestures];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetTransaction) name:MineNotificationDownViewDidHide object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.automaticallyAdjustsScrollViewInsets = NO;
+}
+
+- (void)addGestures
+{
     /**
      add guesture to dismiss keyboard
      */
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(responseToTapGesture:)];
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
     [self.view addGestureRecognizer:tapRecognizer];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    /**
+     add gesture to go to center view controller
+     */
+    UISwipeGestureRecognizer *swipeDownGusturRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeDownFrom:)];
+    swipeDownGusturRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
+    [self.view addGestureRecognizer:swipeDownGusturRecognizer];
 }
 
-- (void)responseToTapGesture:(UITapGestureRecognizer *)recognizer
+- (void)handleSwipeDownFrom:(UIGestureRecognizer *)recognizer
+{
+    [self hideKeyboard];
+    [self.centerViewController hideDownView];
+}
+
+- (void)handleTapGesture:(UITapGestureRecognizer *)recognizer
 {
     [self hideKeyboard];
 }
@@ -204,6 +232,13 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
     self.datePicker.text = [formatter stringFromDate:self.datePickerInput1.date];
+}
+
+#pragma mark - side view delegate -
+
+- (void)setCenterViewController:(UIViewController *)controller
+{
+    _centerViewController = controller;
 }
 
 #pragma mark - map view delegate -
