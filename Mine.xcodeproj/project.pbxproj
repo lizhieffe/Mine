@@ -30,6 +30,21 @@
 		DC15A22E1987D236007FA1AC /* MineCreateTransactionLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC15A22C1987D236007FA1AC /* MineCreateTransactionLocationViewController.xib */; };
 		DC15A2301987D408007FA1AC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC15A22F1987D408007FA1AC /* MapKit.framework */; };
 		DC15A2331988BB33007FA1AC /* MKMapView+Mine.m in Sources */ = {isa = PBXBuildFile; fileRef = DC15A2321988BB33007FA1AC /* MKMapView+Mine.m */; };
+		DCAC0FA419DE52AE000B65FA /* MoneyBag_100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = DCAC0FA019DE52AE000B65FA /* MoneyBag_100x100.png */; };
+		DCAC0FA519DE52AE000B65FA /* Dolls_100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = DCAC0FA119DE52AE000B65FA /* Dolls_100x100.png */; };
+		DCAC0FA619DE52AE000B65FA /* Clock_100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = DCAC0FA219DE52AE000B65FA /* Clock_100x100.png */; };
+		DCAC0FA719DE52AE000B65FA /* Camera_100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = DCAC0FA319DE52AE000B65FA /* Camera_100x100.png */; };
+		DCCFB86C19DE588D004FB14A /* MoneyBag_76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = DCCFB86819DE588D004FB14A /* MoneyBag_76x76.png */; };
+		DCCFB86D19DE588D004FB14A /* Dolls_76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = DCCFB86919DE588D004FB14A /* Dolls_76x76.png */; };
+		DCCFB86E19DE588D004FB14A /* Clock_76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = DCCFB86A19DE588D004FB14A /* Clock_76x76.png */; };
+		DCCFB86F19DE588D004FB14A /* Camera_76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = DCCFB86B19DE588D004FB14A /* Camera_76x76.png */; };
+		DCCFB87419DE5974004FB14A /* MoneyBag_48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = DCCFB87019DE5974004FB14A /* MoneyBag_48x48.png */; };
+		DCCFB87519DE5974004FB14A /* Dolls_48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = DCCFB87119DE5974004FB14A /* Dolls_48x48.png */; };
+		DCCFB87619DE5974004FB14A /* Clock_48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = DCCFB87219DE5974004FB14A /* Clock_48x48.png */; };
+		DCCFB87719DE5974004FB14A /* Camera_48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = DCCFB87319DE5974004FB14A /* Camera_48x48.png */; };
+		DCCFB87919DE62B9004FB14A /* Options_48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = DCCFB87819DE62B9004FB14A /* Options_48x48.png */; };
+		DCCFB87B19DE632D004FB14A /* Options_76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = DCCFB87A19DE632D004FB14A /* Options_76x76.png */; };
+		DCCFB87D19DE6365004FB14A /* Options_100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = DCCFB87C19DE6365004FB14A /* Options_100x100.png */; };
 		DCDF69AA1982831E0066FDCC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCDF69A91982831E0066FDCC /* Foundation.framework */; };
 		DCDF69AC1982831E0066FDCC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCDF69AB1982831E0066FDCC /* CoreGraphics.framework */; };
 		DCDF69AE1982831E0066FDCC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCDF69AD1982831E0066FDCC /* UIKit.framework */; };
@@ -99,6 +114,21 @@
 		DC15A2321988BB33007FA1AC /* MKMapView+Mine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+Mine.m"; sourceTree = "<group>"; };
 		DC15A234198B38BC007FA1AC /* MineCenterViewProtocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineCenterViewProtocal.h; sourceTree = "<group>"; };
 		DC15A236198B3907007FA1AC /* MineSideViewProtocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineSideViewProtocal.h; sourceTree = "<group>"; };
+		DCAC0FA019DE52AE000B65FA /* MoneyBag_100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MoneyBag_100x100.png; sourceTree = "<group>"; };
+		DCAC0FA119DE52AE000B65FA /* Dolls_100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dolls_100x100.png; sourceTree = "<group>"; };
+		DCAC0FA219DE52AE000B65FA /* Clock_100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Clock_100x100.png; sourceTree = "<group>"; };
+		DCAC0FA319DE52AE000B65FA /* Camera_100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camera_100x100.png; sourceTree = "<group>"; };
+		DCCFB86819DE588D004FB14A /* MoneyBag_76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MoneyBag_76x76.png; sourceTree = "<group>"; };
+		DCCFB86919DE588D004FB14A /* Dolls_76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dolls_76x76.png; sourceTree = "<group>"; };
+		DCCFB86A19DE588D004FB14A /* Clock_76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Clock_76x76.png; sourceTree = "<group>"; };
+		DCCFB86B19DE588D004FB14A /* Camera_76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camera_76x76.png; sourceTree = "<group>"; };
+		DCCFB87019DE5974004FB14A /* MoneyBag_48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MoneyBag_48x48.png; sourceTree = "<group>"; };
+		DCCFB87119DE5974004FB14A /* Dolls_48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dolls_48x48.png; sourceTree = "<group>"; };
+		DCCFB87219DE5974004FB14A /* Clock_48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Clock_48x48.png; sourceTree = "<group>"; };
+		DCCFB87319DE5974004FB14A /* Camera_48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camera_48x48.png; sourceTree = "<group>"; };
+		DCCFB87819DE62B9004FB14A /* Options_48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Options_48x48.png; sourceTree = "<group>"; };
+		DCCFB87A19DE632D004FB14A /* Options_76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Options_76x76.png; sourceTree = "<group>"; };
+		DCCFB87C19DE6365004FB14A /* Options_100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Options_100x100.png; sourceTree = "<group>"; };
 		DCDF69A61982831E0066FDCC /* Mine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCDF69A91982831E0066FDCC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DCDF69AB1982831E0066FDCC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -328,6 +358,21 @@
 		DCDF69E0198286DE0066FDCC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DCCFB87A19DE632D004FB14A /* Options_76x76.png */,
+				DCCFB87C19DE6365004FB14A /* Options_100x100.png */,
+				DCCFB87819DE62B9004FB14A /* Options_48x48.png */,
+				DCCFB87019DE5974004FB14A /* MoneyBag_48x48.png */,
+				DCCFB87119DE5974004FB14A /* Dolls_48x48.png */,
+				DCCFB87219DE5974004FB14A /* Clock_48x48.png */,
+				DCCFB87319DE5974004FB14A /* Camera_48x48.png */,
+				DCCFB86819DE588D004FB14A /* MoneyBag_76x76.png */,
+				DCCFB86919DE588D004FB14A /* Dolls_76x76.png */,
+				DCCFB86A19DE588D004FB14A /* Clock_76x76.png */,
+				DCCFB86B19DE588D004FB14A /* Camera_76x76.png */,
+				DCAC0FA019DE52AE000B65FA /* MoneyBag_100x100.png */,
+				DCAC0FA119DE52AE000B65FA /* Dolls_100x100.png */,
+				DCAC0FA219DE52AE000B65FA /* Clock_100x100.png */,
+				DCAC0FA319DE52AE000B65FA /* Camera_100x100.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -409,13 +454,28 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCCFB87719DE5974004FB14A /* Camera_48x48.png in Resources */,
+				DCAC0FA419DE52AE000B65FA /* MoneyBag_100x100.png in Resources */,
+				DCCFB86F19DE588D004FB14A /* Camera_76x76.png in Resources */,
 				DC15A1FA19844DF2007FA1AC /* MineMainViewController.xib in Resources */,
+				DCAC0FA719DE52AE000B65FA /* Camera_100x100.png in Resources */,
 				DC15A226198601A5007FA1AC /* MineTransactionItemCellTableViewCell.xib in Resources */,
+				DCAC0FA519DE52AE000B65FA /* Dolls_100x100.png in Resources */,
+				DCCFB87919DE62B9004FB14A /* Options_48x48.png in Resources */,
 				DCDF69C21982831E0066FDCC /* Images.xcassets in Resources */,
+				DCCFB87B19DE632D004FB14A /* Options_76x76.png in Resources */,
+				DCCFB87D19DE6365004FB14A /* Options_100x100.png in Resources */,
 				DC15A22E1987D236007FA1AC /* MineCreateTransactionLocationViewController.xib in Resources */,
+				DCCFB86C19DE588D004FB14A /* MoneyBag_76x76.png in Resources */,
+				DCCFB87419DE5974004FB14A /* MoneyBag_48x48.png in Resources */,
+				DCAC0FA619DE52AE000B65FA /* Clock_100x100.png in Resources */,
 				DCDF69E51982873F0066FDCC /* MineLoginViewController.xib in Resources */,
 				DCDF69B41982831E0066FDCC /* InfoPlist.strings in Resources */,
 				DC15A2091985C2D5007FA1AC /* MineSignUpViewController.xib in Resources */,
+				DCCFB86E19DE588D004FB14A /* Clock_76x76.png in Resources */,
+				DCCFB87619DE5974004FB14A /* Clock_48x48.png in Resources */,
+				DCCFB87519DE5974004FB14A /* Dolls_48x48.png in Resources */,
+				DCCFB86D19DE588D004FB14A /* Dolls_76x76.png in Resources */,
 				DC15A21A1985EFAC007FA1AC /* MineCreateTransactionItemsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
