@@ -162,6 +162,9 @@
         
         NSDictionary *errorJson = [notification.userInfo valueForKey:MineResponseKeyErrorJson];
         NSInteger errorCode = [[errorJson valueForKey:MineResponseKeyErrorCode] intValue];
+
+        NSDictionary *responseJson = [notification.userInfo valueForKey:MineResponseKeyResponseJson];
+        NSString *token = [responseJson valueForKey:MineResponseKeyResponseToken];
         
         if (errorCode == 0) {
             MineUserInfo *userInfo = [[MineUserInfo alloc] init];
@@ -171,6 +174,7 @@
             userInfo.lastName = self.lastnameTextField.text;
             userInfo.gender = [self getGenderFromUI];
             [MinePreferenceService setCurrentUserInfo:userInfo];
+            [MinePreferenceService setToken:token];
             
             self.presentingViewController.view.hidden = NO;
             [self dismissViewControllerAnimated:YES completion:nil];

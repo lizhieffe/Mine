@@ -28,7 +28,8 @@ extern NSString *const MineResponseKeyErrorJson;
 extern NSString *const MineResponseKeyErrorCode;
 extern NSString *const MineResponseKeyErrorMsg;
 
-extern NSString *const MineResponseKeyResponse;
+extern NSString *const MineResponseKeyResponseJson;
+extern NSString *const MineResponseKeyResponseToken;
 
 #pragma mark - alert view title and body msg -
 

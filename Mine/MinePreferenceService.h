@@ -14,5 +14,8 @@
 
 + (MineUserInfo *)currentUserInfo;
 + (void)setCurrentUserInfo:(MineUserInfo *)userInfo;
++ (NSString *)token;
++ (void)setToken:(NSString *)token;
++ (void)cleanCurrentUserInfo;
 
 @end

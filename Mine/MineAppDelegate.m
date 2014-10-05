@@ -17,7 +17,6 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-//    UIViewController *rootViewController = [[MineLoginViewController alloc] init];
     UIViewController *rootViewController = [[MineMainViewController alloc] init];
     self.window.rootViewController = rootViewController;
     [self.window makeKeyAndVisible];

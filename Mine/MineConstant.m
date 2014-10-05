@@ -16,7 +16,7 @@ NSString *const MineNotificationDownViewDidHide = @"MineNotificationDownViewDidH
 
 #pragma mark - request parameter -
 
-NSString *const MineRequestParameterUsername = @"usr";
+NSString *const MineRequestParameterUsername = @"username";
 NSString *const MineRequestParameterPasscode = @"pwd";
 NSString *const MineRequestParameterFirstname = @"first";
 NSString *const MineRequestParameterLastname = @"last";
@@ -29,6 +29,8 @@ NSString *const MineResponseKeyErrorCode = @"code";
 NSString *const MineResponseKeyErrorMsg = @"message";
 
 NSString *const MineResponseKeyResponseJson = @"response";
+NSString *const MineResponseKeyResponseToken = @"token";
+
 
 #pragma mark - alert view title and body msg -
 

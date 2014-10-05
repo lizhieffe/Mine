@@ -12,6 +12,7 @@
 @implementation MinePreferenceService
 
 static MineUserInfo *_currentUserInfo;
+static NSString *_token;
 
 + (MineUserInfo *)currentUserInfo
 {
@@ -24,6 +25,19 @@ static MineUserInfo *_currentUserInfo;
 + (void)setCurrentUserInfo:(MineUserInfo *)userInfo
 {
     _currentUserInfo = userInfo;
+}
+
++ (NSString *)token {
+    return _token;
+}
+
++ (void)setToken:(NSString *)token {
+    _token = token;
+}
+
++ (void)cleanCurrentUserInfo {
+    _currentUserInfo = nil;
+    _token = nil;
 }
 
 @end
