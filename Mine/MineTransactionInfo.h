@@ -14,10 +14,12 @@
 
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSString *location;
-@property (nonatomic, strong) NSMutableArray *transactionItems;
+@property (nonatomic, strong) NSDictionary *transactionItems;
 
-- (void)addTransactionItem:(MineTransactionItem *)newItem;
-- (NSInteger)itemCount;
-- (double)totalPrice;
++ (id)sharedManager;
+
+- (void)addTransactionItem:(MineTransactionItem *)item;
+- (void)saveTransactionsFromJson:(NSDictionary *)json;
+- (NSDictionary *)getAllTransactionsForYear:(NSInteger)year month:(NSInteger)month;
 
 @end

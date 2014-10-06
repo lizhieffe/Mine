@@ -14,7 +14,9 @@ static double const PRICE_UNKNOWN = DBL_MIN;
 
 @property (nonatomic, strong) NSString *description;
 @property (nonatomic, assign) double price;
+@property (nonatomic, assign) NSDate *date;
 
+- (id)initWithDate:(NSDate *)date price:(double)price;
 - (id)initWithDescription:(NSString *)description price:(double)price;
 
 @end

@@ -176,8 +176,7 @@
             [MinePreferenceService setCurrentUserInfo:userInfo];
             [MinePreferenceService setToken:token];
             
-            self.presentingViewController.view.hidden = NO;
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [self.navigationController popToRootViewControllerAnimated:YES];
         }
         else
             [MineAlertViewUtil showAlertViewWithErrorCode:errorCode];

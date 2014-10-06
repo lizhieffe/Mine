@@ -10,6 +10,16 @@
 
 @implementation MineTransactionItem
 
+- (id)initWithDate:(NSDate *)date price:(double)price
+{
+    self = [super init];
+    if (self) {
+        self.date = date;
+        self.price = price;
+    }
+    return self;
+}
+
 - (id)initWithDescription:(NSString *)description price:(double)price
 {
     self = [super init];

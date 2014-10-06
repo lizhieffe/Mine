@@ -12,10 +12,17 @@
 
 @interface MinePreferenceService : NSObject
 
++ (id)sharedManager;
+
 + (MineUserInfo *)currentUserInfo;
 + (void)setCurrentUserInfo:(MineUserInfo *)userInfo;
 + (NSString *)token;
 + (void)setToken:(NSString *)token;
 + (void)cleanCurrentUserInfo;
+
+- (NSInteger)displayMonth;
+- (void)setDisplayMonth:(NSInteger)displayMonth;
+- (NSInteger)displayYear;
+- (void)setDisplayYear:(NSInteger)displayYear;
 
 @end

@@ -238,7 +238,7 @@
 
 - (void)setCenterViewController:(UIViewController *)controller
 {
-    _centerViewController = controller;
+//    _centerViewController = controller;
 }
 
 #pragma mark - map view delegate -

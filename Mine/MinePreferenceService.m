@@ -8,11 +8,42 @@
 
 #import "MinePreferenceService.h"
 #import "MineUserInfo.h"
+#import "MineTimeUtil.h"
+
+@interface MinePreferenceService () {
+    NSInteger _displayMonth;
+    NSInteger _displayYear;
+}
+
+//@property (assign, nonatomic) NSInteger displayMonth;
+//@property (assign, nonatomic) NSInteger displayYear;
+
+@end
 
 @implementation MinePreferenceService
 
 static MineUserInfo *_currentUserInfo;
 static NSString *_token;
+
++ (id)sharedManager
+{
+    static MinePreferenceService *sharedManager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedManager = [[self alloc] init];
+    });
+    return sharedManager;
+}
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        _displayMonth = [MineTimeUtil getCurrentMonth];
+        _displayYear = [MineTimeUtil getCurrentYear];
+    }
+    return self;
+}
 
 + (MineUserInfo *)currentUserInfo
 {
@@ -38,6 +69,26 @@ static NSString *_token;
 + (void)cleanCurrentUserInfo {
     _currentUserInfo = nil;
     _token = nil;
+}
+
+- (NSInteger)displayMonth
+{
+    return _displayMonth;
+}
+
+- (void)setDisplayMonth:(NSInteger)displayMonth
+{
+    _displayMonth = displayMonth;
+}
+
+- (NSInteger)displayYear
+{
+    return _displayYear;
+}
+
+- (void)setDisplayYear:(NSInteger)displayYear
+{
+    _displayYear = displayYear;
 }
 
 @end

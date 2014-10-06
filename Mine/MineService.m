@@ -28,7 +28,7 @@
 
 - (NSString *)hostUrl
 {
-    return @"http://localhost:8080/MineServer";
+    return @"http://localhost:9000";
 }
 
 - (NSString *)apiPath
@@ -98,10 +98,10 @@
         
         NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         
-        if (!json || [json count] == 0)
+        if (json && [json count] != 0 && [json objectForKey:MineResponseKeyErrorJson])
             [self completionBlockForSuccess](json, response);
         else
-            [self completionBlockForSuccess](json, response);
+            [self completionBlockForFailure](json, response);
         
     };
 }

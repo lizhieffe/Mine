@@ -23,6 +23,8 @@
 {
     if (errorCode == 0)
         return @"";
+    else if (errorCode == 1)
+        return MineAlertViewTitleGeneralError;
     else if (errorCode == 101)
         return MineAlertViewTitleUserNotExist;
     else if (errorCode == 102)
@@ -35,6 +37,8 @@
 {
     if (errorCode == 0)
         return @"";
+    else if (errorCode == 1)
+        return MineAlertViewMsgGeneralError;
     else if (errorCode == 101)
         return MineAlertViewMsgUserNotExist;
     else if (errorCode == 102)

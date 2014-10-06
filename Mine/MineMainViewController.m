@@ -25,8 +25,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *historyBtn;
 @property (weak, nonatomic) IBOutlet UIButton *takePhotoBtn;
 @property (weak, nonatomic) IBOutlet UIButton *peekBtn;
-
-@property (strong, nonatomic) UINavigationController *navigationController;
+@property (weak, nonatomic) IBOutlet UILabel *income;
+@property (weak, nonatomic) IBOutlet UILabel *expense;
 
 @end
 
@@ -44,9 +44,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:self];
-    [self.navigationController setToolbarHidden:YES];
+    self.navigationController.navigationBar.hidden = YES;
     
     /**
      display the login view controller first if there is no user logged in
@@ -58,6 +56,7 @@
     
     [self.addNewTransactionBtn addTarget:self action:@selector(addNewTransactionBtnTapped) forControlEvents:UIControlEventTouchUpInside];
     [self.historyBtn addTarget:self action:@selector(historyBtnTapped) forControlEvents:UIControlEventTouchUpInside];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -68,13 +67,8 @@
 
 - (void)presentLoginViewController
 {
-    self.view.hidden = YES;
     UIViewController *loginViewController = [[MineLoginViewController alloc] init];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    [navigationController setNavigationBarHidden:YES];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self presentViewController:navigationController animated:NO completion:nil];
-    });
+    [self.navigationController pushViewController:loginViewController animated:NO];
 }
 
 - (void)addNewTransactionBtnTapped {

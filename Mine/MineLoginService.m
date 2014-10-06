@@ -28,7 +28,7 @@
 
 - (NSString *)apiPath
 {
-    return @"/login";
+    return @"/signin";
 }
 
 - (void)updateParameters

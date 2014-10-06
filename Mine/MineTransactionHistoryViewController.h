@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MineTransactionHistoryViewController : UIViewController
+@interface MineTransactionHistoryViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end

@@ -115,10 +115,10 @@
 
 - (void)updateUI
 {
-    self.transactionItemsTableView.hidden = [self.transaction itemCount] == 0 ? YES : NO;
-    self.transactionItemsPlaceHolder.hidden = !self.transactionItemsTableView.hidden;
-    
-    [self adjustTransactionItemsTableView];
+//    self.transactionItemsTableView.hidden = [self.transaction itemCount] == 0 ? YES : NO;
+//    self.transactionItemsPlaceHolder.hidden = !self.transactionItemsTableView.hidden;
+//    
+//    [self adjustTransactionItemsTableView];
 }
 
 - (void)clearTextFields
@@ -129,20 +129,20 @@
 
 - (void)adjustTransactionItemsTableView
 {
-    [self.transactionItemsTableView reloadData];
-
-    if ([self.transaction itemCount] > 0) {
-        NSArray *visibleCells = [self.transactionItemsTableView visibleCells];
-        if (visibleCells.count < [self.transaction itemCount])
-            [self.transactionItemsTableView scrollToBottomAnimated:YES];
-        else
-            for (UITableViewCell* cell in visibleCells) {
-                if (cell.frame.origin.y + cell.frame.size.height > self.transactionItemsTableView.frame.size.height) {
-                    [self.transactionItemsTableView scrollToBottomAnimated:YES];
-                    break;
-                }
-            }
-    }
+//    [self.transactionItemsTableView reloadData];
+//
+//    if ([self.transaction itemCount] > 0) {
+//        NSArray *visibleCells = [self.transactionItemsTableView visibleCells];
+//        if (visibleCells.count < [self.transaction itemCount])
+//            [self.transactionItemsTableView scrollToBottomAnimated:YES];
+//        else
+//            for (UITableViewCell* cell in visibleCells) {
+//                if (cell.frame.origin.y + cell.frame.size.height > self.transactionItemsTableView.frame.size.height) {
+//                    [self.transactionItemsTableView scrollToBottomAnimated:YES];
+//                    break;
+//                }
+//            }
+//    }
 }
 
 - (void)adjustScrollView
@@ -169,15 +169,15 @@
 
 - (IBAction)addNewTransactionItemBtnTapped:(id)sender {
     
-    NSString *description = [self.transactionItemDescription.text isEqualToString:@""] ? [NSString stringWithFormat:@"Item %d", [self.transaction itemCount] + 1] : self.transactionItemDescription.text;
-    
-    double price = [self.transactionItemPrice.text isEqualToString:@""] ? PRICE_UNKNOWN : [self.transactionItemPrice.text doubleValue];
-    
-    MineTransactionItem *newItem = [[MineTransactionItem alloc] initWithDescription:description price:price];
-    [self.transaction addTransactionItem:newItem];
-    
-    [self updateUI];
-    [self clearTextFields];
+//    NSString *description = [self.transactionItemDescription.text isEqualToString:@""] ? [NSString stringWithFormat:@"Item %ld", [self.transaction itemCount] + 1] : self.transactionItemDescription.text;
+//    
+//    double price = [self.transactionItemPrice.text isEqualToString:@""] ? PRICE_UNKNOWN : [self.transactionItemPrice.text doubleValue];
+//    
+//    MineTransactionItem *newItem = [[MineTransactionItem alloc] initWithDescription:description price:price];
+//    [self.transaction addTransactionItem:newItem];
+//    
+//    [self updateUI];
+//    [self clearTextFields];
 }
 
 - (IBAction)nextBtnTapped:(id)sender {
@@ -214,7 +214,7 @@
 
 - (void)setCenterViewController:(UIViewController *)controller
 {
-    _centerViewController = controller;
+//    _centerViewController = controller;
 }
 
 #pragma mark - table view delegate -
@@ -228,25 +228,26 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.transaction itemCount];
+//    return [self.transaction itemCount];
+    return 0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    MineTransactionItem *item = [self.transaction.transactionItems objectAtIndex:indexPath.row];
-    NSString *description = item.description;
-    double price = item.price;
-    
-    static NSString *CellIdentifier = @"MineTransactionItemCellTableViewCell";
-    MineTransactionItemCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [MineTransactionItemCellTableViewCell generateCell];
-    }
-    
-    cell.cellDescription.text = [NSString stringWithString:description];
-    cell.cellPrice.text = price == PRICE_UNKNOWN ? @"Unknown price" : [NSString stringWithFormat:@"$ %.2f", price];
-    return cell;
-}
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    MineTransactionItem *item = [self.transaction.transactionItems objectAtIndex:indexPath.row];
+//    NSString *description = item.description;
+//    double price = item.price;
+//    
+//    static NSString *CellIdentifier = @"MineTransactionItemCellTableViewCell";
+//    MineTransactionItemCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//    if (cell == nil) {
+//        cell = [MineTransactionItemCellTableViewCell generateCell];
+//    }
+//    
+//    cell.cellDescription.text = [NSString stringWithString:description];
+//    cell.cellPrice.text = price == PRICE_UNKNOWN ? @"Unknown price" : [NSString stringWithFormat:@"$ %.2f", price];
+//    return cell;
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
