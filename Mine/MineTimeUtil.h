@@ -11,6 +11,7 @@
 @interface MineTimeUtil : NSObject
 
 + (NSString *)getMonthStr:(NSInteger)month;
++ (NSString *)getShortMonthStr:(NSInteger)month;
 
 + (NSInteger)getCurrentDay;
 + (NSInteger)getCurrentMonth;

@@ -12,7 +12,8 @@
 
 + (void)showActivityIndicatorView:(UIActivityIndicatorView *)activityIndicatorView inView:(UIView *)view
 {
-    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    if (![[UIApplication sharedApplication] isIgnoringInteractionEvents])
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 
     /**
      start activity indicator view
@@ -26,7 +27,8 @@
 
 + (void)hideActivityIndicatorView:(UIActivityIndicatorView *)activityIndicatorView
 {
-    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+    if ([[UIApplication sharedApplication] isIgnoringInteractionEvents])
+        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     [activityIndicatorView stopAnimating];
     activityIndicatorView.hidden = YES;
 }

@@ -14,7 +14,7 @@
 {
     self = [super init];
     if (self) {
-        self.date = date;
+        self.transactionDate = date;
         self.price = price;
     }
     return self;

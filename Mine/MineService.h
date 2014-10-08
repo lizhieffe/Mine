@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) NSMutableDictionary *requestParameters;
 @property (nonatomic) BOOL finished;
+@property (assign, nonatomic) NSDate *lastSucceedDate;
+@property (assign, nonatomic) NSInteger expireTimeInterval;
 
 - (NSString *)hostUrl;
 - (NSString *)apiPath;

@@ -11,6 +11,12 @@
 #import "MineConstant.h"
 #import "MineTimeUtil.h"
 
+@interface MineTransactionInfo ()
+
+@property (strong, nonatomic) NSMutableDictionary *transactionItems;
+
+@end
+
 @implementation MineTransactionInfo
 
 + (id)sharedManager
@@ -19,6 +25,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedManager = [[self alloc] init];
+        sharedManager.transactionItems = [[NSMutableDictionary alloc] init];
     });
     return sharedManager;
 }
@@ -27,29 +34,29 @@
 {
     self = [super init];
     if (self) {
-        self.transactionItems = [[NSMutableDictionary alloc] init];
+//        self.transactionItems = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
 
 - (void)addTransactionItem:(MineTransactionItem *)item
 {
-    NSInteger year = [MineTimeUtil getYearForUnixtime:[item.date timeIntervalSince1970]];
-    NSInteger month = [MineTimeUtil getMonthForUnixtime:[item.date timeIntervalSince1970]];
-    [self addTransactionItem:item year:year month:month];
-}
+    NSInteger year = [MineTimeUtil getYearForUnixtime:[item.transactionDate timeIntervalSince1970]];
+    NSInteger month = [MineTimeUtil getMonthForUnixtime:[item.transactionDate timeIntervalSince1970]];
 
-- (void)addTransactionItem:(MineTransactionItem *)transactionItem year:(NSInteger)year month:(NSInteger)month
-{
     NSDictionary *transactionsForYear = [self.transactionItems objectForKey:[@(year) stringValue]];
-    if (!transactionsForYear)
+    if (!transactionsForYear) {
         [self.transactionItems setValue:[[NSMutableDictionary alloc] init] forKey:[@(year) stringValue]];
+        transactionsForYear = [self.transactionItems objectForKey:[@(year) stringValue]];
+    }
     
-    NSArray *transactionsForMonth = [((NSDictionary *)[self.transactionItems objectForKey:[@(year) stringValue]]) objectForKey:[@(month) stringValue]];
-    if (!transactionsForMonth)
-        [((NSDictionary *)[self.transactionItems objectForKey:[@(year) stringValue]]) setValue:[[NSMutableArray alloc] init] forKey:[@(month) stringValue]];
+    NSMutableArray *transactionsForMonth = [transactionsForYear objectForKey:[@(month) stringValue]];
+    if (!transactionsForMonth) {
+        [transactionsForYear setValue:[[NSMutableArray alloc] init] forKey:[@(month) stringValue]];
+        transactionsForMonth = [transactionsForYear objectForKey:[@(month) stringValue]];
+    }
     
-    [((NSMutableArray *)[((NSDictionary *)[self.transactionItems objectForKey:[@(year) stringValue]]) objectForKey:[@(month) stringValue]])addObject:transactionItem];
+    [transactionsForMonth addObject:item];
 }
 
 - (void)saveTransactionsFromJson:(NSDictionary *)json
@@ -57,8 +64,8 @@
     NSDictionary *transactions = [[json objectForKey:MineResponseKeyResponseJson] objectForKey:MineResponseKeyResponseTransactions];
     for (NSDictionary *tmp in transactions) {
         double price = [[tmp objectForKey:@"price"] doubleValue];
-        NSDate *date = [MineTimeUtil unixtimeToNSDate:[[tmp objectForKey:@"unixtime"] integerValue]];
-        
+        NSString *tddd = [tmp objectForKey:@"timestamp"];
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:[((NSString *)[tmp objectForKey:@"timestamp"]) longLongValue]];
         MineTransactionItem *tmp = [[MineTransactionItem alloc] initWithDate:date price:price];
         [self addTransactionItem:tmp];
     }
@@ -70,7 +77,8 @@
     if (!transactionsForYear)
         return nil;
     
-    return (NSArray *)[transactionsForYear objectForKey:[@(month) stringValue]];
+    NSArray *result = [transactionsForYear objectForKey:[@(month) stringValue]];
+    return result;
 }
 
 - (NSInteger)getTotalIncomeForYear:(NSInteger)year month:(NSInteger)month

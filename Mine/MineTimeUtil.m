@@ -42,6 +42,11 @@
     return monthStr;
 }
 
++ (NSString *)getShortMonthStr:(NSInteger)month
+{
+    return [[self getMonthStr:month] substringToIndex:3];
+}
+
 + (NSInteger)getCurrentDay
 {
     return [[self getCurrentDateComponents] day];

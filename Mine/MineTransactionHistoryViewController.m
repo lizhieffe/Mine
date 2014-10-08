@@ -10,8 +10,12 @@
 #import "MineTransactionInfo.h"
 #import "MinePreferenceService.h"
 #import "MineTimeUtil.h"
+#import "MineTransactionHistoryTableViewCell.h"
+#import "MineTransactionItem.h"
 
 @interface MineTransactionHistoryViewController ()
+
+@property (weak, nonatomic) IBOutlet UIButton *okBtn;
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *incomeLabel;
@@ -41,6 +45,13 @@
     // Do any additional setup after loading the view from its nib.
     
     [self updateDateLabel];
+    [self updateIncomeLabel];
+    [self updateExpenseLabel];
+    
+    self.historyTableView.delegate = self;
+    self.historyTableView.dataSource = self;
+    
+    [self.okBtn addTarget:self action:@selector(okBtnTapped) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,16 +68,63 @@
     self.dateLabel.text = [NSString stringWithFormat:@"%@ %ld", monthStr, (long)year];
 }
 
+- (void)updateIncomeLabel
+{
+    NSInteger month = [[MinePreferenceService sharedManager] displayMonth];
+    NSInteger year = [[MinePreferenceService sharedManager] displayYear];
+    NSInteger amount = [[MineTransactionInfo sharedManager] getTotalIncomeForYear:year month:month];
+    self.incomeLabel.text = [NSString stringWithFormat:@"%ld$", amount];
+}
+
+- (void)updateExpenseLabel
+{
+    NSInteger month = [[MinePreferenceService sharedManager] displayMonth];
+    NSInteger year = [[MinePreferenceService sharedManager] displayYear];
+    NSInteger amount = [[MineTransactionInfo sharedManager] getTotalExpenseForYear:year month:month];
+    self.expenseLabel.text = [NSString stringWithFormat:@"%ld$", amount];
+}
+
+# pragma mark - btn action
+
+- (void)okBtnTapped
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 # pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    NSInteger month = [[MinePreferenceService sharedManager] displayMonth];
+    NSInteger year = [[MinePreferenceService sharedManager] displayYear];
+    NSArray *transactions = [[MineTransactionInfo sharedManager] getAllTransactionsForYear:year month:month];
+    return transactions.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    NSInteger month = [[MinePreferenceService sharedManager] displayMonth];
+    NSInteger year = [[MinePreferenceService sharedManager] displayYear];
+    NSArray *transactions = [[MineTransactionInfo sharedManager] getAllTransactionsForYear:year month:month];
+    NSInteger index = indexPath.row;
+    MineTransactionItem *item = [transactions objectAtIndex:index];
+    
+    static NSString *cellIdentifier = @"Cell";
+    MineTransactionHistoryTableViewCell *cell = [self.historyTableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MineTransactionHistoryTableViewCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
+    
+    cell.price = item.price;
+    cell.day = [MineTimeUtil getDay:item.transactionDate];
+    cell.month = month;
+    
+    [cell updatePriceLabel];
+    [cell updateDateLabel];
+    [cell updateSign];
+    
+    return cell;
 }
 
 @end

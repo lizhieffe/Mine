@@ -17,6 +17,15 @@
 
 @implementation MineGetAllTransactionsService
 
+- (id)init {
+    self = [super init];
+    if (self) {
+        self.expireTimeInterval = 3600;
+        self.lastSucceedDate = [NSDate dateWithTimeIntervalSince1970:0];
+    }
+    return self;
+}
+
 - (void)getAllTransactionsForToken:(NSString *)token
 {
     _token = token;
@@ -41,6 +50,16 @@
     return ^(NSMutableDictionary *json, NSURLResponse *response) {
         [[MineTransactionInfo sharedManager] saveTransactionsFromJson:json];
         [[NSNotificationCenter defaultCenter] postNotificationName:MineNotificationGetAllTransactionsDidSucceed object:self userInfo:json];
+        
+        NSDictionary *errorJson = [json valueForKey:MineResponseKeyErrorJson];
+        NSInteger errorCode = [[errorJson valueForKey:MineResponseKeyErrorCode] intValue];
+        
+        NSDictionary *responseJson = [json valueForKey:MineResponseKeyResponseJson];
+        NSString *token = [responseJson valueForKey:MineResponseKeyResponseToken];
+        
+        if (errorCode == 0) {
+            self.lastSucceedDate = [NSDate date];
+        }
     };
 }
 

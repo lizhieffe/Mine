@@ -14,6 +14,8 @@
 #import "MinePreferenceService.h"
 #import "MineSignUpViewController.h"
 #import "UIView+FindFirstResponder.h"
+#import "MineViewUtil.h"
+#import "MineGetAllTransactionsService.h"
 
 @interface MineLoginViewController ()
 
@@ -156,28 +158,25 @@
 
 - (void)loginDidSucceed:(NSNotification *)notification
 {
+    NSDictionary *errorJson = [notification.userInfo valueForKey:MineResponseKeyErrorJson];
+    NSInteger errorCode = [[errorJson valueForKey:MineResponseKeyErrorCode] intValue];
+    
+    NSDictionary *responseJson = [notification.userInfo valueForKey:MineResponseKeyResponseJson];
+    NSString *token = [responseJson valueForKey:MineResponseKeyResponseToken];
+    if (errorCode == 0) {
+        MineUserInfo *userInfo = [[MineUserInfo alloc] init];
+        userInfo.username = self.usernameTextField.text;
+        userInfo.passcode = self.passcodeTextField.text;
+        [MinePreferenceService setCurrentUserInfo:userInfo];
+        [MinePreferenceService setToken:token];
+        
+        MineGetAllTransactionsService *service = [[MineGetAllTransactionsService alloc] init];
+        [service getAllTransactionsForToken:token];
+    }
+    
     dispatch_async(dispatch_get_main_queue(), ^{
-        
-        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-        
-        [self.activityIndicatorView stopAnimating];
-        self.activityIndicatorView.hidden = YES;
-        
-        NSDictionary *errorJson = [notification.userInfo valueForKey:MineResponseKeyErrorJson];
-        NSInteger errorCode = [[errorJson valueForKey:MineResponseKeyErrorCode] intValue];
-        
-        NSDictionary *responseJson = [notification.userInfo valueForKey:MineResponseKeyResponseJson];
-        NSString *token = [responseJson valueForKey:MineResponseKeyResponseToken];
-        
         if (errorCode == 0) {
-            MineUserInfo *userInfo = [[MineUserInfo alloc] init];
-            userInfo.username = self.usernameTextField.text;
-            userInfo.passcode = self.passcodeTextField.text;
-            [MinePreferenceService setCurrentUserInfo:userInfo];
-            [MinePreferenceService setToken:token];
-            
-//            self.presentingViewController.view.hidden = NO;
-//            [self dismissViewControllerAnimated:YES completion:nil];
+            [MineViewUtil hideActivityIndicatorView:self.activityIndicatorView];
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
         else

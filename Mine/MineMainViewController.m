@@ -12,6 +12,7 @@
 #import "MineCreateTransactionItemsViewController.h"
 #import "MineNewTransactionViewController.h"
 #import "MineTransactionHistoryViewController.h"
+#import "MineTransactionInfo.h"
 
 @interface MineMainViewController ()
 
@@ -27,6 +28,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *peekBtn;
 @property (weak, nonatomic) IBOutlet UILabel *income;
 @property (weak, nonatomic) IBOutlet UILabel *expense;
+
+@property (weak, nonatomic) IBOutlet UILabel *incomeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *expenseLabel;
 
 @end
 
@@ -44,6 +48,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.navigationController.navigationBar.hidden = YES;
     
     /**
@@ -56,13 +61,33 @@
     
     [self.addNewTransactionBtn addTarget:self action:@selector(addNewTransactionBtnTapped) forControlEvents:UIControlEventTouchUpInside];
     [self.historyBtn addTarget:self action:@selector(historyBtnTapped) forControlEvents:UIControlEventTouchUpInside];
-
+    
+    /* notification */
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAllTransactionsDidSucceed:) name:MineNotificationGetAllTransactionsDidSucceed object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-//    [self addUpViewController];
-//    [self addDownViewController];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self updateIncomeLabel];
+        [self updateExpenseLabel];
+    });
+}
+
+- (void)updateIncomeLabel
+{
+    NSInteger month = [[MinePreferenceService sharedManager] displayMonth];
+    NSInteger year = [[MinePreferenceService sharedManager] displayYear];
+    NSInteger amount = [[MineTransactionInfo sharedManager] getTotalIncomeForYear:year month:month];
+    self.incomeLabel.text = [NSString stringWithFormat:@"%ld$", amount];
+}
+
+- (void)updateExpenseLabel
+{
+    NSInteger month = [[MinePreferenceService sharedManager] displayMonth];
+    NSInteger year = [[MinePreferenceService sharedManager] displayYear];
+    NSInteger amount = [[MineTransactionInfo sharedManager] getTotalExpenseForYear:year month:month];
+    self.expenseLabel.text = [NSString stringWithFormat:@"%ld$", amount];
 }
 
 - (void)presentLoginViewController
@@ -79,6 +104,14 @@
 - (void)historyBtnTapped {
     MineTransactionHistoryViewController *historyViewController = [[MineTransactionHistoryViewController alloc] init];
     [self.navigationController pushViewController:historyViewController animated:YES];
+}
+
+- (void)getAllTransactionsDidSucceed:(NSNotification *)notification
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self updateIncomeLabel];
+        [self updateExpenseLabel];
+    });
 }
 
 //

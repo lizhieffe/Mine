@@ -12,14 +12,13 @@
 
 @interface MineTransactionInfo : NSObject
 
-@property (nonatomic, strong) NSDate *date;
-@property (nonatomic, strong) NSString *location;
-@property (nonatomic, strong) NSDictionary *transactionItems;
-
 + (id)sharedManager;
 
 - (void)addTransactionItem:(MineTransactionItem *)item;
 - (void)saveTransactionsFromJson:(NSDictionary *)json;
-- (NSDictionary *)getAllTransactionsForYear:(NSInteger)year month:(NSInteger)month;
+- (NSArray *)getAllTransactionsForYear:(NSInteger)year month:(NSInteger)month;
+- (NSInteger)getTotalIncomeForYear:(NSInteger)year month:(NSInteger)month;
+- (NSInteger)getTotalExpenseForYear:(NSInteger)year month:(NSInteger)month;
+- (NSInteger)getTotalAmountForYear:(NSInteger)year month:(NSInteger)month;
 
 @end

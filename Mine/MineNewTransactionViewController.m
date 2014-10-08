@@ -272,14 +272,14 @@
     NSDictionary *errorJson = [notification.userInfo valueForKey:MineResponseKeyErrorJson];
     NSInteger errorCode = [[errorJson valueForKey:MineResponseKeyErrorCode] intValue];
     
-//    NSDictionary *responseJson = [notification.userInfo valueForKey:MineResponseKeyResponseJson];
-//    NSString *token = [responseJson valueForKey:MineResponseKeyResponseToken];
+    if (errorCode == 0) {
+        MineTransactionItem *transaction = [[MineTransactionItem alloc] initWithDate:self.date price:[self price]];
+        [[MineTransactionInfo sharedManager] addTransactionItem:transaction];
+    }
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
         if (errorCode == 0) {
-            MineTransactionItem *transaction = [[MineTransactionItem alloc] initWithDate:self.date price:[self price]];
-            [[MineTransactionInfo sharedManager] addTransactionItem:transaction];
             [self hideActivityIndicatorView];
             [self cancelBtnTapped];
         }

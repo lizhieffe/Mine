@@ -10,4 +10,6 @@
 
 @interface MineGetAllTransactionsService : MineService
 
+- (void)getAllTransactionsForToken:(NSString *)token;
+
 @end

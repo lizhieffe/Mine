@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) NSString *fullUrl;
 
+
 @end
 
 @implementation MineService
@@ -22,6 +23,7 @@
         _requestParameters = [[NSMutableDictionary alloc] init];
         _fullUrl = [[NSString alloc] init];
         _finished = false;
+        _expireTimeInterval = -1;
     }
     return self;
 }
@@ -70,25 +72,17 @@
 
 - (void)start
 {
+    if (self.expireTimeInterval < 0 || [self.lastSucceedDate timeIntervalSinceNow] * (-1) > self.expireTimeInterval) {
+        NSURL *URL = [NSURL URLWithString:[self fullUrl]];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+        [request setHTTPMethod:@"POST"];
     
-    NSURL *URL = [NSURL URLWithString:[self fullUrl]];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
-    [request setHTTPMethod:@"POST"];
-    
-    NSURLSession *session = [NSURLSession sharedSession];
-    //    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
-    //                                            completionHandler:
-    //                                  ^(NSData *data, NSURLResponse *response, NSError *error) {
-    //
-    //                                      NSString *results = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    //                                      NSLog(results);
-    //
-    //                                  }];
-    
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+        NSURLSession *session = [NSURLSession sharedSession];
+        NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                             completionHandler:[self _completionBlock]];
     
-    [task resume];
+        [task resume];
+    }
 }
 
 - (void (^)(NSData *data, NSURLResponse *response, NSError *error))_completionBlock
