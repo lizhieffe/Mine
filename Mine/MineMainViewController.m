@@ -13,6 +13,8 @@
 #import "MineNewTransactionViewController.h"
 #import "MineTransactionHistoryViewController.h"
 #import "MineTransactionInfo.h"
+#import "MinePersistDataUtil.h"
+#import "MineGetAllTransactionsService.h"
 
 @interface MineMainViewController ()
 
@@ -54,9 +56,18 @@
     /**
      display the login view controller first if there is no user logged in
      */
-    if (![MinePreferenceService currentUserInfo] || ![MinePreferenceService token]) {
+    if (![MinePreferenceService isUserLoggedIn]) {
         [MinePreferenceService cleanCurrentUserInfo];
         [self presentLoginViewController];
+    }
+    else {
+        /**
+         restart app after log in
+         */
+        if (![MinePreferenceService token]) {
+            [MinePreferenceService setToken:[MinePersistDataUtil objectForKey:@"token"]];
+            
+        }
     }
     
     [self.addNewTransactionBtn addTarget:self action:@selector(addNewTransactionBtnTapped) forControlEvents:UIControlEventTouchUpInside];
@@ -72,6 +83,9 @@
         [self updateIncomeLabel];
         [self updateExpenseLabel];
     });
+    
+    MineGetAllTransactionsService *service = [[MineGetAllTransactionsService alloc] init];
+    [service getAllTransactionsForToken:[MinePreferenceService token]];
 }
 
 - (void)updateIncomeLabel

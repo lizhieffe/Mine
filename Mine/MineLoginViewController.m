@@ -65,17 +65,7 @@
 - (IBAction)loginBtnTapped:(id)sender
 {
     [self hideKeyboard];
-    
-    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-
-    /**
-     start activity indicator view
-     */
-    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.activityIndicatorView];
-    [self.activityIndicatorView.layer setBackgroundColor:[[UIColor colorWithWhite:0.0 alpha:0.30] CGColor]];
-    [self.activityIndicatorView setFrame:self.view.frame];
-    [self.activityIndicatorView startAnimating];
-    self.activityIndicatorView.hidden = NO;
+    [MineViewUtil showActivityIndicatorView:self.activityIndicatorView inView:self.view];
     
     /**
      start service

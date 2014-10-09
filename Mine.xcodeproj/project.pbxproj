@@ -36,6 +36,7 @@
 		DC50980F19E21F0C00EBD4DE /* MineColorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DC50980E19E21F0C00EBD4DE /* MineColorUtil.m */; };
 		DC50981219E224A600EBD4DE /* MineAddTransactionService.m in Sources */ = {isa = PBXBuildFile; fileRef = DC50981119E224A600EBD4DE /* MineAddTransactionService.m */; };
 		DC50981519E2280C00EBD4DE /* MineViewUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DC50981419E2280C00EBD4DE /* MineViewUtil.m */; };
+		DC99468A19E6CA1000559AA8 /* MineServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DC99468919E6CA1000559AA8 /* MineServiceManager.m */; };
 		DCAC0FA419DE52AE000B65FA /* MoneyBag_100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = DCAC0FA019DE52AE000B65FA /* MoneyBag_100x100.png */; };
 		DCAC0FA519DE52AE000B65FA /* Dolls_100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = DCAC0FA119DE52AE000B65FA /* Dolls_100x100.png */; };
 		DCAC0FA619DE52AE000B65FA /* Clock_100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = DCAC0FA219DE52AE000B65FA /* Clock_100x100.png */; };
@@ -75,6 +76,7 @@
 		DCDF69D51982831E0066FDCC /* MineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF69D41982831E0066FDCC /* MineTests.m */; };
 		DCDF69E41982873F0066FDCC /* MineLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF69E21982873F0066FDCC /* MineLoginViewController.m */; };
 		DCDF69E51982873F0066FDCC /* MineLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCDF69E31982873F0066FDCC /* MineLoginViewController.xib */; };
+		DCE2403F19E4FE25009DB1E4 /* MinePersistDataUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE2403E19E4FE25009DB1E4 /* MinePersistDataUtil.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +145,8 @@
 		DC50981119E224A600EBD4DE /* MineAddTransactionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineAddTransactionService.m; sourceTree = "<group>"; };
 		DC50981319E2280C00EBD4DE /* MineViewUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewUtil.h; sourceTree = "<group>"; };
 		DC50981419E2280C00EBD4DE /* MineViewUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewUtil.m; sourceTree = "<group>"; };
+		DC99468819E6CA1000559AA8 /* MineServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineServiceManager.h; sourceTree = "<group>"; };
+		DC99468919E6CA1000559AA8 /* MineServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineServiceManager.m; sourceTree = "<group>"; };
 		DCAC0FA019DE52AE000B65FA /* MoneyBag_100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MoneyBag_100x100.png; sourceTree = "<group>"; };
 		DCAC0FA119DE52AE000B65FA /* Dolls_100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dolls_100x100.png; sourceTree = "<group>"; };
 		DCAC0FA219DE52AE000B65FA /* Clock_100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Clock_100x100.png; sourceTree = "<group>"; };
@@ -190,6 +194,8 @@
 		DCDF69E11982873F0066FDCC /* MineLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineLoginViewController.h; sourceTree = "<group>"; };
 		DCDF69E21982873F0066FDCC /* MineLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineLoginViewController.m; sourceTree = "<group>"; };
 		DCDF69E31982873F0066FDCC /* MineLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineLoginViewController.xib; sourceTree = "<group>"; };
+		DCE2403D19E4FE25009DB1E4 /* MinePersistDataUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinePersistDataUtil.h; sourceTree = "<group>"; };
+		DCE2403E19E4FE25009DB1E4 /* MinePersistDataUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinePersistDataUtil.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +226,8 @@
 		DC15A1EB198436D1007FA1AC /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				DC99468819E6CA1000559AA8 /* MineServiceManager.h */,
+				DC99468919E6CA1000559AA8 /* MineServiceManager.m */,
 				DC15A1EC198436FA007FA1AC /* MineService.h */,
 				DC15A1ED198436FA007FA1AC /* MineService.m */,
 				DC15A1EF19844465007FA1AC /* MineLoginService.h */,
@@ -249,6 +257,8 @@
 				DC50980E19E21F0C00EBD4DE /* MineColorUtil.m */,
 				DC50981319E2280C00EBD4DE /* MineViewUtil.h */,
 				DC50981419E2280C00EBD4DE /* MineViewUtil.m */,
+				DCE2403D19E4FE25009DB1E4 /* MinePersistDataUtil.h */,
+				DCE2403E19E4FE25009DB1E4 /* MinePersistDataUtil.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -581,6 +591,7 @@
 				DC50980F19E21F0C00EBD4DE /* MineColorUtil.m in Sources */,
 				DC15A229198755AF007FA1AC /* UITableView+Mine.m in Sources */,
 				DC50980719E1B4FB00EBD4DE /* MineGetAllTransactionsService.m in Sources */,
+				DCE2403F19E4FE25009DB1E4 /* MinePersistDataUtil.m in Sources */,
 				DC15A20C1985CC86007FA1AC /* MineSignUpService.m in Sources */,
 				DC15A2331988BB33007FA1AC /* MKMapView+Mine.m in Sources */,
 				DCCFB88119DECE66004FB14A /* MineNewTransactionViewController.m in Sources */,
@@ -601,6 +612,7 @@
 				DCDF69B61982831E0066FDCC /* main.m in Sources */,
 				DC15A2201985F8BC007FA1AC /* MineTransactionItem.m in Sources */,
 				DCDF69BA1982831E0066FDCC /* MineAppDelegate.m in Sources */,
+				DC99468A19E6CA1000559AA8 /* MineServiceManager.m in Sources */,
 				DC50980419E1AFFC00EBD4DE /* MineTimeUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

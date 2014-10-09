@@ -10,13 +10,11 @@
 
 static double const PRICE_UNKNOWN = DBL_MIN;
 
-@interface MineTransactionItem : NSObject
+@interface MineTransactionItem : NSObject <NSCoding>
 
-@property (nonatomic, strong) NSString *description;
 @property (nonatomic, assign) double price;
 @property (strong, nonatomic) NSDate *transactionDate;
 
 - (id)initWithDate:(NSDate *)date price:(double)price;
-- (id)initWithDescription:(NSString *)description price:(double)price;
 
 @end

@@ -53,10 +53,6 @@
         
         NSDictionary *errorJson = [json valueForKey:MineResponseKeyErrorJson];
         NSInteger errorCode = [[errorJson valueForKey:MineResponseKeyErrorCode] intValue];
-        
-        NSDictionary *responseJson = [json valueForKey:MineResponseKeyResponseJson];
-        NSString *token = [responseJson valueForKey:MineResponseKeyResponseToken];
-        
         if (errorCode == 0) {
             self.lastSucceedDate = [NSDate date];
         }

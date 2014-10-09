@@ -18,6 +18,7 @@
     /**
      start activity indicator view
      */
+//    activityIndicatorView.frame = [UIScreen mainScreen].applicationFrame;
     [[UIApplication sharedApplication].keyWindow bringSubviewToFront:activityIndicatorView];
     [activityIndicatorView.layer setBackgroundColor:[[UIColor colorWithWhite:0.0 alpha:0.30] CGColor]];
     [activityIndicatorView setFrame:view.frame];

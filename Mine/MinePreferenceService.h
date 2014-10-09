@@ -14,6 +14,8 @@
 
 + (id)sharedManager;
 
++ (BOOL)isUserLoggedIn;
+
 + (MineUserInfo *)currentUserInfo;
 + (void)setCurrentUserInfo:(MineUserInfo *)userInfo;
 + (NSString *)token;

@@ -10,6 +10,9 @@
 #import "MineTransactionItem.h"
 #import "MineConstant.h"
 #import "MineTimeUtil.h"
+#import "MinePersistDataUtil.h"
+
+NSString *const MinePersistDataKeyTransactions = @"transactions";
 
 @interface MineTransactionInfo ()
 
@@ -34,12 +37,16 @@
 {
     self = [super init];
     if (self) {
-//        self.transactionItems = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
 
 - (void)addTransactionItem:(MineTransactionItem *)item
+{
+    [self addTransactionItem:item saveToPersistData:YES];
+}
+
+- (void)addTransactionItem:(MineTransactionItem *)item saveToPersistData:(BOOL)save
 {
     NSInteger year = [MineTimeUtil getYearForUnixtime:[item.transactionDate timeIntervalSince1970]];
     NSInteger month = [MineTimeUtil getMonthForUnixtime:[item.transactionDate timeIntervalSince1970]];
@@ -57,18 +64,29 @@
     }
     
     [transactionsForMonth addObject:item];
+    
+    if (save)
+        [MinePersistDataUtil setObject:self.transactionItems forKey:MinePersistDataKeyTransactions];
 }
 
 - (void)saveTransactionsFromJson:(NSDictionary *)json
 {
+    if (self.transactionItems)
+        [self.transactionItems removeAllObjects];
+    
     NSDictionary *transactions = [[json objectForKey:MineResponseKeyResponseJson] objectForKey:MineResponseKeyResponseTransactions];
     for (NSDictionary *tmp in transactions) {
         double price = [[tmp objectForKey:@"price"] doubleValue];
-        NSString *tddd = [tmp objectForKey:@"timestamp"];
         NSDate *date = [NSDate dateWithTimeIntervalSince1970:[((NSString *)[tmp objectForKey:@"timestamp"]) longLongValue]];
         MineTransactionItem *tmp = [[MineTransactionItem alloc] initWithDate:date price:price];
-        [self addTransactionItem:tmp];
+        [self addTransactionItem:tmp saveToPersistData:NO];
     }
+//    [MinePersistDataUtil setObject:self.transactionItems forKey:MinePersistDataKeyTransactions];
+}
+
+- (void)loadTransactionsFromPersistData
+{
+    self.transactionItems = [MinePersistDataUtil objectForKey:MinePersistDataKeyTransactions];
 }
 
 - (NSArray *)getAllTransactionsForYear:(NSInteger)year month:(NSInteger)month

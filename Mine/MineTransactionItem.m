@@ -20,13 +20,14 @@
     return self;
 }
 
-- (id)initWithDescription:(NSString *)description price:(double)price
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
 {
-    self = [super init];
-    if (self) {
-        self.description = description;
-        self.price = price;
-    }
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
     return self;
 }
 

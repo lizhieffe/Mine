@@ -30,7 +30,8 @@
 
 - (NSString *)hostUrl
 {
-    return @"http://localhost:9000";
+//    return @"http://localhost:9000";
+    return @"http://54.69.249.96:9000";
 }
 
 - (NSString *)apiPath
@@ -76,11 +77,9 @@
         NSURL *URL = [NSURL URLWithString:[self fullUrl]];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
         [request setHTTPMethod:@"POST"];
-    
         NSURLSession *session = [NSURLSession sharedSession];
         NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                             completionHandler:[self _completionBlock]];
-    
         [task resume];
     }
 }
@@ -88,10 +87,7 @@
 - (void (^)(NSData *data, NSURLResponse *response, NSError *error))_completionBlock
 {
     return ^(NSData *data, NSURLResponse *response, NSError *error) {
-        //        NSString *results = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        
         NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        
         if (json && [json count] != 0 && [json objectForKey:MineResponseKeyErrorJson])
             [self completionBlockForSuccess](json, response);
         else

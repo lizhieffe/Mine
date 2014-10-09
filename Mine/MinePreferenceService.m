@@ -9,14 +9,13 @@
 #import "MinePreferenceService.h"
 #import "MineUserInfo.h"
 #import "MineTimeUtil.h"
+#import "MinePersistDataUtil.h"
 
 @interface MinePreferenceService () {
+    // the month and year in MineTransactionHistoryViewController
     NSInteger _displayMonth;
     NSInteger _displayYear;
 }
-
-//@property (assign, nonatomic) NSInteger displayMonth;
-//@property (assign, nonatomic) NSInteger displayYear;
 
 @end
 
@@ -45,6 +44,18 @@ static NSString *_token;
     return self;
 }
 
++ (BOOL)isUserLoggedIn
+{
+    if ([MinePreferenceService token])
+        return YES;
+    
+    if ([MinePersistDataUtil objectForKey:@"token"]) {
+        return YES;
+    }
+    else
+        return NO;
+}
+
 + (MineUserInfo *)currentUserInfo
 {
     if (!_currentUserInfo) {
@@ -59,16 +70,24 @@ static NSString *_token;
 }
 
 + (NSString *)token {
-    return _token;
+    if (_token)
+        return _token;
+
+    NSString *tmp = (NSString *)[MinePersistDataUtil objectForKey:@"token"];
+    if (tmp)
+        return tmp;
+    
+    return nil;
 }
 
 + (void)setToken:(NSString *)token {
     _token = token;
+    [MinePersistDataUtil setObject:token forKey:@"token"];
 }
 
 + (void)cleanCurrentUserInfo {
-    _currentUserInfo = nil;
     _token = nil;
+    [MinePersistDataUtil deleteKey:@"token"];
 }
 
 - (NSInteger)displayMonth
