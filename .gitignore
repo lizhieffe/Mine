@@ -16,3 +16,9 @@ Mine.xcodeproj/xcuserdata/zhili.xcuserdatad/xcschemes/xcschememanagement.plist
 *.lock
 
 Pods/*
+
+*.xcbkptlist
+
+Mine.xcworkspace/xcuserdata/zhili.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+
+Mine.xcworkspace/xcuserdata/zhili.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist

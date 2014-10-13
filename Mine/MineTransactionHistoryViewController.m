@@ -28,6 +28,8 @@
 @property (assign, nonatomic) NSInteger year;
 @property (assign, nonatomic) NSInteger month;
 
+@property (strong, nonatomic) NSIndexPath *indexPathToDelete;
+
 @end
 
 @implementation MineTransactionHistoryViewController
@@ -114,7 +116,7 @@
     NSInteger year = [[MinePreferenceService sharedManager] displayYear];
     NSArray *transactions = [[MineTransactionInfo sharedManager] getAllTransactionsForYear:year month:month];
     NSInteger index = indexPath.row;
-    MineTransactionItem *item = [transactions objectAtIndex:index];
+    MineTransactionItem *item = [transactions objectAtIndex:(transactions.count - index - 1)];
     
     static NSString *cellIdentifier = @"MyCustomCell";
     MineTransactionHistoryTableViewCell *cell = [self.historyTableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -158,6 +160,7 @@
         {
             MineDeleteTransactionService *service = [[MineDeleteTransactionService alloc] init];
             [service deleteTransactionWithId:cell.transactionId];
+            self.indexPathToDelete = [self.historyTableView indexPathForCell:cell];
             
             NSLog(@"Delete button was pressed");
             break;
@@ -176,11 +179,14 @@
     NSInteger errorCode = [[errorJson valueForKey:MineResponseKeyErrorCode] intValue];
     
     if (errorCode == 0) {
-//        NSDictionary *responseJson = [notification.userInfo valueForKey:MineResponseKeyResponseJson];
-//        NSString *deletedTransactionId = [responseJson valueForKey:MineResponseKeyResponseDeletedTransactionId];
-        
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.historyTableView reloadData];
+//            [self.historyTableView reloadData];
+            if (self.indexPathToDelete) {
+                NSArray *indexPaths = [[NSArray alloc] initWithObjects:self.indexPathToDelete, nil];
+                [self.historyTableView beginUpdates];
+                [self.historyTableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+                [self.historyTableView endUpdates];
+            }
             [self updateIncomeLabel];
             [self updateExpenseLabel];
         });
