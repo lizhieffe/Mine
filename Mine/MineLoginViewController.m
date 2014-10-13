@@ -161,7 +161,7 @@
         [MinePreferenceService setToken:token];
         
         MineGetAllTransactionsService *service = [[MineGetAllTransactionsService alloc] init];
-        [service getAllTransactionsForToken:token];
+        [service getAllTransactions];
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{

@@ -10,6 +10,6 @@
 
 @interface MineAddTransactionService : MineService
 
-- (void)addTransactionForToken:(NSString *)token timestamp:(NSInteger)timestamp price:(NSInteger)price;
+- (void)addTransactionWithTimestamp:(NSInteger)timestamp price:(NSInteger)price;
 
 @end

@@ -11,14 +11,18 @@
 @interface MineService : NSObject
 
 @property (strong, nonatomic) NSMutableDictionary *requestParameters;
-@property (nonatomic) BOOL finished;
-@property (assign, nonatomic) NSDate *lastSucceedDate;
+@property (nonatomic, assign) BOOL finished;
+@property (nonatomic, assign) BOOL ignoreCache;
 @property (assign, nonatomic) NSInteger expireTimeInterval;
+@property (strong, nonatomic) NSString *token;
 
 - (NSString *)hostUrl;
 - (NSString *)apiPath;
 - (NSString *)HTTPMethod;
 - (void)updateParameters;
 - (void)start;
+- (NSDate *)lastSucceedDate;
+- (NSDate *)lastSucceedDateInCache;
+- (NSDictionary *)lastSucceedJsonInCache;
 
 @end

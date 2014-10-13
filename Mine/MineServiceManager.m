@@ -12,8 +12,6 @@
 
 @interface MineServiceManager ()
 
-@property (strong, nonatomic) NSMutableDictionary *lastSucceedDates;
-@property (strong, atomic) MineService *currentService;
 
 @end
 
@@ -33,8 +31,7 @@
 - (void)getAllTransactions
 {
     MineGetAllTransactionsService *service = [[MineGetAllTransactionsService alloc] init];
-    service.lastSucceedDate = [self.lastSucceedDates objectForKey:@"getAllTransactions"];
-    [service getAllTransactionsForToken:[MinePreferenceService token]];
+    [service getAllTransactions];
 }
 
 @end

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SWTableViewCell.h>
 
-@interface MineTransactionHistoryViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface MineTransactionHistoryViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, SWTableViewCellDelegate>
 
 @end

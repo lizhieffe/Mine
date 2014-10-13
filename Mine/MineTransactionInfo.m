@@ -17,6 +17,7 @@ NSString *const MinePersistDataKeyTransactions = @"transactions";
 @interface MineTransactionInfo ()
 
 @property (strong, nonatomic) NSMutableDictionary *transactionItems;
+@property (strong, nonatomic) NSMutableDictionary *transactionItemsHelper;
 
 @end
 
@@ -29,6 +30,7 @@ NSString *const MinePersistDataKeyTransactions = @"transactions";
     dispatch_once(&onceToken, ^{
         sharedManager = [[self alloc] init];
         sharedManager.transactionItems = [[NSMutableDictionary alloc] init];
+        sharedManager.transactionItemsHelper = [[NSMutableDictionary alloc] init];
     });
     return sharedManager;
 }
@@ -43,7 +45,7 @@ NSString *const MinePersistDataKeyTransactions = @"transactions";
 
 - (void)addTransactionItem:(MineTransactionItem *)item
 {
-    [self addTransactionItem:item saveToPersistData:YES];
+    [self addTransactionItem:item saveToPersistData:NO];
 }
 
 - (void)addTransactionItem:(MineTransactionItem *)item saveToPersistData:(BOOL)save
@@ -67,6 +69,8 @@ NSString *const MinePersistDataKeyTransactions = @"transactions";
     
     if (save)
         [MinePersistDataUtil setObject:self.transactionItems forKey:MinePersistDataKeyTransactions];
+    
+    [self.transactionItemsHelper setObject:item.transactionDate forKey:[@(item.transactionId) stringValue]];
 }
 
 - (void)saveTransactionsFromJson:(NSDictionary *)json
@@ -76,12 +80,12 @@ NSString *const MinePersistDataKeyTransactions = @"transactions";
     
     NSDictionary *transactions = [[json objectForKey:MineResponseKeyResponseJson] objectForKey:MineResponseKeyResponseTransactions];
     for (NSDictionary *tmp in transactions) {
+        long transactionId = [[tmp objectForKey:@"transaction_id"] longValue];
         double price = [[tmp objectForKey:@"price"] doubleValue];
         NSDate *date = [NSDate dateWithTimeIntervalSince1970:[((NSString *)[tmp objectForKey:@"timestamp"]) longLongValue]];
-        MineTransactionItem *tmp = [[MineTransactionItem alloc] initWithDate:date price:price];
+        MineTransactionItem *tmp = [[MineTransactionItem alloc] initWithId:transactionId date:date price:price];
         [self addTransactionItem:tmp saveToPersistData:NO];
     }
-//    [MinePersistDataUtil setObject:self.transactionItems forKey:MinePersistDataKeyTransactions];
 }
 
 - (void)loadTransactionsFromPersistData
@@ -89,13 +93,34 @@ NSString *const MinePersistDataKeyTransactions = @"transactions";
     self.transactionItems = [MinePersistDataUtil objectForKey:MinePersistDataKeyTransactions];
 }
 
-- (NSArray *)getAllTransactionsForYear:(NSInteger)year month:(NSInteger)month
+- (void)deleteTransactionWithId:(long)transactionId
+{
+    NSDate *date = [self.transactionItemsHelper objectForKey:[@(transactionId) stringValue]];
+    NSInteger year = [MineTimeUtil getYearForUnixtime:[date timeIntervalSince1970]];
+    NSInteger month = [MineTimeUtil getMonthForUnixtime:[date timeIntervalSince1970]];
+    NSMutableArray *transactions = [self getAllTransactionsForYear:year month:month];
+    
+    MineTransactionItem *itemToDelete = nil;
+    for (MineTransactionItem *item in transactions) {
+        if (item.transactionId == transactionId) {
+            itemToDelete = item;
+            break;
+        }
+    }
+    
+    if (itemToDelete) {
+        [transactions removeObject:itemToDelete];
+        [self.transactionItemsHelper removeObjectForKey:[@(transactionId) stringValue]];
+    }
+}
+
+- (NSMutableArray *)getAllTransactionsForYear:(NSInteger)year month:(NSInteger)month
 {
     NSDictionary *transactionsForYear = [self.transactionItems objectForKey:[@(year) stringValue]];
     if (!transactionsForYear)
         return nil;
     
-    NSArray *result = [transactionsForYear objectForKey:[@(month) stringValue]];
+    NSMutableArray *result = [transactionsForYear objectForKey:[@(month) stringValue]];
     return result;
 }
 

@@ -79,13 +79,13 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    MineGetAllTransactionsService *service = [[MineGetAllTransactionsService alloc] init];
+    [service getAllTransactions];
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         [self updateIncomeLabel];
         [self updateExpenseLabel];
     });
-    
-    MineGetAllTransactionsService *service = [[MineGetAllTransactionsService alloc] init];
-    [service getAllTransactionsForToken:[MinePreferenceService token]];
 }
 
 - (void)updateIncomeLabel

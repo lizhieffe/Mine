@@ -7,6 +7,11 @@
 //
 
 #import "MineService.h"
+#import "MineTimeUtil.h"
+#import "MinePersistDataUtil.h"
+#import "MinePreferenceService.h"
+#import "MineConstant.h"
+#import "MineServiceManager.h"
 
 @interface MineService ()
 
@@ -22,15 +27,17 @@
     if (self) {
         _requestParameters = [[NSMutableDictionary alloc] init];
         _fullUrl = [[NSString alloc] init];
-        _finished = false;
+        _finished = NO;
+        _ignoreCache = NO;
         _expireTimeInterval = -1;
+        _token = [MinePreferenceService token];
     }
     return self;
 }
 
 - (NSString *)hostUrl
 {
-//    return @"http://localhost:9000";
+//    return @"http://192.168.1.131:9000";
     return @"http://54.69.249.96:9000";
 }
 
@@ -69,11 +76,18 @@
 
 - (void)updateParameters
 {
+    if (_token)
+        [self.requestParameters setObject:self.token forKey:MineRequestParameterToken];
 }
 
 - (void)start
 {
-    if (self.expireTimeInterval < 0 || [self.lastSucceedDate timeIntervalSinceNow] * (-1) > self.expireTimeInterval) {
+    NSDate *lastSucceedDate = [self lastSucceedDate];
+    if (!self.ignoreCache && lastSucceedDate && self.expireTimeInterval >= 0 && [lastSucceedDate timeIntervalSinceNow] * (-1) <= self.expireTimeInterval)
+        return;
+    
+    lastSucceedDate = [self lastSucceedDateInCache];
+    if (self.ignoreCache || !lastSucceedDate || self.expireTimeInterval < 0 || [lastSucceedDate timeIntervalSinceNow] * (-1) > self.expireTimeInterval) {
         NSURL *URL = [NSURL URLWithString:[self fullUrl]];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
         [request setHTTPMethod:@"POST"];
@@ -82,30 +96,88 @@
                                             completionHandler:[self _completionBlock]];
         [task resume];
     }
+    else {
+        NSDictionary *lastSucceedJson = [self lastSucceedJsonInCache];
+        [self completionBlockForSuccess](lastSucceedJson, nil);
+    }
 }
 
 - (void (^)(NSData *data, NSURLResponse *response, NSError *error))_completionBlock
 {
     return ^(NSData *data, NSURLResponse *response, NSError *error) {
         NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        if (json && [json count] != 0 && [json objectForKey:MineResponseKeyErrorJson])
+        if (json && [json count] != 0 && [json objectForKey:MineResponseKeyErrorJson]) {
+            
+            NSDictionary *errorJson = [json valueForKey:MineResponseKeyErrorJson];
+            NSInteger errorCode = [[errorJson valueForKey:MineResponseKeyErrorCode] intValue];
+            if (errorCode == 0) {
+                [self setlastSucceedDate:[NSDate date]];
+                [self setLastSucceedDateInCache:[NSDate date]];
+                [self setLastSucceedJsonInCache:json];
+            }
+            
             [self completionBlockForSuccess](json, response);
+        }
         else
             [self completionBlockForFailure](json, response);
         
     };
 }
 
-- (void (^)(NSMutableDictionary *json, NSURLResponse *response))completionBlockForSuccess
+- (void (^)(NSDictionary *json, NSURLResponse *response))completionBlockForSuccess
 {
-    return ^(NSMutableDictionary *json, NSURLResponse *response) {
+    return ^(NSDictionary *json, NSURLResponse *response) {
     };
 }
 
-- (void (^)(NSMutableDictionary *json, NSURLResponse *response))completionBlockForFailure
+- (void (^)(NSDictionary *json, NSURLResponse *response))completionBlockForFailure
 {
-    return ^(NSMutableDictionary *json, NSURLResponse *response) {
+    return ^(NSDictionary *json, NSURLResponse *response) {
     };
+}
+
+- (NSDate *)lastSucceedDate
+{
+    MineServiceManager *sharedManager = [MineServiceManager sharedManager];
+    NSString *className = NSStringFromClass([self class]);
+    return [sharedManager.lastSucceedDates objectForKey:className];
+}
+
+- (void)setlastSucceedDate:(NSDate *)date
+{
+    MineServiceManager *sharedManager = [MineServiceManager sharedManager];
+    NSString *className = NSStringFromClass([self class]);
+    [sharedManager.lastSucceedDates setObject:date forKey:className];
+}
+
+- (NSDate *)lastSucceedDateInCache
+{
+    NSString *className = NSStringFromClass([self class]);
+    NSString *path = [NSString stringWithFormat:@"%@_lastSucceedDate", className];
+    NSDate *lastSucceedDate = [MinePersistDataUtil objectForKey:path];
+    return lastSucceedDate;
+}
+
+- (NSDictionary *)lastSucceedJsonInCache
+{
+    NSString *className = NSStringFromClass([self class]);
+    NSString *path = [NSString stringWithFormat:@"%@_lastSucceedJson", className];
+    NSDictionary *json = [MinePersistDataUtil objectForKey:path];
+    return json;
+}
+
+- (void)setLastSucceedDateInCache:(NSDate *)lastSucceedDate
+{    
+    NSString *className = NSStringFromClass([self class]);
+    NSString *path = [NSString stringWithFormat:@"%@_lastSucceedDate", className];
+    [MinePersistDataUtil setObject:lastSucceedDate forKey:path];
+}
+
+- (void)setLastSucceedJsonInCache:(NSDictionary *)json
+{
+    NSString *className = NSStringFromClass([self class]);
+    NSString *path = [NSString stringWithFormat:@"%@_lastSucceedJson", className];
+    [MinePersistDataUtil setObject:json forKey:path];
 }
 
 @end

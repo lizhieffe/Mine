@@ -7,15 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SWTableViewCell.h>
 
-@interface MineTransactionHistoryTableViewCell : UITableViewCell
+@interface MineTransactionHistoryTableViewCell : SWTableViewCell
 
 //- (id)initWithPrice:(NSInteger)price date:(NSDate *)date;
-+ (UITableViewCell *)generateCellWithPrice:(NSInteger)price date:(NSDate *)date;
++ (UITableViewCell *)generateCellWithId:(long)transactionId price:(NSInteger)price date:(NSDate *)date;
 
 @property (assign, nonatomic) NSInteger month;
 @property (assign, nonatomic) NSInteger day;
 @property (assign, nonatomic) NSInteger price;
+@property (assign, nonatomic) long transactionId;
 
 - (void)updateSign;
 - (void)updateDateLabel;

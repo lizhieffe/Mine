@@ -10,4 +10,8 @@
 
 @interface MineServiceManager : NSObject
 
+@property (strong, nonatomic) NSMutableDictionary *lastSucceedDates;
+
++ (id)sharedManager;
+
 @end

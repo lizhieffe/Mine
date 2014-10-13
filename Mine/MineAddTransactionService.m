@@ -10,7 +10,6 @@
 
 @interface MineAddTransactionService ()
 
-@property (strong, nonatomic) NSString *token;
 @property (assign, nonatomic) NSInteger timestamp;
 @property (assign, nonatomic) NSInteger price;
 
@@ -18,9 +17,8 @@
 
 @implementation MineAddTransactionService
 
-- (void)addTransactionForToken:(NSString *)token timestamp:(NSInteger)timestamp price:(NSInteger)price
+- (void)addTransactionWithTimestamp:(NSInteger)timestamp price:(NSInteger)price
 {
-    _token = token;
     _timestamp = timestamp;
     _price = price;
     
@@ -36,7 +34,6 @@
 - (void)updateParameters
 {
     [super updateParameters];
-    [self.requestParameters setObject:_token forKey:MineRequestParameterToken];
     [self.requestParameters setObject:[@(_timestamp) stringValue] forKey:MineRequestParameterTimestamp];
     [self.requestParameters setObject:[@(_price) stringValue] forKey:MineRequestParameterPrice];
 }

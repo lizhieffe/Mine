@@ -17,10 +17,6 @@
         [userDefaults setObject:[NSKeyedArchiver archivedDataWithRootObject:value] forKey:key];
     else
         [userDefaults setObject:value forKey:key];
-    
-//    NSDictionary *dict = [self getDict];
-//    [dict setValue:value forKey:key];
-//    [self saveDict:dict];
 }
 
 + (id)objectForKey:(NSString *)key
@@ -31,21 +27,12 @@
         return [NSKeyedUnarchiver unarchiveObjectWithData:(NSData *)object];
     else
         return object;
-    
-    
-//    NSDictionary *dict = [self getDict];
-//    return [dict objectForKey:key];
 }
 
 + (void)deleteKey:(NSString *)key
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults removeObjectForKey:key];
-    
-    
-//    NSMutableDictionary *dict = [self getDict];
-//    [dict removeObjectForKey:key];
-//    [self saveDict:dict];
 }
 
 + (NSMutableDictionary *)getDict

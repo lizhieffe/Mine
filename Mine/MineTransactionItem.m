@@ -10,10 +10,11 @@
 
 @implementation MineTransactionItem
 
-- (id)initWithDate:(NSDate *)date price:(double)price
+- (id)initWithId:(long)transactionId date:(NSDate *)date price:(double)price
 {
     self = [super init];
     if (self) {
+        self.transactionId = transactionId;
         self.transactionDate = date;
         self.price = price;
     }

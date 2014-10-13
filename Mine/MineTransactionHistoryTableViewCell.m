@@ -20,13 +20,14 @@
 
 @implementation MineTransactionHistoryTableViewCell
 
-+ (UITableViewCell *)generateCellWithPrice:(NSInteger)price date:(NSDate *)date
++ (UITableViewCell *)generateCellWithId:(long)transactionId price:(NSInteger)price date:(NSDate *)date
 {
     MineTransactionHistoryTableViewCell *cell = nil;
     cell = [[MineTransactionHistoryTableViewCell alloc] init];
     cell.day = [MineTimeUtil getDay:date];
     cell.month = [MineTimeUtil getMonth:date];
     cell.price = price;
+    cell.transactionId = transactionId;
     
     [cell updateSign];
     [cell updateDateLabel];

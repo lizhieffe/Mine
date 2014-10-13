@@ -14,6 +14,7 @@ extern NSString *const MineNotificationLoginDidSucceed;
 extern NSString *const MineNotificationSignUpDidSucceed;
 extern NSString *const MineNotificationAddTransactionDidSucceed;
 extern NSString *const MineNotificationGetAllTransactionsDidSucceed;
+extern NSString *const MineNotificationDeleteTransactionDidSucceed;
 extern NSString *const MineNotificationDownViewDidHide;
 
 #pragma mark - request parameter -
@@ -26,6 +27,7 @@ extern NSString *const MineRequestParameterGender;
 extern NSString *const MineRequestParameterToken;
 extern NSString *const MineRequestParameterTimestamp;
 extern NSString *const MineRequestParameterPrice;
+extern NSString *const MineRequestParameterTransactionId;
 
 #pragma mark - response key -
 
@@ -36,6 +38,7 @@ extern NSString *const MineResponseKeyErrorMsg;
 extern NSString *const MineResponseKeyResponseJson;
 extern NSString *const MineResponseKeyResponseToken;
 extern NSString *const MineResponseKeyResponseTransactions;
+extern NSString *const MineResponseKeyResponseDeletedTransactionId;
 
 #pragma mark - alert view title and body msg -
 

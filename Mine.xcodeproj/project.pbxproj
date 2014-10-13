@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		75F170A61A0247F659980BBC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9218DDA4C57C8E918F70C9CD /* libPods.a */; };
 		DC15A1EE198436FA007FA1AC /* MineService.m in Sources */ = {isa = PBXBuildFile; fileRef = DC15A1ED198436FA007FA1AC /* MineService.m */; };
 		DC15A1F119844465007FA1AC /* MineLoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = DC15A1F019844465007FA1AC /* MineLoginService.m */; };
 		DC15A1F519844A9C007FA1AC /* MineConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = DC15A1F419844A9C007FA1AC /* MineConstant.m */; };
@@ -37,6 +38,7 @@
 		DC50981219E224A600EBD4DE /* MineAddTransactionService.m in Sources */ = {isa = PBXBuildFile; fileRef = DC50981119E224A600EBD4DE /* MineAddTransactionService.m */; };
 		DC50981519E2280C00EBD4DE /* MineViewUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DC50981419E2280C00EBD4DE /* MineViewUtil.m */; };
 		DC99468A19E6CA1000559AA8 /* MineServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DC99468919E6CA1000559AA8 /* MineServiceManager.m */; };
+		DC99468D19EB78B900559AA8 /* MineDeleteTransactionService.m in Sources */ = {isa = PBXBuildFile; fileRef = DC99468C19EB78B900559AA8 /* MineDeleteTransactionService.m */; };
 		DCAC0FA419DE52AE000B65FA /* MoneyBag_100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = DCAC0FA019DE52AE000B65FA /* MoneyBag_100x100.png */; };
 		DCAC0FA519DE52AE000B65FA /* Dolls_100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = DCAC0FA119DE52AE000B65FA /* Dolls_100x100.png */; };
 		DCAC0FA619DE52AE000B65FA /* Clock_100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = DCAC0FA219DE52AE000B65FA /* Clock_100x100.png */; };
@@ -90,6 +92,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08F266DC3FFAFAECE12FA8FA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		9218DDA4C57C8E918F70C9CD /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D08BF8DE36E3F327940A9872 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		DC15A1EC198436FA007FA1AC /* MineService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineService.h; sourceTree = "<group>"; };
 		DC15A1ED198436FA007FA1AC /* MineService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineService.m; sourceTree = "<group>"; };
 		DC15A1EF19844465007FA1AC /* MineLoginService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineLoginService.h; sourceTree = "<group>"; };
@@ -147,6 +152,8 @@
 		DC50981419E2280C00EBD4DE /* MineViewUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewUtil.m; sourceTree = "<group>"; };
 		DC99468819E6CA1000559AA8 /* MineServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineServiceManager.h; sourceTree = "<group>"; };
 		DC99468919E6CA1000559AA8 /* MineServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineServiceManager.m; sourceTree = "<group>"; };
+		DC99468B19EB78B900559AA8 /* MineDeleteTransactionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineDeleteTransactionService.h; sourceTree = "<group>"; };
+		DC99468C19EB78B900559AA8 /* MineDeleteTransactionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineDeleteTransactionService.m; sourceTree = "<group>"; };
 		DCAC0FA019DE52AE000B65FA /* MoneyBag_100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MoneyBag_100x100.png; sourceTree = "<group>"; };
 		DCAC0FA119DE52AE000B65FA /* Dolls_100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dolls_100x100.png; sourceTree = "<group>"; };
 		DCAC0FA219DE52AE000B65FA /* Clock_100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Clock_100x100.png; sourceTree = "<group>"; };
@@ -207,6 +214,7 @@
 				DCDF69AC1982831E0066FDCC /* CoreGraphics.framework in Frameworks */,
 				DCDF69AE1982831E0066FDCC /* UIKit.framework in Frameworks */,
 				DCDF69AA1982831E0066FDCC /* Foundation.framework in Frameworks */,
+				75F170A61A0247F659980BBC /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,6 +231,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B6A3A6619859A57AA045466C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D08BF8DE36E3F327940A9872 /* Pods.debug.xcconfig */,
+				08F266DC3FFAFAECE12FA8FA /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		DC15A1EB198436D1007FA1AC /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,6 +257,8 @@
 				DC50981119E224A600EBD4DE /* MineAddTransactionService.m */,
 				DC50980519E1B4FB00EBD4DE /* MineGetAllTransactionsService.h */,
 				DC50980619E1B4FB00EBD4DE /* MineGetAllTransactionsService.m */,
+				DC99468B19EB78B900559AA8 /* MineDeleteTransactionService.h */,
+				DC99468C19EB78B900559AA8 /* MineDeleteTransactionService.m */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -320,6 +339,7 @@
 				DCDF69CE1982831E0066FDCC /* MineTests */,
 				DCDF69A81982831E0066FDCC /* Frameworks */,
 				DCDF69A71982831E0066FDCC /* Products */,
+				B6A3A6619859A57AA045466C /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -340,6 +360,7 @@
 				DCDF69AB1982831E0066FDCC /* CoreGraphics.framework */,
 				DCDF69AD1982831E0066FDCC /* UIKit.framework */,
 				DCDF69C81982831E0066FDCC /* XCTest.framework */,
+				9218DDA4C57C8E918F70C9CD /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -462,9 +483,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DCDF69D81982831E0066FDCC /* Build configuration list for PBXNativeTarget "Mine" */;
 			buildPhases = (
+				8DAB0ED4023CCD15260C4A8D /* Check Pods Manifest.lock */,
 				DCDF69A21982831E0066FDCC /* Sources */,
 				DCDF69A31982831E0066FDCC /* Frameworks */,
 				DCDF69A41982831E0066FDCC /* Resources */,
+				B1C67327FD84E838AD86D2C5 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -579,6 +602,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		8DAB0ED4023CCD15260C4A8D /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B1C67327FD84E838AD86D2C5 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		DCDF69A21982831E0066FDCC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -607,6 +663,7 @@
 				DC15A22D1987D236007FA1AC /* MineCreateTransactionLocationViewController.m in Sources */,
 				DC15A2101985D990007FA1AC /* UIView+FindFirstResponder.m in Sources */,
 				DC15A225198601A5007FA1AC /* MineTransactionItemCellTableViewCell.m in Sources */,
+				DC99468D19EB78B900559AA8 /* MineDeleteTransactionService.m in Sources */,
 				DC15A1F119844465007FA1AC /* MineLoginService.m in Sources */,
 				DC15A1EE198436FA007FA1AC /* MineService.m in Sources */,
 				DCDF69B61982831E0066FDCC /* main.m in Sources */,
@@ -727,6 +784,7 @@
 		};
 		DCDF69D91982831E0066FDCC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D08BF8DE36E3F327940A9872 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -740,6 +798,7 @@
 		};
 		DCDF69DA1982831E0066FDCC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08F266DC3FFAFAECE12FA8FA /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

@@ -11,8 +11,6 @@
 
 @interface MineGetAllTransactionsService()
 
-@property (strong, nonatomic) NSString *token;
-
 @end
 
 @implementation MineGetAllTransactionsService
@@ -21,15 +19,12 @@
     self = [super init];
     if (self) {
         self.expireTimeInterval = 3600;
-        self.lastSucceedDate = [NSDate dateWithTimeIntervalSince1970:0];
     }
     return self;
 }
 
-- (void)getAllTransactionsForToken:(NSString *)token
+- (void)getAllTransactions
 {
-    _token = token;
-    
     [self updateParameters];
     [super start];
 }
@@ -42,20 +37,16 @@
 - (void)updateParameters
 {
     [super updateParameters];
-    [self.requestParameters setObject:_token forKey:MineRequestParameterToken];
+    [self.requestParameters setObject:self.token forKey:MineRequestParameterToken];
 }
 
 - (void (^)(NSMutableDictionary *json, NSURLResponse *response))completionBlockForSuccess
 {
     return ^(NSMutableDictionary *json, NSURLResponse *response) {
-        [[MineTransactionInfo sharedManager] saveTransactionsFromJson:json];
-        [[NSNotificationCenter defaultCenter] postNotificationName:MineNotificationGetAllTransactionsDidSucceed object:self userInfo:json];
         
-        NSDictionary *errorJson = [json valueForKey:MineResponseKeyErrorJson];
-        NSInteger errorCode = [[errorJson valueForKey:MineResponseKeyErrorCode] intValue];
-        if (errorCode == 0) {
-            self.lastSucceedDate = [NSDate date];
-        }
+        [[MineTransactionInfo sharedManager] saveTransactionsFromJson:json];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:MineNotificationGetAllTransactionsDidSucceed object:self userInfo:json];
     };
 }
 

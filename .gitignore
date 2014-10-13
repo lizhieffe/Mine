@@ -12,3 +12,7 @@ Mine.xcodeproj/xcuserdata/zhili.xcuserdatad/xcschemes/Mine.xcscheme
 Mine.xcodeproj/xcuserdata/zhili.xcuserdatad/xcschemes/xcschememanagement.plist
 
 *.xccheckout
+
+*.lock
+
+Pods/*

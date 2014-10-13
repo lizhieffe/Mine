@@ -12,6 +12,8 @@
 #import "MineTimeUtil.h"
 #import "MineTransactionHistoryTableViewCell.h"
 #import "MineTransactionItem.h"
+#import "MineDeleteTransactionService.h"
+#import "MineAlertViewUtil.h"
 
 @interface MineTransactionHistoryViewController ()
 
@@ -42,7 +44,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    // table view cell
+    [self.historyTableView registerNib:[UINib nibWithNibName:@"MineTransactionHistoryTableViewCell" bundle:nil] forCellReuseIdentifier:@"MyCustomCell"];
     
     [self updateDateLabel];
     [self updateIncomeLabel];
@@ -52,6 +56,9 @@
     self.historyTableView.dataSource = self;
     
     [self.okBtn addTarget:self action:@selector(okBtnTapped) forControlEvents:UIControlEventTouchUpInside];
+    
+    /* notification */
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteTransactionDidSucceed:) name:MineNotificationDeleteTransactionDidSucceed object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -109,7 +116,7 @@
     NSInteger index = indexPath.row;
     MineTransactionItem *item = [transactions objectAtIndex:index];
     
-    static NSString *cellIdentifier = @"Cell";
+    static NSString *cellIdentifier = @"MyCustomCell";
     MineTransactionHistoryTableViewCell *cell = [self.historyTableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MineTransactionHistoryTableViewCell" owner:self options:nil];
@@ -119,12 +126,68 @@
     cell.price = item.price;
     cell.day = [MineTimeUtil getDay:item.transactionDate];
     cell.month = month;
+    cell.transactionId = item.transactionId;
     
     [cell updatePriceLabel];
     [cell updateDateLabel];
     [cell updateSign];
     
+    cell.rightUtilityButtons = [self rightButtons];
+    cell.delegate = self;
+    
     return cell;
+}
+
+# pragma mark - table view cell left buttons
+
+- (NSArray *)rightButtons
+{
+    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:
+     [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
+                                                title:@"Delete"];
+    
+    return rightUtilityButtons;
+}
+
+# pragma mark - SWTableViewCell delegate
+
+- (void)swipeableTableViewCell:(MineTransactionHistoryTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
+    switch (index) {
+        case 0:
+        {
+            MineDeleteTransactionService *service = [[MineDeleteTransactionService alloc] init];
+            [service deleteTransactionWithId:cell.transactionId];
+            
+            NSLog(@"Delete button was pressed");
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+# pragma mark - notification response handler
+
+- (void)deleteTransactionDidSucceed:(NSNotification *)notification
+{
+    
+    NSDictionary *errorJson = [notification.userInfo valueForKey:MineResponseKeyErrorJson];
+    NSInteger errorCode = [[errorJson valueForKey:MineResponseKeyErrorCode] intValue];
+    
+    if (errorCode == 0) {
+//        NSDictionary *responseJson = [notification.userInfo valueForKey:MineResponseKeyResponseJson];
+//        NSString *deletedTransactionId = [responseJson valueForKey:MineResponseKeyResponseDeletedTransactionId];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.historyTableView reloadData];
+            [self updateIncomeLabel];
+            [self updateExpenseLabel];
+        });
+    }
+    else {
+        [MineAlertViewUtil showAlertViewWithErrorCode:errorCode];
+    }
 }
 
 @end

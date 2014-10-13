@@ -15,6 +15,7 @@
 #import "MineTransactionItem.h"
 #import "MineTransactionInfo.h"
 #import "MineAlertViewUtil.h"
+#import "MineGetAllTransactionsService.h"
 
 @interface MineNewTransactionViewController ()
 
@@ -62,7 +63,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     
     [self hideActivityIndicatorView];
     
@@ -242,7 +242,7 @@
     NSInteger price = self.isAmountPositive ? self.amountAbsValue : (-1) * self.amountAbsValue;
     
     MineAddTransactionService *service = [[MineAddTransactionService alloc] init];
-    [service addTransactionForToken:[MinePreferenceService token] timestamp:timestamp price:price];
+    [service addTransactionWithTimestamp:timestamp price:price];
 }
 
 - (void)cancelBtnTapped
@@ -273,8 +273,13 @@
     NSInteger errorCode = [[errorJson valueForKey:MineResponseKeyErrorCode] intValue];
     
     if (errorCode == 0) {
-        MineTransactionItem *transaction = [[MineTransactionItem alloc] initWithDate:self.date price:[self price]];
-        [[MineTransactionInfo sharedManager] addTransactionItem:transaction];
+//        MineTransactionItem *transaction = [[MineTransactionItem alloc] initWithDate:self.date price:[self price]];
+//        [[MineTransactionInfo sharedManager] addTransactionItem:transaction];
+        
+        MineGetAllTransactionsService *service = [[MineGetAllTransactionsService alloc] init];
+        service.ignoreCache = YES;
+        [service getAllTransactions];
+
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
