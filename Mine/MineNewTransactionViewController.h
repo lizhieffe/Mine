@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MineNewTransactionViewController : UIViewController <UITextFieldDelegate>
+@interface MineNewTransactionViewController : UIViewController <UITextFieldDelegate, UIAlertViewDelegate>
 
 @end

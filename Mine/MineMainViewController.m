@@ -24,10 +24,9 @@
 //@property (assign, nonatomic) BOOL downViewInScreen;
 //@property (assign, nonatomic) BOOL upViewInScreen;
 
-@property (weak, nonatomic) IBOutlet UIButton *addNewTransactionBtn;
-@property (weak, nonatomic) IBOutlet UIButton *historyBtn;
-@property (weak, nonatomic) IBOutlet UIButton *takePhotoBtn;
-@property (weak, nonatomic) IBOutlet UIButton *peekBtn;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addNewTransactionBtn;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *historyBtn;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *peekBtn;
 @property (weak, nonatomic) IBOutlet UILabel *income;
 @property (weak, nonatomic) IBOutlet UILabel *expense;
 
@@ -51,7 +50,7 @@
 {
     [super viewDidLoad];
     
-    self.navigationController.navigationBar.hidden = YES;
+//    self.navigationController.navigationBar.hidden = YES;
     
     /**
      display the login view controller first if there is no user logged in
@@ -70,8 +69,11 @@
         }
     }
     
-    [self.addNewTransactionBtn addTarget:self action:@selector(addNewTransactionBtnTapped) forControlEvents:UIControlEventTouchUpInside];
-    [self.historyBtn addTarget:self action:@selector(historyBtnTapped) forControlEvents:UIControlEventTouchUpInside];
+    self.addNewTransactionBtn.target = self;
+    self.addNewTransactionBtn.action = @selector(addNewTransactionBtnTapped);
+    
+    self.historyBtn.target = self;
+    self.historyBtn.action = @selector(historyBtnTapped);
     
     /* notification */
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAllTransactionsDidSucceed:) name:MineNotificationGetAllTransactionsDidSucceed object:nil];

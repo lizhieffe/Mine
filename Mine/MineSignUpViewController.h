@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MineSignUpViewController : UIViewController <UITextFieldDelegate>
+@interface MineSignUpViewController : UIViewController <UITextFieldDelegate, UIAlertViewDelegate>
 
 @end

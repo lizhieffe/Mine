@@ -8,21 +8,22 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MineNewTransactionViewController">
             <connections>
                 <outlet property="activityIndicatorView" destination="vaO-hN-HRV" id="tyd-Nl-EQA"/>
+                <outlet property="addBtn" destination="qqc-RW-lVT" id="kyy-V9-4fQ"/>
                 <outlet property="amount" destination="VVW-kw-V6x" id="7Y3-ub-FCy"/>
-                <outlet property="cancelBtn" destination="vCp-6Y-zgj" id="LiS-J5-BiS"/>
+                <outlet property="cancelBtn" destination="8tu-kM-hgH" id="BhA-6W-qHm"/>
                 <outlet property="dateBtn" destination="l8E-0m-gsQ" id="OTe-zp-caJ"/>
                 <outlet property="dateBtnTextField" destination="HGY-mu-c3Q" id="4dp-d4-YXd"/>
                 <outlet property="fiftyDollarBtn" destination="NmB-PL-jCW" id="WKV-Jx-7MA"/>
                 <outlet property="fiveDollarBtn" destination="6rs-Ic-lK2" id="L7x-Pi-J0O"/>
                 <outlet property="monthBtn" destination="C5V-GP-9HY" id="wWw-GW-qET"/>
                 <outlet property="negativeBtn" destination="WC3-4F-8lX" id="gip-Qa-WUb"/>
-                <outlet property="okBtn" destination="iPJ-ns-THW" id="HPG-eu-6Qd"/>
                 <outlet property="otherBtn" destination="bPF-Wj-qMz" id="elT-fm-jBZ"/>
                 <outlet property="otherBtnTextField" destination="ghj-RO-7lG" id="FcJ-w7-7hv"/>
                 <outlet property="positiveBtn" destination="YpA-1Y-n4b" id="FHw-un-n5U"/>
                 <outlet property="tenDollarBtn" destination="xes-Lk-J23" id="Huk-nG-J2O"/>
                 <outlet property="twentyDollarBtn" destination="5bC-Dd-MvW" id="bmF-QC-k2C"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="yearBtn" destination="t2n-F4-xsd" id="qSV-oI-9zk"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -30,8 +31,25 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="vaO-hN-HRV">
+                    <rect key="frame" x="143" y="266" width="37" height="37"/>
+                </activityIndicatorView>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GzX-Y1-yr6">
+                    <rect key="frame" x="166" y="240" width="130" height="60"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t2n-F4-xsd">
+                            <rect key="frame" x="0.0" y="0.0" width="130" height="61"/>
+                            <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="24"/>
+                            <state key="normal" title="2014">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="etj-qX-flV">
-                    <rect key="frame" x="25" y="377" width="60" height="60"/>
+                    <rect key="frame" x="25" y="398" width="60" height="60"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6rs-Ic-lK2">
                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -45,7 +63,7 @@
                     <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YNW-Jq-PJE">
-                    <rect key="frame" x="95" y="377" width="60" height="60"/>
+                    <rect key="frame" x="95" y="398" width="60" height="60"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xes-Lk-J23">
                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -59,7 +77,7 @@
                     <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tlL-Tz-wLo">
-                    <rect key="frame" x="166" y="377" width="60" height="60"/>
+                    <rect key="frame" x="166" y="398" width="60" height="60"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bC-Dd-MvW">
                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -73,12 +91,12 @@
                     <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5eV-H3-N4r">
-                    <rect key="frame" x="25" y="219" width="160" height="60"/>
+                    <rect key="frame" x="25" y="240" width="60" height="60"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C5V-GP-9HY">
-                            <rect key="frame" x="0.0" y="0.0" width="160" height="60"/>
+                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                             <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="24"/>
-                            <state key="normal" title="September">
+                            <state key="normal" title="Sep">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -87,10 +105,10 @@
                     <color key="backgroundColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1kG-bC-esH">
-                    <rect key="frame" x="199" y="219" width="97" height="60"/>
+                    <rect key="frame" x="95" y="240" width="60" height="60"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l8E-0m-gsQ">
-                            <rect key="frame" x="0.0" y="0.0" width="97" height="61"/>
+                            <rect key="frame" x="0.0" y="0.0" width="60" height="61"/>
                             <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="24"/>
                             <state key="normal" title="25">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -100,90 +118,34 @@
                     </subviews>
                     <color key="backgroundColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q2C-w7-i0I">
-                    <rect key="frame" x="0.0" y="468" width="160" height="100"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="iPJ-ns-THW">
-                            <rect key="frame" x="0.0" y="0.0" width="160" height="100"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <color key="tintColor" red="0.0" green="0.80000000000000004" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
-                        <view alpha="0.69999998807907104" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Ru-4x-qd8">
-                            <rect key="frame" x="0.0" y="87" width="160" height="13"/>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            <color key="tintColor" cocoaTouchSystemColor="lightTextColor"/>
-                        </view>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="OK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3H-L3-F7Q">
-                            <rect key="frame" x="12" y="58" width="137" height="21"/>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Accept_48x48.png" translatesAutoresizingMaskIntoConstraints="NO" id="8ub-lr-v5S">
-                            <rect key="frame" x="58" y="0.0" width="45" height="65"/>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.80000000000000004" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="tintColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Nn-4x-hsg">
-                    <rect key="frame" x="160" y="468" width="160" height="100"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Cancel_48x48.png" translatesAutoresizingMaskIntoConstraints="NO" id="Tfb-bA-Woa">
-                            <rect key="frame" x="0.0" y="8" width="160" height="46"/>
-                        </imageView>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CANCEL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcs-ge-Hu9">
-                            <rect key="frame" x="12" y="57" width="137" height="21"/>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vCp-6Y-zgj">
-                            <rect key="frame" x="0.0" y="0.0" width="160" height="100"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <state key="normal">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
-                        <view alpha="0.69999998807907104" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hwk-JI-uVh">
-                            <rect key="frame" x="0.0" y="87" width="160" height="13"/>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            <color key="tintColor" cocoaTouchSystemColor="lightTextColor"/>
-                        </view>
-                    </subviews>
-                    <color key="backgroundColor" red="0.80000000000000004" green="0.40000000000000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="+$5300" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VVW-kw-V6x">
-                    <rect key="frame" x="0.0" y="108" width="320" height="89"/>
+                    <rect key="frame" x="0.0" y="129" width="320" height="89"/>
                     <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="60"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="THIS TRANSACTION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcM-ro-tsl">
-                    <rect key="frame" x="79" y="90" width="162" height="21"/>
+                    <rect key="frame" x="79" y="111" width="162" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.40000000000000002" green="1" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YpA-1Y-n4b">
-                    <rect key="frame" x="25" y="298" width="60" height="60"/>
+                    <rect key="frame" x="25" y="319" width="60" height="60"/>
                     <color key="backgroundColor" red="0.40000000000000002" green="1" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" image="Add_100x100.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WC3-4F-8lX">
-                    <rect key="frame" x="95" y="298" width="60" height="60"/>
+                    <rect key="frame" x="95" y="319" width="60" height="60"/>
                     <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" image="Remove_100x100.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bPF-Wj-qMz">
-                    <rect key="frame" x="166" y="298" width="130" height="60"/>
+                    <rect key="frame" x="166" y="319" width="130" height="60"/>
                     <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="18"/>
                     <state key="normal" title="Other Value">
@@ -192,7 +154,7 @@
                     </state>
                 </button>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bh1-hv-rsQ">
-                    <rect key="frame" x="236" y="377" width="60" height="60"/>
+                    <rect key="frame" x="236" y="398" width="60" height="60"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NmB-PL-jCW">
                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -205,31 +167,46 @@
                     </subviews>
                     <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ghj-RO-7lG">
+                    <rect key="frame" x="166" y="319" width="130" height="58"/>
+                    <color key="textColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
+                </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="HGY-mu-c3Q">
-                    <rect key="frame" x="25" y="219" width="271" height="60"/>
+                    <rect key="frame" x="25" y="240" width="271" height="60"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="textColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ghj-RO-7lG">
-                    <rect key="frame" x="166" y="298" width="130" height="58"/>
-                    <color key="textColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
-                </textField>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="vaO-hN-HRV">
-                    <rect key="frame" x="143" y="266" width="37" height="37"/>
-                </activityIndicatorView>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jxx-w0-gco">
+                    <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                    <items>
+                        <barButtonItem enabled="NO" title="Peek" id="zFG-RV-ndd">
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                        <barButtonItem enabled="NO" width="76" id="WcK-Fe-Pxk">
+                            <color key="tintColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                        <barButtonItem title="Add" id="qqc-RW-lVT">
+                            <color key="tintColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                        <barButtonItem enabled="NO" width="64" id="u3A-Sv-EkM">
+                            <color key="tintColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                        <barButtonItem title="Cancel" id="8tu-kM-hgH">
+                            <color key="tintColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
             </subviews>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
         </view>
     </objects>
     <resources>
-        <image name="Accept_48x48.png" width="48" height="48"/>
         <image name="Add_100x100.png" width="100" height="100"/>
-        <image name="Cancel_48x48.png" width="48" height="48"/>
         <image name="Remove_100x100.png" width="100" height="100"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

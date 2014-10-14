@@ -21,6 +21,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *monthBtn;
 @property (weak, nonatomic) IBOutlet UIButton *dateBtn;
+@property (weak, nonatomic) IBOutlet UIButton *yearBtn;
 @property (weak, nonatomic) IBOutlet UITextField *dateBtnTextField;
 
 @property (weak, nonatomic) IBOutlet UIButton *fiveDollarBtn;
@@ -33,8 +34,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *positiveBtn;
 @property (weak, nonatomic) IBOutlet UIButton *negativeBtn;
 
-@property (weak, nonatomic) IBOutlet UIButton *okBtn;
-@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addBtn;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelBtn;
 
 @property (weak, nonatomic) IBOutlet UILabel *amount;
 
@@ -104,8 +105,11 @@
     [self.positiveBtn addTarget:self action:@selector(positiveBtnTapped) forControlEvents:UIControlEventTouchUpInside];
     [self.negativeBtn addTarget:self action:@selector(negativeBtnTapped) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.okBtn addTarget:self action:@selector(okBtnTapped) forControlEvents:UIControlEventTouchUpInside];
-    [self.cancelBtn addTarget:self action:@selector(cancelBtnTapped) forControlEvents:UIControlEventTouchUpInside];
+    self.addBtn.target = self;
+    self.addBtn.action = @selector(okBtnTapped);
+    
+    self.cancelBtn.target = self;
+    self.cancelBtn.action = @selector(cancelBtnTapped);
 
     /* notification */
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addTransactionDidSucceed:) name:MineNotificationAddTransactionDidSucceed object:nil];
@@ -140,8 +144,11 @@
 {
     NSInteger month = [MineTimeUtil getMonth:self.date];
     NSInteger day = [MineTimeUtil getDay:self.date];
+    NSInteger year = [MineTimeUtil getYear:self.date];
     
-    NSString *monthStr = [MineTimeUtil getMonthStr:month];
+    [self.yearBtn setTitle:[@(year) stringValue] forState:UIControlStateNormal];
+    
+    NSString *monthStr = [MineTimeUtil getShortMonthStr:month];
     [self.monthBtn setTitle:monthStr forState:UIControlStateNormal];
     
     [self.dateBtn setTitle:[@(day) stringValue] forState:UIControlStateNormal];
@@ -150,12 +157,12 @@
 - (void)updateOkBtn
 {
     if (self.amountAbsValue == 0) {
-        [self.okBtn setBackgroundColor:[UIColor grayColor]];
-        self.okBtn.enabled = NO;
+//        [self.addBtn setBackgroundColor:[UIColor grayColor]];
+        self.addBtn.enabled = NO;
     }
     else {
-        [self.okBtn setBackgroundColor:UIColorFromRGB(0x00CC33)];
-        self.okBtn.enabled = YES;
+//        [self.addBtn setBackgroundColor:UIColorFromRGB(0x00CC33)];
+        self.addBtn.enabled = YES;
     }
 }
 
@@ -248,6 +255,10 @@
 - (void)cancelBtnTapped
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
+//    [self removeFromParentViewController];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+//    });
 }
 
 - (void)responseToTapGesture:(UITapGestureRecognizer *)recognizer
@@ -273,9 +284,6 @@
     NSInteger errorCode = [[errorJson valueForKey:MineResponseKeyErrorCode] intValue];
     
     if (errorCode == 0) {
-//        MineTransactionItem *transaction = [[MineTransactionItem alloc] initWithDate:self.date price:[self price]];
-//        [[MineTransactionInfo sharedManager] addTransactionItem:transaction];
-        
         MineGetAllTransactionsService *service = [[MineGetAllTransactionsService alloc] init];
         service.ignoreCache = YES;
         [service getAllTransactions];
@@ -290,7 +298,7 @@
         }
         else {
             [self hideActivityIndicatorView];
-            [MineAlertViewUtil showAlertViewWithErrorCode:errorCode];
+            [MineAlertViewUtil showAlertViewWithErrorCode:errorCode delegate:self];
         }
     });
 }

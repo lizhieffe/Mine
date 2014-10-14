@@ -10,12 +10,12 @@
 
 @implementation MineAlertViewUtil
 
-+ (void)showAlertViewWithErrorCode:(NSInteger)errorCode
++ (void)showAlertViewWithErrorCode:(NSInteger)errorCode delegate:(id)delegate
 {
     NSString *title = [MineAlertViewUtil titleForErrorCode:errorCode];
     NSString *msg = [MineAlertViewUtil msgForErrorCode:errorCode];
     
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:msg delegate:delegate cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     [alertView show];
 }
 

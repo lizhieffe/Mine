@@ -16,6 +16,8 @@
 #import "UIView+FindFirstResponder.h"
 #import "MineViewUtil.h"
 #import "MineGetAllTransactionsService.h"
+#import "MineColorUtil.h"
+#import "UITextField+Mine.h"
 
 @interface MineLoginViewController ()
 
@@ -38,6 +40,9 @@
     _keyboardOnScreen = NO;
     self.usernameTextField.delegate = self;
     self.passcodeTextField.delegate = self;
+    
+    [self.usernameTextField addPaddingOnTheLeftSideWithSize:15];
+    [self.passcodeTextField addPaddingOnTheLeftSideWithSize:15];
     
     [self updateLoginBtnWithStatus:NO];
     self.activityIndicatorView.hidden = YES;
@@ -95,7 +100,7 @@
     }
     else {
         self.loginButton.enabled = YES;
-        [self.loginButton setBackgroundColor:[UIColor blueColor]];
+        [self.loginButton setBackgroundColor:UIColorFromRGB(0xFF3300)];
     }
 }
 
@@ -170,7 +175,8 @@
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
         else
-            [MineAlertViewUtil showAlertViewWithErrorCode:errorCode];
+            [MineViewUtil hideActivityIndicatorView:self.activityIndicatorView];
+            [MineAlertViewUtil showAlertViewWithErrorCode:errorCode delegate:self];
     });
 }
 
@@ -205,5 +211,13 @@
     
     return YES;
 }
+
+#pragma mark - UIAlertViewDelegate
+
+//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//    if (buttonIndex == 0)
+//        [alertView removeFromSuperview];
+//}
 
 @end

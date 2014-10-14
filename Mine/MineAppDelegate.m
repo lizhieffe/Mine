@@ -10,6 +10,7 @@
 
 #import "MineMainViewController.h"
 #import "MineLoginViewController.h"
+#import "MineYearViewController.h"
 
 @implementation MineAppDelegate
 
@@ -17,8 +18,10 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    UIViewController *mainViewController = [[MineMainViewController alloc] init];
+//    UIViewController *mainViewController = [[MineMainViewController alloc] init];
+    UIViewController *mainViewController = [[MineYearViewController alloc] init];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+    
     [self.window addSubview:navigationController.view];
     self.window.rootViewController = navigationController;
 

@@ -10,7 +10,7 @@
 
 @interface MineAlertViewUtil : NSObject
 
-+ (void)showAlertViewWithErrorCode:(NSInteger)errorCode;
++ (void)showAlertViewWithErrorCode:(NSInteger)errorCode delegate:(id)delegate;
 + (NSString *)titleForErrorCode:(NSInteger)errorCode;
 + (NSString *)msgForErrorCode:(NSInteger)errorCode;
 

@@ -12,6 +12,8 @@
 #import "MinePreferenceService.h"
 #import "MineAlertViewUtil.h"
 #import "UIView+FindFirstResponder.h"
+#import "MineColorUtil.h"
+#import "UITextField+Mine.h"
 
 @interface MineSignUpViewController ()
 
@@ -39,7 +41,7 @@
     [super viewDidLoad];
 
     [self.navigationController setNavigationBarHidden:NO];
-    [self updateLoginBtnWithStatus:NO];
+    [self updateSignupBtnWithStatus:NO];
     self.activityIndicatorView.hidden = YES;
     
     self.keyboardOnScreen = NO;
@@ -49,8 +51,16 @@
     self.firstnameTextField.delegate = self;
     self.lastnameTextField.delegate = self;
     
-    if([self respondsToSelector:@selector(edgesForExtendedLayout)])
-        self.edgesForExtendedLayout = UIRectEdgeNone;
+    [self.usernameTextField addPaddingOnTheLeftSideWithSize:15];
+    [self.passcodeTextField addPaddingOnTheLeftSideWithSize:15];
+    [self.firstnameTextField addPaddingOnTheLeftSideWithSize:15];
+    [self.lastnameTextField addPaddingOnTheLeftSideWithSize:15];
+
+//    if([self respondsToSelector:@selector(edgesForExtendedLayout)])
+//        self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    [self.genderSegmentedPicker setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor grayColor]} forState:UIControlStateNormal];
+    [self.genderSegmentedPicker setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromRGB(0xFF3300)} forState:UIControlStateSelected];
     
     /**
      add guesture to dismiss keyboard
@@ -116,7 +126,7 @@
     }
 }
 
-- (void)updateLoginBtnWithStatus:(BOOL)status
+- (void)updateSignupBtnWithStatus:(BOOL)status
 {
     if (!status) {
         self.signUpBtn.enabled = NO;
@@ -124,7 +134,7 @@
     }
     else {
         self.signUpBtn.enabled = YES;
-        [self.signUpBtn setBackgroundColor:[UIColor blueColor]];
+        [self.signUpBtn setBackgroundColor:UIColorFromRGB(0xFF3300)];
     }
 }
 
@@ -179,7 +189,7 @@
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
         else
-            [MineAlertViewUtil showAlertViewWithErrorCode:errorCode];
+            [MineAlertViewUtil showAlertViewWithErrorCode:errorCode delegate:self];
     });
 }
 
@@ -208,7 +218,7 @@
         loginBtnStatus = NO;
     else
         loginBtnStatus = YES;
-    [self updateLoginBtnWithStatus:loginBtnStatus];
+    [self updateSignupBtnWithStatus:loginBtnStatus];
     
     return YES;
 }
@@ -219,7 +229,7 @@
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
-    [self updateLoginBtnWithStatus:NO];
+    [self updateSignupBtnWithStatus:NO];
     
     return YES;
 }
