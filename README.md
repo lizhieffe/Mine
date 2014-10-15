@@ -8,4 +8,4 @@ The Mine platform provides a mobile solution for individual users to record and 
 ![alt tag](https://dl.dropboxusercontent.com/u/4771616/Mine%20Project%20Demo%20Image/ScreenshotAddNewTransaction.PNG =250x)
 
 
-<img src="https://dl.dropboxusercontent.com/u/4771616/Mine%20Project%20Demo%20Image/ScreenshotAddNewTransaction.PNG" alt="Drawing" style="width: 100px;"/>
+<img src="https://dl.dropboxusercontent.com/u/4771616/Mine%20Project%20Demo%20Image/ScreenshotAddNewTransaction.PNG" alt="Drawing" style="width: 50px;"/>
