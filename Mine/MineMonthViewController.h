@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <SWTableViewCell.h>
 
-@interface MineTransactionHistoryViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, SWTableViewCellDelegate>
+@interface MineMonthViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, SWTableViewCellDelegate>
 
 - (id)initForYear:(NSInteger)year month:(NSInteger)month;
 

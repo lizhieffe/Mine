@@ -47,6 +47,8 @@
 		DC9946AC19ECDCB000559AA8 /* MineYearHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC9946AA19ECDCB000559AA8 /* MineYearHistoryTableViewCell.xib */; };
 		DC9946B819ECF32900559AA8 /* MineYearHistoryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9946B619ECF32900559AA8 /* MineYearHistoryCollectionViewCell.m */; };
 		DC9946B919ECF32900559AA8 /* MineYearHistoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC9946B719ECF32900559AA8 /* MineYearHistoryCollectionViewCell.xib */; };
+		DC9946C219EE250E00559AA8 /* MineHistogramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9946C019EE250E00559AA8 /* MineHistogramViewController.m */; };
+		DC9946C319EE250E00559AA8 /* MineHistogramViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC9946C119EE250E00559AA8 /* MineHistogramViewController.xib */; };
 		DCAC0FA419DE52AE000B65FA /* MoneyBag_100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = DCAC0FA019DE52AE000B65FA /* MoneyBag_100x100.png */; };
 		DCAC0FA519DE52AE000B65FA /* Dolls_100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = DCAC0FA119DE52AE000B65FA /* Dolls_100x100.png */; };
 		DCAC0FA619DE52AE000B65FA /* Clock_100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = DCAC0FA219DE52AE000B65FA /* Clock_100x100.png */; };
@@ -66,8 +68,8 @@
 		DCCFB88219DECE66004FB14A /* MineNewTransactionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCCFB88019DECE66004FB14A /* MineNewTransactionViewController.xib */; };
 		DCCFB88519DECEFB004FB14A /* Accept_48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = DCCFB88319DECEFB004FB14A /* Accept_48x48.png */; };
 		DCCFB88619DECEFB004FB14A /* Cancel_48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = DCCFB88419DECEFB004FB14A /* Cancel_48x48.png */; };
-		DCCFB88D19E0251A004FB14A /* MineTransactionHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCFB88B19E0251A004FB14A /* MineTransactionHistoryViewController.m */; };
-		DCCFB88E19E0251A004FB14A /* MineTransactionHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCCFB88C19E0251A004FB14A /* MineTransactionHistoryViewController.xib */; };
+		DCCFB88D19E0251A004FB14A /* MineMonthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCFB88B19E0251A004FB14A /* MineMonthViewController.m */; };
+		DCCFB88E19E0251A004FB14A /* MineMonthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCCFB88C19E0251A004FB14A /* MineMonthViewController.xib */; };
 		DCCFB89719E0282A004FB14A /* MineTransactionHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCFB89519E0282A004FB14A /* MineTransactionHistoryTableViewCell.m */; };
 		DCCFB89819E0282A004FB14A /* MineTransactionHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCCFB89619E0282A004FB14A /* MineTransactionHistoryTableViewCell.xib */; };
 		DCCFB89B19E02A9C004FB14A /* Add_100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = DCCFB89919E02A9C004FB14A /* Add_100x100.png */; };
@@ -174,6 +176,9 @@
 		DC9946B519ECF32900559AA8 /* MineYearHistoryCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineYearHistoryCollectionViewCell.h; sourceTree = "<group>"; };
 		DC9946B619ECF32900559AA8 /* MineYearHistoryCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineYearHistoryCollectionViewCell.m; sourceTree = "<group>"; };
 		DC9946B719ECF32900559AA8 /* MineYearHistoryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineYearHistoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		DC9946BF19EE250E00559AA8 /* MineHistogramViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineHistogramViewController.h; sourceTree = "<group>"; };
+		DC9946C019EE250E00559AA8 /* MineHistogramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineHistogramViewController.m; sourceTree = "<group>"; };
+		DC9946C119EE250E00559AA8 /* MineHistogramViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineHistogramViewController.xib; sourceTree = "<group>"; };
 		DCAC0FA019DE52AE000B65FA /* MoneyBag_100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MoneyBag_100x100.png; sourceTree = "<group>"; };
 		DCAC0FA119DE52AE000B65FA /* Dolls_100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dolls_100x100.png; sourceTree = "<group>"; };
 		DCAC0FA219DE52AE000B65FA /* Clock_100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Clock_100x100.png; sourceTree = "<group>"; };
@@ -194,9 +199,9 @@
 		DCCFB88019DECE66004FB14A /* MineNewTransactionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineNewTransactionViewController.xib; sourceTree = "<group>"; };
 		DCCFB88319DECEFB004FB14A /* Accept_48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Accept_48x48.png; sourceTree = "<group>"; };
 		DCCFB88419DECEFB004FB14A /* Cancel_48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cancel_48x48.png; sourceTree = "<group>"; };
-		DCCFB88A19E0251A004FB14A /* MineTransactionHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineTransactionHistoryViewController.h; sourceTree = "<group>"; };
-		DCCFB88B19E0251A004FB14A /* MineTransactionHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineTransactionHistoryViewController.m; sourceTree = "<group>"; };
-		DCCFB88C19E0251A004FB14A /* MineTransactionHistoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineTransactionHistoryViewController.xib; sourceTree = "<group>"; };
+		DCCFB88A19E0251A004FB14A /* MineMonthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineMonthViewController.h; sourceTree = "<group>"; };
+		DCCFB88B19E0251A004FB14A /* MineMonthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineMonthViewController.m; sourceTree = "<group>"; };
+		DCCFB88C19E0251A004FB14A /* MineMonthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineMonthViewController.xib; sourceTree = "<group>"; };
 		DCCFB89419E0282A004FB14A /* MineTransactionHistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineTransactionHistoryTableViewCell.h; sourceTree = "<group>"; };
 		DCCFB89519E0282A004FB14A /* MineTransactionHistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineTransactionHistoryTableViewCell.m; sourceTree = "<group>"; };
 		DCCFB89619E0282A004FB14A /* MineTransactionHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineTransactionHistoryTableViewCell.xib; sourceTree = "<group>"; };
@@ -469,15 +474,18 @@
 				DC9946A119ECCC6E00559AA8 /* MineYearViewController.h */,
 				DC9946A219ECCC6E00559AA8 /* MineYearViewController.m */,
 				DC9946A319ECCC6E00559AA8 /* MineYearViewController.xib */,
+				DCCFB88A19E0251A004FB14A /* MineMonthViewController.h */,
+				DCCFB88B19E0251A004FB14A /* MineMonthViewController.m */,
+				DCCFB88C19E0251A004FB14A /* MineMonthViewController.xib */,
+				DC9946BF19EE250E00559AA8 /* MineHistogramViewController.h */,
+				DC9946C019EE250E00559AA8 /* MineHistogramViewController.m */,
+				DC9946C119EE250E00559AA8 /* MineHistogramViewController.xib */,
 				DC15A1F619844DF2007FA1AC /* MineMainViewController.h */,
 				DC15A1F719844DF2007FA1AC /* MineMainViewController.m */,
 				DC15A1F819844DF2007FA1AC /* MineMainViewController.xib */,
 				DCCFB87E19DECE66004FB14A /* MineNewTransactionViewController.h */,
 				DCCFB87F19DECE66004FB14A /* MineNewTransactionViewController.m */,
 				DCCFB88019DECE66004FB14A /* MineNewTransactionViewController.xib */,
-				DCCFB88A19E0251A004FB14A /* MineTransactionHistoryViewController.h */,
-				DCCFB88B19E0251A004FB14A /* MineTransactionHistoryViewController.m */,
-				DCCFB88C19E0251A004FB14A /* MineTransactionHistoryViewController.xib */,
 				DC15A2161985EFAC007FA1AC /* MineCreateTransactionItemsViewController.h */,
 				DC15A2171985EFAC007FA1AC /* MineCreateTransactionItemsViewController.m */,
 				DC15A2181985EFAC007FA1AC /* MineCreateTransactionItemsViewController.xib */,
@@ -605,7 +613,7 @@
 				DC15A1FA19844DF2007FA1AC /* MineMainViewController.xib in Resources */,
 				DCAC0FA719DE52AE000B65FA /* Camera_100x100.png in Resources */,
 				DCCFB88519DECEFB004FB14A /* Accept_48x48.png in Resources */,
-				DCCFB88E19E0251A004FB14A /* MineTransactionHistoryViewController.xib in Resources */,
+				DCCFB88E19E0251A004FB14A /* MineMonthViewController.xib in Resources */,
 				DCCFB88219DECE66004FB14A /* MineNewTransactionViewController.xib in Resources */,
 				DC9946B919ECF32900559AA8 /* MineYearHistoryCollectionViewCell.xib in Resources */,
 				DC15A226198601A5007FA1AC /* MineTransactionItemCellTableViewCell.xib in Resources */,
@@ -620,6 +628,7 @@
 				DCCFB86C19DE588D004FB14A /* MoneyBag_76x76.png in Resources */,
 				DCCFB87419DE5974004FB14A /* MoneyBag_48x48.png in Resources */,
 				DCAC0FA619DE52AE000B65FA /* Clock_100x100.png in Resources */,
+				DC9946C319EE250E00559AA8 /* MineHistogramViewController.xib in Resources */,
 				DCDF69E51982873F0066FDCC /* MineLoginViewController.xib in Resources */,
 				DCCFB89C19E02A9C004FB14A /* Remove_100x100.png in Resources */,
 				DCCFB89B19E02A9C004FB14A /* Add_100x100.png in Resources */,
@@ -685,7 +694,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC15A1FD19855697007FA1AC /* MineAlertViewUtil.m in Sources */,
-				DCCFB88D19E0251A004FB14A /* MineTransactionHistoryViewController.m in Sources */,
+				DCCFB88D19E0251A004FB14A /* MineMonthViewController.m in Sources */,
 				DC50980C19E1E16500EBD4DE /* UIPopoverController+iPhone.m in Sources */,
 				DC15A2081985C2D5007FA1AC /* MineSignUpViewController.m in Sources */,
 				DC50980F19E21F0C00EBD4DE /* MineColorUtil.m in Sources */,
@@ -714,6 +723,7 @@
 				DC99468D19EB78B900559AA8 /* MineDeleteTransactionService.m in Sources */,
 				DC15A1F119844465007FA1AC /* MineLoginService.m in Sources */,
 				DC15A1EE198436FA007FA1AC /* MineService.m in Sources */,
+				DC9946C219EE250E00559AA8 /* MineHistogramViewController.m in Sources */,
 				DCDF69B61982831E0066FDCC /* main.m in Sources */,
 				DC15A2201985F8BC007FA1AC /* MineTransactionItem.m in Sources */,
 				DCDF69BA1982831E0066FDCC /* MineAppDelegate.m in Sources */,
@@ -836,10 +846,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mine/Mine-Prefix.pch";
 				INFOPLIST_FILE = "Mine/Mine-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -850,10 +863,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mine/Mine-Prefix.pch";
 				INFOPLIST_FILE = "Mine/Mine-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

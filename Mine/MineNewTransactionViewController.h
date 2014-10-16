@@ -10,4 +10,6 @@
 
 @interface MineNewTransactionViewController : UIViewController <UITextFieldDelegate, UIAlertViewDelegate>
 
+- (id)initWithDate:(NSDate *)date;
+
 @end

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 com.zhi.li. All rights reserved.
 //
 
-#import "MineTransactionHistoryViewController.h"
+#import "MineMonthViewController.h"
 #import "MineTransactionInfo.h"
 #import "MinePreferenceService.h"
 #import "MineTimeUtil.h"
@@ -15,8 +15,9 @@
 #import "MineDeleteTransactionService.h"
 #import "MineAlertViewUtil.h"
 #import "MineNewTransactionViewController.h"
+#import "MineHistogramViewController.h"
 
-@interface MineTransactionHistoryViewController ()
+@interface MineMonthViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *incomeLabel;
@@ -25,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *historyTableView;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addNewTransactionBtn;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *histogramBtn;
 
 @property (assign, nonatomic) NSInteger year;
 @property (assign, nonatomic) NSInteger month;
@@ -33,7 +35,7 @@
 
 @end
 
-@implementation MineTransactionHistoryViewController
+@implementation MineMonthViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -58,22 +60,31 @@
 {
     [super viewDidLoad];
 
-    self.addNewTransactionBtn.target = self;
-    self.addNewTransactionBtn.action = @selector(addNewTransactionBtnTapped);
-    
-    // table view cell
-    [self.historyTableView registerNib:[UINib nibWithNibName:@"MineTransactionHistoryTableViewCell" bundle:nil] forCellReuseIdentifier:@"MyCustomCell"];
-    
     [self updateDateLabel];
     [self updateIncomeLabel];
     [self updateExpenseLabel];
     
+    self.addNewTransactionBtn.target = self;
+    self.addNewTransactionBtn.action = @selector(addNewTransactionBtnTapped);
+    
+    self.histogramBtn.target = self;
+    self.histogramBtn.action = @selector(histogramBtnTapped);
+    
+    // table view cell
+    [self.historyTableView registerNib:[UINib nibWithNibName:@"MineTransactionHistoryTableViewCell" bundle:nil] forCellReuseIdentifier:@"MyCustomCell"];
+    
     self.historyTableView.delegate = self;
     self.historyTableView.dataSource = self;
     
-    
     /* notification */
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAllTransactionsDidSucceed:) name:MineNotificationGetAllTransactionsDidSucceed object:nil];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteTransactionDidSucceed:) name:MineNotificationDeleteTransactionDidSucceed object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,26 +101,41 @@
 
 - (void)updateIncomeLabel
 {
-    NSInteger amount = [[MineTransactionInfo sharedManager] getTotalIncomeForYear:self.year month:self.month];
+    NSInteger amount = [[MineTransactionInfo sharedManager] getIncomeForYear:self.year month:self.month];
     self.incomeLabel.text = [NSString stringWithFormat:@"%ld$", amount];
 }
 
 - (void)updateExpenseLabel
 {
-    NSInteger amount = [[MineTransactionInfo sharedManager] getTotalExpenseForYear:self.year month:self.month];
+    NSInteger amount = [[MineTransactionInfo sharedManager] getOutcomeForYear:self.year month:self.month];
     self.expenseLabel.text = [NSString stringWithFormat:@"%ld$", amount];
 }
 
 # pragma mark - btn action
 
-//- (void)addBtnTapped
-//{
-//    [self.navigationController popToRootViewControllerAnimated:YES];
-//}
-
 - (void)addNewTransactionBtnTapped {
-    MineNewTransactionViewController *newTransactionViewController = [[MineNewTransactionViewController alloc] init];
+    NSInteger day = [MineTimeUtil getCurrentDay];
+    NSDate *date = [MineTimeUtil getDateForYear:self.year month:self.month day:day];
+    MineNewTransactionViewController *newTransactionViewController = [[MineNewTransactionViewController alloc] initWithDate:date];
     [self.navigationController pushViewController:newTransactionViewController animated:YES];
+}
+
+- (void)histogramBtnTapped {
+    NSInteger year = self.year;
+    
+    // set navigation bar back btn title
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[@(year) stringValue] style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    NSMutableArray *months = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 12; i ++)
+        [months addObject:[MineTimeUtil getShortMonthStr:(i + 1)]];
+    NSArray *incomeArray = [[MineTransactionInfo sharedManager] getIncomeForYear:year];
+    NSArray *outcomeArray = [[MineTransactionInfo sharedManager] getAbsOutcomeForYear:year];
+    NSArray *balanceArray = [[MineTransactionInfo sharedManager] getTotalAmountForYear:year];
+    
+    MineHistogramViewController *histogramViewController = [[MineHistogramViewController alloc] initWithXLabelArray:months incomeArray:incomeArray outcomeArray:outcomeArray balanceArray:balanceArray];
+    histogramViewController.year = year;
+    [self.navigationController pushViewController:histogramViewController animated:YES];
 }
 
 # pragma mark - UITableViewDataSource
@@ -144,6 +170,8 @@
     
     cell.rightUtilityButtons = [self rightButtons];
     cell.delegate = self;
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
@@ -180,12 +208,20 @@
 
 # pragma mark - notification response handler
 
+- (void)getAllTransactionsDidSucceed:(NSNotification *)notification
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self updateExpenseLabel];
+        [self updateIncomeLabel];
+        [self.historyTableView reloadData];
+    });
+}
+
 - (void)deleteTransactionDidSucceed:(NSNotification *)notification
 {
-    
     NSDictionary *errorJson = [notification.userInfo valueForKey:MineResponseKeyErrorJson];
     NSInteger errorCode = [[errorJson valueForKey:MineResponseKeyErrorCode] intValue];
-    
+
     if (errorCode == 0) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (self.indexPathToDelete) {

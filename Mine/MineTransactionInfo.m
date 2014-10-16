@@ -124,7 +124,7 @@ NSString *const MinePersistDataKeyTransactions = @"transactions";
     return result;
 }
 
-- (NSInteger)getTotalIncomeForYear:(NSInteger)year month:(NSInteger)month
+- (NSInteger)getIncomeForYear:(NSInteger)year month:(NSInteger)month
 {
     NSInteger total = 0;
     NSArray *transactions = [self getAllTransactionsForYear:year month:month];
@@ -135,7 +135,7 @@ NSString *const MinePersistDataKeyTransactions = @"transactions";
     return total;
 }
 
-- (NSInteger)getTotalExpenseForYear:(NSInteger)year month:(NSInteger)month
+- (NSInteger)getOutcomeForYear:(NSInteger)year month:(NSInteger)month
 {
     NSInteger total = 0;
     NSArray *transactions = [self getAllTransactionsForYear:year month:month];
@@ -148,7 +148,58 @@ NSString *const MinePersistDataKeyTransactions = @"transactions";
 
 - (NSInteger)getTotalAmountForYear:(NSInteger)year month:(NSInteger)month
 {
-    return [self getTotalIncomeForYear:year month:month] + [self getTotalExpenseForYear:year month:month];
+    return [self getIncomeForYear:year month:month] + [self getOutcomeForYear:year month:month];
+}
+
+- (NSArray *)getIncomeForYear:(NSInteger)year
+{
+    NSMutableArray *amount = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 12; i ++) {
+        [amount addObject:[NSNumber numberWithLong:[self getIncomeForYear:year month:(i + 1)]]];
+    }
+    return amount;
+}
+
+- (NSArray *)getAbsOutcomeForYear:(NSInteger)year
+{
+    NSMutableArray *amount = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 12; i ++) {
+        [amount addObject:[NSNumber numberWithLong:ABS([self getOutcomeForYear:year month:(i + 1)])]];
+    }
+    return amount;
+}
+
+- (NSArray *)getTotalAmountForYear:(NSInteger)year
+{
+    NSMutableArray *amount = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 12; i ++) {
+        [amount addObject:[NSNumber numberWithLong:[self getTotalAmountForYear:year month:(i + 1)]]];
+    }
+    return amount;
+}
+
+- (NSInteger)getIncomeSumForYear:(NSInteger)year
+{
+    NSInteger sum = 0;
+    for (int i = 0; i < 12; i ++)
+        sum += [self getIncomeForYear:year month:(i + 1)];
+    return sum;
+}
+
+- (NSInteger)getOutcomeSumForYear:(NSInteger)year
+{
+    NSInteger sum = 0;
+    for (int i = 0; i < 12; i ++)
+        sum += [self getOutcomeForYear:year month:(i + 1)];
+    return sum;
+}
+
+- (NSInteger)getTotalAmoutSumForYear:(NSInteger)year
+{
+    NSInteger sum = 0;
+    for (int i = 0; i < 12; i ++)
+        sum += [self getTotalAmountForYear:year month:(i + 1)];
+    return sum;
 }
 
 @end

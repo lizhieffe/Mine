@@ -11,23 +11,21 @@
 #import "MineMainViewController.h"
 #import "MineLoginViewController.h"
 #import "MineYearViewController.h"
+#import "MineColorUtil.h"
 
 @implementation MineAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [self.window setBackgroundColor:[UIColor whiteColor]];
 
-//    UIViewController *mainViewController = [[MineMainViewController alloc] init];
     UIViewController *mainViewController = [[MineYearViewController alloc] init];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
     
     [self.window addSubview:navigationController.view];
     self.window.rootViewController = navigationController;
 
-//    UIViewController *mainViewController = [[MineMainViewController alloc] init];
-//    self.window.rootViewController = mainViewController;
-    
     [self.window makeKeyAndVisible];
     
     return YES;

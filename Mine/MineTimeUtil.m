@@ -118,4 +118,13 @@
     return components;
 }
 
++ (NSDate *)getDateForYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day
+{
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    [comps setDay:day];
+    [comps setMonth:month];
+    [comps setYear:year];
+    return [[NSCalendar currentCalendar] dateFromComponents:comps];
+}
+
 @end

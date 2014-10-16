@@ -10,7 +10,8 @@
 #import "MineYearHistoryCollectionViewCell.h"
 #import "MineTimeUtil.h"
 #import "MineTransactionInfo.h"
-#import "MineTransactionHistoryViewController.h"
+#import "MineMonthViewController.h"
+#import "MineColorUtil.h"
 
 static BOOL nibCollectionViewCellloaded = NO;
 
@@ -77,7 +78,10 @@ static BOOL nibCollectionViewCellloaded = NO;
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger month = indexPath.row * 3 + indexPath.section + 1;
-    MineTransactionHistoryViewController *historyViewController = [[MineTransactionHistoryViewController alloc] initForYear:self.year month:month];
+    MineMonthViewController *historyViewController = [[MineMonthViewController alloc] initForYear:self.year month:month];
+    
+    self.tableViewContainerController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[@(self.year) stringValue] style:UIBarButtonItemStylePlain target:nil action:nil];
+
     [self.tableViewContainerController.navigationController pushViewController:historyViewController animated:YES];
 }
 
@@ -99,14 +103,24 @@ static BOOL nibCollectionViewCellloaded = NO;
     
     NSInteger month = indexPath.row * 3 + indexPath.section + 1;
     NSString *monthStr = [MineTimeUtil getShortMonthStr:month];
-    cell.monthLabel.text = monthStr;
+    cell.monthLabel.text = [monthStr uppercaseString];
     
     NSInteger year = self.year;
-    cell.incomeLabel.text = [NSString stringWithFormat:@"$%@", [@([[MineTransactionInfo sharedManager] getTotalIncomeForYear:year month:month]) stringValue]];
+    cell.incomeLabel.text = [NSString stringWithFormat:@"$%@", [@([[MineTransactionInfo sharedManager] getIncomeForYear:year month:month]) stringValue]];
     
-    NSInteger absOutcome = abs((int)[[MineTransactionInfo sharedManager] getTotalExpenseForYear:year month:month]);
+    NSInteger absOutcome = abs((int)[[MineTransactionInfo sharedManager] getOutcomeForYear:year month:month]);
     cell.outcomeLabel.text = [NSString stringWithFormat:@"-$%@", [@(absOutcome) stringValue]];
     
+    NSInteger currentYear = [MineTimeUtil getCurrentYear];
+    NSInteger currentMonth = [MineTimeUtil getCurrentMonth];
+    if (currentMonth == month && currentYear == year) {
+        cell.monthLabel.backgroundColor = UIColorFromRGB(0xFF3300);
+        cell.monthLabel.textColor = [UIColor whiteColor];
+    }
+    else {
+        cell.monthLabel.backgroundColor = [UIColor whiteColor];
+        cell.monthLabel.textColor = UIColorFromRGB(0xFF3300);
+    }
     return cell;
 }
 

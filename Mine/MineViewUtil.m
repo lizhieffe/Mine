@@ -12,18 +12,16 @@
 
 + (void)showActivityIndicatorView:(UIActivityIndicatorView *)activityIndicatorView inView:(UIView *)view
 {
-    if (![[UIApplication sharedApplication] isIgnoringInteractionEvents])
-        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-
-    /**
-     start activity indicator view
-     */
-//    activityIndicatorView.frame = [UIScreen mainScreen].applicationFrame;
-    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:activityIndicatorView];
-    [activityIndicatorView.layer setBackgroundColor:[[UIColor colorWithWhite:0.0 alpha:0.30] CGColor]];
-    [activityIndicatorView setFrame:view.frame];
-    [activityIndicatorView startAnimating];
-    activityIndicatorView.hidden = NO;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (![[UIApplication sharedApplication] isIgnoringInteractionEvents])
+            [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    
+        [[UIApplication sharedApplication].keyWindow bringSubviewToFront:activityIndicatorView];
+        [activityIndicatorView.layer setBackgroundColor:[[UIColor colorWithWhite:0.0 alpha:0.30] CGColor]];
+        [activityIndicatorView setFrame:view.frame];
+        [activityIndicatorView startAnimating];
+        activityIndicatorView.hidden = NO;
+    });
 }
 
 + (void)hideActivityIndicatorView:(UIActivityIndicatorView *)activityIndicatorView

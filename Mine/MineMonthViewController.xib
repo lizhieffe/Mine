@@ -5,11 +5,12 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6243"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MineTransactionHistoryViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MineMonthViewController">
             <connections>
                 <outlet property="addNewTransactionBtn" destination="eRN-1S-9pk" id="Vz5-t9-XEy"/>
                 <outlet property="dateLabel" destination="etO-yh-vua" id="Ryd-gO-Qj6"/>
                 <outlet property="expenseLabel" destination="nTA-bj-ZQD" id="gDg-I6-a8d"/>
+                <outlet property="histogramBtn" destination="VC3-bY-Q6f" id="hg8-Bb-0Kh"/>
                 <outlet property="historyTableView" destination="oLF-K1-iw8" id="AFi-vj-B8Z"/>
                 <outlet property="incomeLabel" destination="fI8-zC-jd2" id="kem-gY-2jP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

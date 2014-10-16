@@ -11,10 +11,11 @@
 #import "MinePreferenceService.h"
 #import "MineCreateTransactionItemsViewController.h"
 #import "MineNewTransactionViewController.h"
-#import "MineTransactionHistoryViewController.h"
+#import "MineMonthViewController.h"
 #import "MineTransactionInfo.h"
 #import "MinePersistDataUtil.h"
 #import "MineGetAllTransactionsService.h"
+#import "MineHistogramViewController.h"
 
 @interface MineMainViewController ()
 
@@ -72,8 +73,8 @@
     self.addNewTransactionBtn.target = self;
     self.addNewTransactionBtn.action = @selector(addNewTransactionBtnTapped);
     
-    self.historyBtn.target = self;
-    self.historyBtn.action = @selector(historyBtnTapped);
+//    self.historyBtn.target = self;
+//    self.historyBtn.action = @selector(historyBtnTapped);
     
     /* notification */
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAllTransactionsDidSucceed:) name:MineNotificationGetAllTransactionsDidSucceed object:nil];
@@ -94,7 +95,7 @@
 {
     NSInteger month = [[MinePreferenceService sharedManager] displayMonth];
     NSInteger year = [[MinePreferenceService sharedManager] displayYear];
-    NSInteger amount = [[MineTransactionInfo sharedManager] getTotalIncomeForYear:year month:month];
+    NSInteger amount = [[MineTransactionInfo sharedManager] getIncomeForYear:year month:month];
     self.incomeLabel.text = [NSString stringWithFormat:@"%ld$", amount];
 }
 
@@ -102,7 +103,7 @@
 {
     NSInteger month = [[MinePreferenceService sharedManager] displayMonth];
     NSInteger year = [[MinePreferenceService sharedManager] displayYear];
-    NSInteger amount = [[MineTransactionInfo sharedManager] getTotalExpenseForYear:year month:month];
+    NSInteger amount = [[MineTransactionInfo sharedManager] getOutcomeForYear:year month:month];
     self.expenseLabel.text = [NSString stringWithFormat:@"%ld$", amount];
 }
 
@@ -117,8 +118,9 @@
     [self.navigationController pushViewController:newTransactionViewController animated:YES];
 }
 
-- (void)historyBtnTapped {
-    MineTransactionHistoryViewController *historyViewController = [[MineTransactionHistoryViewController alloc] init];
+
+- (void)histogramBtnTapped {
+    MineMonthViewController *historyViewController = [[MineMonthViewController alloc] init];
     [self.navigationController pushViewController:historyViewController animated:YES];
 }
 

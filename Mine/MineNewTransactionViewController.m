@@ -52,6 +52,20 @@
 
 @implementation MineNewTransactionViewController
 
+- (id)init
+{
+    return [self initWithDate:[NSDate date]];
+}
+
+- (id)initWithDate:(NSDate *)date
+{
+    self = [super init];
+    if (self) {
+        _date = date;
+    }
+    return self;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -73,14 +87,13 @@
     [self updateAmountLabel];
     [self updateOkBtn];
     
-    self.date = [NSDate date];    
     [self updateDate];
     
     self.otherBtnTextField.tintColor = [UIColor clearColor];
     self.otherBtnTextField.delegate = self;
     
     self.datePicker = [[UIDatePicker alloc] init];
-    [self.datePicker setDate:[NSDate date]];
+    [self.datePicker setDate:self.date];
     [self.datePicker addTarget:self action:@selector(datePickerValueChanged) forControlEvents:UIControlEventValueChanged];
     self.dateBtnTextField.tintColor = [UIColor clearColor];
     [self.dateBtnTextField setInputView:self.datePicker];
@@ -254,7 +267,8 @@
 
 - (void)cancelBtnTapped
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 //    [self removeFromParentViewController];
 //    dispatch_async(dispatch_get_main_queue(), ^{
 //        [self.navigationController dismissViewControllerAnimated:YES completion:nil];

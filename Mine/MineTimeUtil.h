@@ -24,5 +24,6 @@
 + (NSInteger)getYear:(NSDate *)date;
 
 + (NSDate *)unixtimeToNSDate:(NSInteger)unixtime;
++ (NSDate *)getDateForYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day;
 
 @end

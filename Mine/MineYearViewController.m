@@ -16,13 +16,16 @@
 #import "MineGetAllTransactionsService.h"
 #import "MineLoginViewController.h"
 #import "MineNewTransactionViewController.h"
-#import "MineTransactionHistoryViewController.h"
+#import "MineMonthViewController.h"
 #import "UITableView+Mine.h"
+#import "MineHistogramViewController.h"
+#import "MineTransactionInfo.h"
 
 @interface MineYearViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *yearlyHistoryTable;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addNewTransactionBtn;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *histogramBtn;
 
 @property (assign, nonatomic) BOOL justLoaded;
 
@@ -34,6 +37,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // navigation bar item color
+    self.navigationController.navigationBar.tintColor = UIColorFromRGB(0xFF3300);
+    
+    // navigation bar title font and color
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Hiragino Kaku Gothic ProN" size:17], NSFontAttributeName, UIColorFromRGB(0xFF3300), NSForegroundColorAttributeName, nil]];
     
     self.yearlyHistoryTable.delegate = self;
     self.yearlyHistoryTable.dataSource = self;
@@ -60,8 +69,8 @@
     self.addNewTransactionBtn.target = self;
     self.addNewTransactionBtn.action = @selector(addNewTransactionBtnTapped);
     
-//    self.historyBtn.target = self;
-//    self.historyBtn.action = @selector(historyBtnTapped);
+    self.histogramBtn.target = self;
+    self.histogramBtn.action = @selector(histogramBtnTapped);
     
     /* notification */
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAllTransactionsDidSucceed:) name:MineNotificationGetAllTransactionsDidSucceed object:nil];
@@ -79,6 +88,7 @@
         /* go to the current year when loaded the first time */
         if (self.justLoaded) {
             [self.yearlyHistoryTable scrollToBottomAnimated:NO];
+            self.justLoaded = NO;
         }
     });
 }
@@ -97,13 +107,34 @@
 }
 
 - (void)addNewTransactionBtnTapped {
-    MineNewTransactionViewController *newTransactionViewController = [[MineNewTransactionViewController alloc] init];
+    NSInteger year = [self getYearOfMostVisibleCell];
+    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[@(year) stringValue] style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    NSInteger month = [MineTimeUtil getCurrentMonth];
+    NSInteger day = [MineTimeUtil getCurrentDay];
+    NSDate *date = [MineTimeUtil getDateForYear:year month:month day:day];
+    
+    MineNewTransactionViewController *newTransactionViewController = [[MineNewTransactionViewController alloc] initWithDate:date];
     [self.navigationController pushViewController:newTransactionViewController animated:YES];
 }
 
-- (void)historyBtnTapped {
-    MineTransactionHistoryViewController *historyViewController = [[MineTransactionHistoryViewController alloc] init];
-    [self.navigationController pushViewController:historyViewController animated:YES];
+- (void)histogramBtnTapped {
+    NSInteger year = [self getYearOfMostVisibleCell];
+    
+    // set navigation bar back btn title
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[@(year) stringValue] style:UIBarButtonItemStylePlain target:nil action:nil];
+
+    NSMutableArray *months = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 12; i ++)
+         [months addObject:[MineTimeUtil getShortMonthStr:(i + 1)]];
+    NSArray *incomeArray = [[MineTransactionInfo sharedManager] getIncomeForYear:year];
+    NSArray *outcomeArray = [[MineTransactionInfo sharedManager] getAbsOutcomeForYear:year];
+    NSArray *balanceArray = [[MineTransactionInfo sharedManager] getTotalAmountForYear:year];
+    
+    MineHistogramViewController *histogramViewController = [[MineHistogramViewController alloc] initWithXLabelArray:months incomeArray:incomeArray outcomeArray:outcomeArray balanceArray:balanceArray];
+    histogramViewController.year = year;
+    [self.navigationController pushViewController:histogramViewController animated:YES];
 }
 
 - (void)getAllTransactionsDidSucceed:(NSNotification *)notification
@@ -113,15 +144,42 @@
     });
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSIndexPath *)getIndexpathOfMostVisibleCell
+{
+    NSArray *visibleCells = [self.yearlyHistoryTable indexPathsForVisibleRows];
+    if ([visibleCells count] == 1)
+        return [visibleCells objectAtIndex:0];
+    
+    CGFloat offset = self.yearlyHistoryTable.contentOffset.y;
+    
+    CGRect rectOfCellInTableView_0 = [self.yearlyHistoryTable rectForRowAtIndexPath:[visibleCells objectAtIndex:0]];
+    
+    if (rectOfCellInTableView_0.origin.y >= offset)
+        return [visibleCells objectAtIndex:0];
+    
+    CGRect rectOfCellInTableView_1 = [self.yearlyHistoryTable rectForRowAtIndexPath:[visibleCells objectAtIndex:1]];
+    if (rectOfCellInTableView_1.origin.y - offset > ([[UIScreen mainScreen] bounds].size.height / 2))
+        return [visibleCells objectAtIndex:0];
+    
+    return [visibleCells objectAtIndex:1];
 }
-*/
+
+- (NSInteger)getYearOfMostVisibleCell
+{
+    CGFloat offset = self.yearlyHistoryTable.contentOffset.y;
+    NSInteger sectionHeight = [self tableView:self.yearlyHistoryTable heightForHeaderInSection:0] + [self tableView:self.yearlyHistoryTable heightForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    
+    int section;
+    if ((NSInteger)offset % sectionHeight > sectionHeight / 2)
+        section = offset / sectionHeight + 1;
+    else
+        section = offset / sectionHeight;
+    
+    NSInteger currentYear = [MineTimeUtil getCurrentYear];
+    NSInteger num = [self numberOfSectionsInTableView:self.yearlyHistoryTable];
+    
+    return currentYear - num + section + 1;
+}
 
 # pragma mark - UITableViewDataSource
 
@@ -195,33 +253,5 @@
     [cell setCollectionViewDataSourceDelegate:cell index:indexPath.row];
 
 }
-//
-//#pragma mark - collection view data source
-//
-//- (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView
-//{
-//    return 3;
-//}
-//
-//- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-//{
-//    return 4;
-//}
-//
-//- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    MineYearHistoryCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:yearHistoryCollectionViewCellIdentifier forIndexPath:indexPath];
-//    
-//    NSInteger month = indexPath.row * 3 + indexPath.section + 1;
-//    NSString *monthStr = [MineTimeUtil getShortMonthStr:month];
-//    cell.monthLabel.text = monthStr;
-//    
-//    return cell;
-//}
-//
-//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-//{
-//    return UIEdgeInsetsMake(0, 3, 0, 3);
-//}
 
 @end

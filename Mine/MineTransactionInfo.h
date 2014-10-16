@@ -18,8 +18,14 @@
 - (void)saveTransactionsFromJson:(NSDictionary *)json;
 - (void)deleteTransactionWithId:(long)transactionId;
 - (NSMutableArray *)getAllTransactionsForYear:(NSInteger)year month:(NSInteger)month;
-- (NSInteger)getTotalIncomeForYear:(NSInteger)year month:(NSInteger)month;
-- (NSInteger)getTotalExpenseForYear:(NSInteger)year month:(NSInteger)month;
+- (NSInteger)getIncomeForYear:(NSInteger)year month:(NSInteger)month;
+- (NSInteger)getOutcomeForYear:(NSInteger)year month:(NSInteger)month;
 - (NSInteger)getTotalAmountForYear:(NSInteger)year month:(NSInteger)month;
+- (NSArray *)getIncomeForYear:(NSInteger)year;
+- (NSArray *)getAbsOutcomeForYear:(NSInteger)year;
+- (NSArray *)getTotalAmountForYear:(NSInteger)year;
+- (NSInteger)getIncomeSumForYear:(NSInteger)year;
+- (NSInteger)getOutcomeSumForYear:(NSInteger)year;
+- (NSInteger)getTotalAmoutSumForYear:(NSInteger)year;
 
 @end

@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MineYearViewController">
             <connections>
                 <outlet property="addNewTransactionBtn" destination="Dnv-Jo-76M" id="6Lv-cn-yji"/>
+                <outlet property="histogramBtn" destination="d4m-aa-Jf6" id="Hq9-Um-fPg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="yearlyHistoryTable" destination="5G4-iR-WSF" id="Aa5-QJ-yaH"/>
             </connections>
