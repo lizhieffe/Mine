@@ -14,6 +14,7 @@
 //- (id)initWithPrice:(NSInteger)price date:(NSDate *)date;
 + (UITableViewCell *)generateCellWithId:(long)transactionId price:(NSInteger)price date:(NSDate *)date;
 
+@property (assign, nonatomic) NSInteger year;
 @property (assign, nonatomic) NSInteger month;
 @property (assign, nonatomic) NSInteger day;
 @property (assign, nonatomic) NSInteger price;

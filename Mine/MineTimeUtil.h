@@ -26,4 +26,6 @@
 + (NSDate *)unixtimeToNSDate:(NSInteger)unixtime;
 + (NSDate *)getDateForYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day;
 
++ (NSInteger)getNumberOfDaysForMonth:(NSInteger)month year:(NSInteger)year;
+
 @end

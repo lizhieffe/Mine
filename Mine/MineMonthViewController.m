@@ -19,14 +19,19 @@
 
 @interface MineMonthViewController ()
 
+@property (strong, nonatomic) IBOutlet UIView *headerView;
+
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *incomeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *expenseLabel;
 
 @property (weak, nonatomic) IBOutlet UITableView *historyTableView;
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *addNewTransactionBtn;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *prevBtn;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *nextBtn;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *histogramBtn;
+
+@property (strong, nonatomic) UIBarButtonItem *addBtn;
 
 @property (assign, nonatomic) NSInteger year;
 @property (assign, nonatomic) NSInteger month;
@@ -59,13 +64,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    [self updateDateLabel];
-    [self updateIncomeLabel];
-    [self updateExpenseLabel];
     
-    self.addNewTransactionBtn.target = self;
-    self.addNewTransactionBtn.action = @selector(addNewTransactionBtnTapped);
+    [self updateUI];
+    
+//    self.addNewTransactionBtn.target = self;
+//    self.addNewTransactionBtn.action = @selector(addNewTransactionBtnTapped);
+    
+    self.addBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBtnTapped)];
+    self.navigationItem.rightBarButtonItem = self.addBtn;
+    
+    self.prevBtn.target = self;
+    self.prevBtn.action = @selector(prevBtnTapped);
+   
+    self.nextBtn.target = self;
+    self.nextBtn.action = @selector(nextBtnTapped);
     
     self.histogramBtn.target = self;
     self.histogramBtn.action = @selector(histogramBtnTapped);
@@ -83,59 +95,98 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteTransactionDidSucceed:) name:MineNotificationDeleteTransactionDidSucceed object:nil];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)updateUI
 {
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [self updateDateLabel];
+    [self updateIncomeLabel];
+    [self updateExpenseLabel];
+    [self.historyTableView reloadData];
 }
 
 - (void)updateDateLabel
 {
     NSString *monthStr = [MineTimeUtil getMonthStr:self.month];
-    self.dateLabel.text = [NSString stringWithFormat:@"%@ %ld", monthStr, (long)self.year];
+    self.dateLabel.text = [NSString stringWithFormat:@"%@", monthStr];
 }
 
 - (void)updateIncomeLabel
 {
-    NSInteger amount = [[MineTransactionInfo sharedManager] getIncomeForYear:self.year month:self.month];
-    self.incomeLabel.text = [NSString stringWithFormat:@"%ld$", amount];
+    NSInteger amount = [[MineTransactionInfo sharedManager] getIncomeSumForYear:self.year month:self.month];
+    self.incomeLabel.text = [NSString stringWithFormat:@"Income: $%ld", amount];
 }
 
 - (void)updateExpenseLabel
 {
-    NSInteger amount = [[MineTransactionInfo sharedManager] getOutcomeForYear:self.year month:self.month];
-    self.expenseLabel.text = [NSString stringWithFormat:@"%ld$", amount];
+    NSInteger amount = [[MineTransactionInfo sharedManager] getOutcomeSumForYear:self.year month:self.month];
+    
+    self.expenseLabel.text = [NSString stringWithFormat:@"Outcome: -$%ld", ABS(amount)];
 }
 
 # pragma mark - btn action
 
-- (void)addNewTransactionBtnTapped {
+- (void)addBtnTapped {
     NSInteger day = [MineTimeUtil getCurrentDay];
     NSDate *date = [MineTimeUtil getDateForYear:self.year month:self.month day:day];
     MineNewTransactionViewController *newTransactionViewController = [[MineNewTransactionViewController alloc] initWithDate:date];
     [self.navigationController pushViewController:newTransactionViewController animated:YES];
 }
 
+- (void)prevBtnTapped
+{
+    if (self.month > 1)
+        self.month -= 1;
+    else {
+//        if (self.year == [MineTimeUtil getCurrentYear] - 9)
+//            return;
+//        self.month = 12;
+//        self.year -= 1;
+        return;
+    }
+    
+    [self updateUI];
+}
+
+- (void)nextBtnTapped
+{
+    if (self.month < 12)
+        self.month += 1;
+    else {
+//        if (self.year == [MineTimeUtil getCurrentYear])
+//            return;
+//        self.month = 1;
+//        self.year += 1;
+        return;
+    }
+    
+    [self updateUI];
+}
+
 - (void)histogramBtnTapped {
     NSInteger year = self.year;
     
     // set navigation bar back btn title
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[@(year) stringValue] style:UIBarButtonItemStylePlain target:nil action:nil];
+    NSString *backBtnText = [NSString stringWithFormat:@"%@ %ld", [[MineTimeUtil getShortMonthStr:self.month] uppercaseString], self.year];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:backBtnText style:UIBarButtonItemStylePlain target:nil action:nil];
     
-    NSMutableArray *months = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 12; i ++)
-        [months addObject:[MineTimeUtil getShortMonthStr:(i + 1)]];
-    NSArray *incomeArray = [[MineTransactionInfo sharedManager] getIncomeForYear:year];
-    NSArray *outcomeArray = [[MineTransactionInfo sharedManager] getAbsOutcomeForYear:year];
-    NSArray *balanceArray = [[MineTransactionInfo sharedManager] getTotalAmountForYear:year];
+    NSInteger days = [MineTimeUtil getNumberOfDaysForMonth:self.month year:self.year];
+    NSInteger displayEveryNDays = 3;
     
-    MineHistogramViewController *histogramViewController = [[MineHistogramViewController alloc] initWithXLabelArray:months incomeArray:incomeArray outcomeArray:outcomeArray balanceArray:balanceArray];
+    NSMutableArray *day = [[NSMutableArray alloc] init];
+    for (int i = 0; i < (int)days / (int)displayEveryNDays + 1; i ++)
+        [day addObject:[@((int)displayEveryNDays * i + 1) stringValue]];
+    NSArray *incomeArray = [[MineTransactionInfo sharedManager] getIncomeForYear:year month:self.month sumEveryNDay:displayEveryNDays];
+    NSArray *outcomeArray = [[MineTransactionInfo sharedManager] getAbsOutcomeForYear:year month:self.month sumEveryNDay:displayEveryNDays];
+    
+    MineHistogramViewController *histogramViewController = [[MineHistogramViewController alloc] initWithXLabelArray:day incomeArray:incomeArray outcomeArray:outcomeArray];
     histogramViewController.year = year;
     [self.navigationController pushViewController:histogramViewController animated:YES];
+}
+
+# pragma mark - UITableViewDelegate
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 35;
 }
 
 # pragma mark - UITableViewDataSource
@@ -162,6 +213,7 @@
     cell.price = item.price;
     cell.day = [MineTimeUtil getDay:item.transactionDate];
     cell.month = self.month;
+    cell.year = self.year;
     cell.transactionId = item.transactionId;
     
     [cell updatePriceLabel];
@@ -174,6 +226,18 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
+}
+
+# pragma mark - table view section header
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return self.headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return self.headerView.frame.size.height;
 }
 
 # pragma mark - table view cell left buttons

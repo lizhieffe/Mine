@@ -7,8 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MineYearViewController">
             <connections>
-                <outlet property="addNewTransactionBtn" destination="Dnv-Jo-76M" id="6Lv-cn-yji"/>
-                <outlet property="histogramBtn" destination="d4m-aa-Jf6" id="Hq9-Um-fPg"/>
+                <outlet property="histogramBtn" destination="Dnv-Jo-76M" id="0W5-7d-FSL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="yearlyHistoryTable" destination="5G4-iR-WSF" id="Aa5-QJ-yaH"/>
             </connections>
@@ -29,19 +28,19 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <items>
                         <barButtonItem title="Peek" id="V6G-OI-PBe">
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                        <barButtonItem enabled="NO" width="55" id="hau-fp-3BN">
                             <color key="tintColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
-                        <barButtonItem enabled="NO" width="76" id="hau-fp-3BN">
-                            <color key="tintColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
-                        <barButtonItem title="New" id="Dnv-Jo-76M">
+                        <barButtonItem title="Histogram" id="Dnv-Jo-76M">
                             <color key="tintColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                         <barButtonItem enabled="NO" width="37" id="PZT-t1-jeE">
                             <color key="tintColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
-                        <barButtonItem title="Histogram" id="d4m-aa-Jf6">
-                            <color key="tintColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <barButtonItem title="add" id="d4m-aa-Jf6">
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </barButtonItem>
                     </items>
                 </toolbar>

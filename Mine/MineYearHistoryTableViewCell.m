@@ -106,9 +106,9 @@ static BOOL nibCollectionViewCellloaded = NO;
     cell.monthLabel.text = [monthStr uppercaseString];
     
     NSInteger year = self.year;
-    cell.incomeLabel.text = [NSString stringWithFormat:@"$%@", [@([[MineTransactionInfo sharedManager] getIncomeForYear:year month:month]) stringValue]];
+    cell.incomeLabel.text = [NSString stringWithFormat:@"$%@", [@([[MineTransactionInfo sharedManager] getIncomeSumForYear:year month:month]) stringValue]];
     
-    NSInteger absOutcome = abs((int)[[MineTransactionInfo sharedManager] getOutcomeForYear:year month:month]);
+    NSInteger absOutcome = abs((int)[[MineTransactionInfo sharedManager] getOutcomeSumForYear:year month:month]);
     cell.outcomeLabel.text = [NSString stringWithFormat:@"-$%@", [@(absOutcome) stringValue]];
     
     NSInteger currentYear = [MineTimeUtil getCurrentYear];

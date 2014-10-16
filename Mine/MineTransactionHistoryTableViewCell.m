@@ -12,7 +12,7 @@
 
 @interface MineTransactionHistoryTableViewCell ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *sign;
+@property (weak, nonatomic) IBOutlet UILabel *sign;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 
@@ -54,24 +54,28 @@
 - (void)updateSign
 {
     if (self.price > 0) {
-        self.sign.image = [UIImage imageNamed:@"Add_100x100.png"];
-        self.sign.backgroundColor = UIColorFromRGB(0x66FFCC);
+//        self.sign.image = [UIImage imageNamed:@"Add_100x100.png"];
+//        self.sign.backgroundColor = UIColorFromRGB(0x00FF66);
+        self.sign.backgroundColor = [UIColor whiteColor];
     }
     else {
-        self.sign.image = [UIImage imageNamed:@"Remove_100x100.png"];
-        self.sign.backgroundColor = UIColorFromRGB(0xFF9966);
+//        self.sign.image = [UIImage imageNamed:@"Remove_100x100.png"];
+        self.sign.backgroundColor = UIColorFromRGB(0xFF3300);
     }
 }
 
 - (void)updateDateLabel
 {
     NSString *monthStr = [MineTimeUtil getShortMonthStr:self.month];
-    self.dateLabel.text = [NSString stringWithFormat:@" %@.%ld", monthStr, self.day];
+    self.dateLabel.text = [NSString stringWithFormat:@"%@ %ld, %ld", monthStr, self.day, self.year];
 }
 
 - (void)updatePriceLabel
 {
-    self.priceLabel.text = [NSString stringWithFormat:@"%ld$", self.price];
+    if (self.price >= 0)
+        self.priceLabel.text = [NSString stringWithFormat:@"$%ld", self.price];
+    else
+        self.priceLabel.text = [NSString stringWithFormat:@"-$%ld", ABS(self.price)];
 }
 
 - (void)awakeFromNib

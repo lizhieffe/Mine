@@ -17,13 +17,25 @@
 - (void)addTransactionItem:(MineTransactionItem *)item;
 - (void)saveTransactionsFromJson:(NSDictionary *)json;
 - (void)deleteTransactionWithId:(long)transactionId;
+
 - (NSMutableArray *)getAllTransactionsForYear:(NSInteger)year month:(NSInteger)month;
-- (NSInteger)getIncomeForYear:(NSInteger)year month:(NSInteger)month;
-- (NSInteger)getOutcomeForYear:(NSInteger)year month:(NSInteger)month;
-- (NSInteger)getTotalAmountForYear:(NSInteger)year month:(NSInteger)month;
+
+- (NSInteger)getIncomeSumForYear:(NSInteger)year month:(NSInteger)month;
+- (NSInteger)getOutcomeSumForYear:(NSInteger)year month:(NSInteger)month;
+- (NSInteger)getBalanceSumForYear:(NSInteger)year month:(NSInteger)month;
+
+- (NSInteger)getIncomeSumForYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day;
+- (NSInteger)getOutcomeSumForYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day;
+- (NSInteger)getBalanceSumForYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day;
+
 - (NSArray *)getIncomeForYear:(NSInteger)year;
 - (NSArray *)getAbsOutcomeForYear:(NSInteger)year;
 - (NSArray *)getTotalAmountForYear:(NSInteger)year;
+
+- (NSArray *)getIncomeForYear:(NSInteger)year month:(NSInteger)month sumEveryNDay:(NSInteger)n;
+- (NSArray *)getAbsOutcomeForYear:(NSInteger)year month:(NSInteger)month sumEveryNDay:(NSInteger)n;
+- (NSArray *)getTotalAmountForYear:(NSInteger)year month:(NSInteger)month sumEveryNDay:(NSInteger)n;
+
 - (NSInteger)getIncomeSumForYear:(NSInteger)year;
 - (NSInteger)getOutcomeSumForYear:(NSInteger)year;
 - (NSInteger)getTotalAmoutSumForYear:(NSInteger)year;

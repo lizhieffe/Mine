@@ -24,8 +24,9 @@
 @interface MineYearViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *yearlyHistoryTable;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *addNewTransactionBtn;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *histogramBtn;
+
+@property (strong, nonatomic) UIBarButtonItem *addBtn;
 
 @property (assign, nonatomic) BOOL justLoaded;
 
@@ -43,6 +44,12 @@
     
     // navigation bar title font and color
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Hiragino Kaku Gothic ProN" size:17], NSFontAttributeName, UIColorFromRGB(0xFF3300), NSForegroundColorAttributeName, nil]];
+    
+    self.addBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBtnTapped)];
+    self.navigationItem.rightBarButtonItem = self.addBtn;
+    
+    self.histogramBtn.target = self;
+    self.histogramBtn.action = @selector(histogramBtnTapped);
     
     self.yearlyHistoryTable.delegate = self;
     self.yearlyHistoryTable.dataSource = self;
@@ -65,12 +72,6 @@
             
         }
     }
-    
-    self.addNewTransactionBtn.target = self;
-    self.addNewTransactionBtn.action = @selector(addNewTransactionBtnTapped);
-    
-    self.histogramBtn.target = self;
-    self.histogramBtn.action = @selector(histogramBtnTapped);
     
     /* notification */
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAllTransactionsDidSucceed:) name:MineNotificationGetAllTransactionsDidSucceed object:nil];
@@ -106,7 +107,7 @@
     [self.navigationController pushViewController:loginViewController animated:NO];
 }
 
-- (void)addNewTransactionBtnTapped {
+- (void)addBtnTapped {
     NSInteger year = [self getYearOfMostVisibleCell];
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[@(year) stringValue] style:UIBarButtonItemStylePlain target:nil action:nil];
@@ -130,9 +131,8 @@
          [months addObject:[MineTimeUtil getShortMonthStr:(i + 1)]];
     NSArray *incomeArray = [[MineTransactionInfo sharedManager] getIncomeForYear:year];
     NSArray *outcomeArray = [[MineTransactionInfo sharedManager] getAbsOutcomeForYear:year];
-    NSArray *balanceArray = [[MineTransactionInfo sharedManager] getTotalAmountForYear:year];
     
-    MineHistogramViewController *histogramViewController = [[MineHistogramViewController alloc] initWithXLabelArray:months incomeArray:incomeArray outcomeArray:outcomeArray balanceArray:balanceArray];
+    MineHistogramViewController *histogramViewController = [[MineHistogramViewController alloc] initWithXLabelArray:months incomeArray:incomeArray outcomeArray:outcomeArray];
     histogramViewController.year = year;
     [self.navigationController pushViewController:histogramViewController animated:YES];
 }

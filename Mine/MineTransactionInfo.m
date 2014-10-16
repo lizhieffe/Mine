@@ -124,7 +124,7 @@ NSString *const MinePersistDataKeyTransactions = @"transactions";
     return result;
 }
 
-- (NSInteger)getIncomeForYear:(NSInteger)year month:(NSInteger)month
+- (NSInteger)getIncomeSumForYear:(NSInteger)year month:(NSInteger)month
 {
     NSInteger total = 0;
     NSArray *transactions = [self getAllTransactionsForYear:year month:month];
@@ -135,7 +135,7 @@ NSString *const MinePersistDataKeyTransactions = @"transactions";
     return total;
 }
 
-- (NSInteger)getOutcomeForYear:(NSInteger)year month:(NSInteger)month
+- (NSInteger)getOutcomeSumForYear:(NSInteger)year month:(NSInteger)month
 {
     NSInteger total = 0;
     NSArray *transactions = [self getAllTransactionsForYear:year month:month];
@@ -146,16 +146,122 @@ NSString *const MinePersistDataKeyTransactions = @"transactions";
     return total;
 }
 
-- (NSInteger)getTotalAmountForYear:(NSInteger)year month:(NSInteger)month
+- (NSInteger)getBalanceSumForYear:(NSInteger)year month:(NSInteger)month
 {
-    return [self getIncomeForYear:year month:month] + [self getOutcomeForYear:year month:month];
+    return [self getIncomeSumForYear:year month:month] + [self getOutcomeSumForYear:year month:month];
+}
+
+- (NSInteger)getIncomeSumForYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day
+{
+    NSInteger total = 0;
+    NSArray *transactions = [self getAllTransactionsForYear:year month:month];
+    for (MineTransactionItem *item in transactions) {
+        if (item.price > 0 && item.transactionDate == [MineTimeUtil getDateForYear:year month:month day:day])
+            total += item.price;
+    }
+    return total;
+}
+
+- (NSInteger)getOutcomeSumForYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day
+{
+    NSInteger total = 0;
+    NSArray *transactions = [self getAllTransactionsForYear:year month:month];
+    for (MineTransactionItem *item in transactions) {
+        if (item.price < 0 && item.transactionDate == [MineTimeUtil getDateForYear:year month:month day:day])
+            total += item.price;
+    }
+    return total;
+}
+
+- (NSInteger)getBalanceSumForYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day
+{
+    return [self getIncomeSumForYear:year month:month day:day] + [self getOutcomeSumForYear:year month:month day:day];
+}
+
+- (NSArray *)getIncomeForYear:(NSInteger)year month:(NSInteger)month sumEveryNDay:(NSInteger)n
+{
+    NSInteger days = [MineTimeUtil getNumberOfDaysForMonth:month year:year];
+    
+    if (n <= 0)
+        n = 1;
+    else if (n > days)
+        n = days;
+    
+    NSArray *transactions = [self getAllTransactionsForYear:year month:month];
+    NSMutableArray *amount = [[NSMutableArray alloc] init];
+    int num = (int)days / n + 1;
+    
+    for (int i = 0; i < num; i ++)
+         [amount addObject:[NSNumber numberWithInt:0]];
+    
+    for (MineTransactionItem *item in transactions) {
+        if (item.price > 0) {
+            int tmp = (int)([MineTimeUtil getDay:item.transactionDate] - 1) / n;
+            int value = [[amount objectAtIndex:tmp] intValue] + item.price;
+            [amount replaceObjectAtIndex:tmp withObject:[NSNumber numberWithInt:value]];
+        }
+    }
+
+    return amount;
+}
+
+- (NSArray *)getAbsOutcomeForYear:(NSInteger)year month:(NSInteger)month sumEveryNDay:(NSInteger)n
+{
+    NSInteger days = [MineTimeUtil getNumberOfDaysForMonth:month year:year];
+    
+    if (n <= 0)
+        n = 1;
+    else if (n > days)
+        n = days;
+    
+    NSArray *transactions = [self getAllTransactionsForYear:year month:month];
+    NSMutableArray *amount = [[NSMutableArray alloc] init];
+    int num = (int)days / n + 1;
+    
+    for (int i = 0; i < num; i ++)
+        [amount addObject:[NSNumber numberWithInt:0]];
+    
+    for (MineTransactionItem *item in transactions) {
+        if (item.price < 0) {
+            int tmp = (int)([MineTimeUtil getDay:item.transactionDate] - 1) / n;
+            int value = [[amount objectAtIndex:tmp] intValue] + ABS(item.price);
+            [amount replaceObjectAtIndex:tmp withObject:[NSNumber numberWithInt:value]];
+        }
+    }
+    
+    return amount;
+}
+
+- (NSArray *)getTotalAmountForYear:(NSInteger)year month:(NSInteger)month sumEveryNDay:(NSInteger)n
+{
+    NSInteger days = [MineTimeUtil getNumberOfDaysForMonth:month year:year];
+    
+    if (n <= 0)
+        n = 1;
+    else if (n > days)
+        n = days;
+    
+    NSArray *transactions = [self getAllTransactionsForYear:year month:month];
+    NSMutableArray *amount = [[NSMutableArray alloc] init];
+    int num = (int)days / n + 1;
+    
+    for (int i = 0; i < num; i ++)
+        [amount addObject:[NSNumber numberWithInt:0]];
+    
+    for (MineTransactionItem *item in transactions) {
+        int tmp = (int)([MineTimeUtil getDay:item.transactionDate] - 1) / n;
+        int value = [[amount objectAtIndex:tmp] intValue] + item.price;
+        [amount replaceObjectAtIndex:tmp withObject:[NSNumber numberWithInt:value]];
+    }
+    
+    return amount;
 }
 
 - (NSArray *)getIncomeForYear:(NSInteger)year
 {
     NSMutableArray *amount = [[NSMutableArray alloc] init];
     for (int i = 0; i < 12; i ++) {
-        [amount addObject:[NSNumber numberWithLong:[self getIncomeForYear:year month:(i + 1)]]];
+        [amount addObject:[NSNumber numberWithLong:[self getIncomeSumForYear:year month:(i + 1)]]];
     }
     return amount;
 }
@@ -164,7 +270,7 @@ NSString *const MinePersistDataKeyTransactions = @"transactions";
 {
     NSMutableArray *amount = [[NSMutableArray alloc] init];
     for (int i = 0; i < 12; i ++) {
-        [amount addObject:[NSNumber numberWithLong:ABS([self getOutcomeForYear:year month:(i + 1)])]];
+        [amount addObject:[NSNumber numberWithLong:ABS([self getOutcomeSumForYear:year month:(i + 1)])]];
     }
     return amount;
 }
@@ -173,7 +279,7 @@ NSString *const MinePersistDataKeyTransactions = @"transactions";
 {
     NSMutableArray *amount = [[NSMutableArray alloc] init];
     for (int i = 0; i < 12; i ++) {
-        [amount addObject:[NSNumber numberWithLong:[self getTotalAmountForYear:year month:(i + 1)]]];
+        [amount addObject:[NSNumber numberWithLong:[self getBalanceSumForYear:year month:(i + 1)]]];
     }
     return amount;
 }
@@ -182,7 +288,7 @@ NSString *const MinePersistDataKeyTransactions = @"transactions";
 {
     NSInteger sum = 0;
     for (int i = 0; i < 12; i ++)
-        sum += [self getIncomeForYear:year month:(i + 1)];
+        sum += [self getIncomeSumForYear:year month:(i + 1)];
     return sum;
 }
 
@@ -190,7 +296,7 @@ NSString *const MinePersistDataKeyTransactions = @"transactions";
 {
     NSInteger sum = 0;
     for (int i = 0; i < 12; i ++)
-        sum += [self getOutcomeForYear:year month:(i + 1)];
+        sum += [self getOutcomeSumForYear:year month:(i + 1)];
     return sum;
 }
 
@@ -198,7 +304,7 @@ NSString *const MinePersistDataKeyTransactions = @"transactions";
 {
     NSInteger sum = 0;
     for (int i = 0; i < 12; i ++)
-        sum += [self getTotalAmountForYear:year month:(i + 1)];
+        sum += [self getBalanceSumForYear:year month:(i + 1)];
     return sum;
 }
 

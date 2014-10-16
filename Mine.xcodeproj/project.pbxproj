@@ -30,6 +30,16 @@
 		DC15A22E1987D236007FA1AC /* MineCreateTransactionLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC15A22C1987D236007FA1AC /* MineCreateTransactionLocationViewController.xib */; };
 		DC15A2301987D408007FA1AC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC15A22F1987D408007FA1AC /* MapKit.framework */; };
 		DC15A2331988BB33007FA1AC /* MKMapView+Mine.m in Sources */ = {isa = PBXBuildFile; fileRef = DC15A2321988BB33007FA1AC /* MKMapView+Mine.m */; };
+		DC406F0219EF8BB400B70F36 /* Icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = DC406EF819EF8BB400B70F36 /* Icon-40.png */; };
+		DC406F0319EF8BB400B70F36 /* Icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC406EF919EF8BB400B70F36 /* Icon-40@2x.png */; };
+		DC406F0419EF8BB400B70F36 /* Icon-40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC406EFA19EF8BB400B70F36 /* Icon-40@3x.png */; };
+		DC406F0519EF8BB400B70F36 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC406EFB19EF8BB400B70F36 /* Icon-60@2x.png */; };
+		DC406F0619EF8BB400B70F36 /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC406EFC19EF8BB400B70F36 /* Icon-60@3x.png */; };
+		DC406F0719EF8BB400B70F36 /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = DC406EFD19EF8BB400B70F36 /* Icon-76.png */; };
+		DC406F0819EF8BB400B70F36 /* Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC406EFE19EF8BB400B70F36 /* Icon-76@2x.png */; };
+		DC406F0919EF8BB400B70F36 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = DC406EFF19EF8BB400B70F36 /* Icon-Small.png */; };
+		DC406F0A19EF8BB400B70F36 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC406F0019EF8BB400B70F36 /* Icon-Small@2x.png */; };
+		DC406F0B19EF8BB400B70F36 /* Icon-Small@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC406F0119EF8BB400B70F36 /* Icon-Small@3x.png */; };
 		DC50980419E1AFFC00EBD4DE /* MineTimeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DC50980319E1AFFC00EBD4DE /* MineTimeUtil.m */; };
 		DC50980719E1B4FB00EBD4DE /* MineGetAllTransactionsService.m in Sources */ = {isa = PBXBuildFile; fileRef = DC50980619E1B4FB00EBD4DE /* MineGetAllTransactionsService.m */; };
 		DC50980919E1D88800EBD4DE /* wallet_512x512.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = DC50980819E1D88800EBD4DE /* wallet_512x512.jpeg */; };
@@ -147,6 +157,16 @@
 		DC15A2321988BB33007FA1AC /* MKMapView+Mine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+Mine.m"; sourceTree = "<group>"; };
 		DC15A234198B38BC007FA1AC /* MineCenterViewProtocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineCenterViewProtocal.h; sourceTree = "<group>"; };
 		DC15A236198B3907007FA1AC /* MineSideViewProtocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineSideViewProtocal.h; sourceTree = "<group>"; };
+		DC406EF819EF8BB400B70F36 /* Icon-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40.png"; sourceTree = "<group>"; };
+		DC406EF919EF8BB400B70F36 /* Icon-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40@2x.png"; sourceTree = "<group>"; };
+		DC406EFA19EF8BB400B70F36 /* Icon-40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40@3x.png"; sourceTree = "<group>"; };
+		DC406EFB19EF8BB400B70F36 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
+		DC406EFC19EF8BB400B70F36 /* Icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@3x.png"; sourceTree = "<group>"; };
+		DC406EFD19EF8BB400B70F36 /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = "<group>"; };
+		DC406EFE19EF8BB400B70F36 /* Icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76@2x.png"; sourceTree = "<group>"; };
+		DC406EFF19EF8BB400B70F36 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		DC406F0019EF8BB400B70F36 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		DC406F0119EF8BB400B70F36 /* Icon-Small@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@3x.png"; sourceTree = "<group>"; };
 		DC50980219E1AFFC00EBD4DE /* MineTimeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineTimeUtil.h; sourceTree = "<group>"; };
 		DC50980319E1AFFC00EBD4DE /* MineTimeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineTimeUtil.m; sourceTree = "<group>"; };
 		DC50980519E1B4FB00EBD4DE /* MineGetAllTransactionsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineGetAllTransactionsService.h; sourceTree = "<group>"; };
@@ -363,6 +383,23 @@
 			name = Protocal;
 			sourceTree = "<group>";
 		};
+		DC406EF719EF8B9600B70F36 /* Icon */ = {
+			isa = PBXGroup;
+			children = (
+				DC406EF819EF8BB400B70F36 /* Icon-40.png */,
+				DC406EF919EF8BB400B70F36 /* Icon-40@2x.png */,
+				DC406EFA19EF8BB400B70F36 /* Icon-40@3x.png */,
+				DC406EFB19EF8BB400B70F36 /* Icon-60@2x.png */,
+				DC406EFC19EF8BB400B70F36 /* Icon-60@3x.png */,
+				DC406EFD19EF8BB400B70F36 /* Icon-76.png */,
+				DC406EFE19EF8BB400B70F36 /* Icon-76@2x.png */,
+				DC406EFF19EF8BB400B70F36 /* Icon-Small.png */,
+				DC406F0019EF8BB400B70F36 /* Icon-Small@2x.png */,
+				DC406F0119EF8BB400B70F36 /* Icon-Small@3x.png */,
+			);
+			name = Icon;
+			sourceTree = "<group>";
+		};
 		DC99469A19ECB47500559AA8 /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -499,6 +536,7 @@
 		DCDF69E0198286DE0066FDCC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DC406EF719EF8B9600B70F36 /* Icon */,
 				DC99469819ECA8B700559AA8 /* loginViewBackground_744x1392.png */,
 				DCCFB89919E02A9C004FB14A /* Add_100x100.png */,
 				DCCFB89A19E02A9C004FB14A /* Remove_100x100.png */,
@@ -606,8 +644,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC406F0219EF8BB400B70F36 /* Icon-40.png in Resources */,
 				DCCFB87719DE5974004FB14A /* Camera_48x48.png in Resources */,
 				DCAC0FA419DE52AE000B65FA /* MoneyBag_100x100.png in Resources */,
+				DC406F0A19EF8BB400B70F36 /* Icon-Small@2x.png in Resources */,
 				DC9946A519ECCC6E00559AA8 /* MineYearViewController.xib in Resources */,
 				DCCFB86F19DE588D004FB14A /* Camera_76x76.png in Resources */,
 				DC15A1FA19844DF2007FA1AC /* MineMainViewController.xib in Resources */,
@@ -617,10 +657,14 @@
 				DCCFB88219DECE66004FB14A /* MineNewTransactionViewController.xib in Resources */,
 				DC9946B919ECF32900559AA8 /* MineYearHistoryCollectionViewCell.xib in Resources */,
 				DC15A226198601A5007FA1AC /* MineTransactionItemCellTableViewCell.xib in Resources */,
+				DC406F0919EF8BB400B70F36 /* Icon-Small.png in Resources */,
 				DCAC0FA519DE52AE000B65FA /* Dolls_100x100.png in Resources */,
 				DCCFB87919DE62B9004FB14A /* Options_48x48.png in Resources */,
 				DC9946AC19ECDCB000559AA8 /* MineYearHistoryTableViewCell.xib in Resources */,
 				DCDF69C21982831E0066FDCC /* Images.xcassets in Resources */,
+				DC406F0419EF8BB400B70F36 /* Icon-40@3x.png in Resources */,
+				DC406F0819EF8BB400B70F36 /* Icon-76@2x.png in Resources */,
+				DC406F0719EF8BB400B70F36 /* Icon-76.png in Resources */,
 				DCCFB89819E0282A004FB14A /* MineTransactionHistoryTableViewCell.xib in Resources */,
 				DCCFB87B19DE632D004FB14A /* Options_76x76.png in Resources */,
 				DCCFB87D19DE6365004FB14A /* Options_100x100.png in Resources */,
@@ -629,17 +673,21 @@
 				DCCFB87419DE5974004FB14A /* MoneyBag_48x48.png in Resources */,
 				DCAC0FA619DE52AE000B65FA /* Clock_100x100.png in Resources */,
 				DC9946C319EE250E00559AA8 /* MineHistogramViewController.xib in Resources */,
+				DC406F0619EF8BB400B70F36 /* Icon-60@3x.png in Resources */,
 				DCDF69E51982873F0066FDCC /* MineLoginViewController.xib in Resources */,
 				DCCFB89C19E02A9C004FB14A /* Remove_100x100.png in Resources */,
 				DCCFB89B19E02A9C004FB14A /* Add_100x100.png in Resources */,
 				DCDF69B41982831E0066FDCC /* InfoPlist.strings in Resources */,
 				DC15A2091985C2D5007FA1AC /* MineSignUpViewController.xib in Resources */,
 				DC99469919ECA8B700559AA8 /* loginViewBackground_744x1392.png in Resources */,
+				DC406F0519EF8BB400B70F36 /* Icon-60@2x.png in Resources */,
 				DCCFB86E19DE588D004FB14A /* Clock_76x76.png in Resources */,
 				DCCFB87619DE5974004FB14A /* Clock_48x48.png in Resources */,
 				DCCFB87519DE5974004FB14A /* Dolls_48x48.png in Resources */,
 				DC50980919E1D88800EBD4DE /* wallet_512x512.jpeg in Resources */,
 				DCCFB86D19DE588D004FB14A /* Dolls_76x76.png in Resources */,
+				DC406F0B19EF8BB400B70F36 /* Icon-Small@3x.png in Resources */,
+				DC406F0319EF8BB400B70F36 /* Icon-40@2x.png in Resources */,
 				DCCFB88619DECEFB004FB14A /* Cancel_48x48.png in Resources */,
 				DC15A21A1985EFAC007FA1AC /* MineCreateTransactionItemsViewController.xib in Resources */,
 			);

@@ -127,4 +127,13 @@
     return [[NSCalendar currentCalendar] dateFromComponents:comps];
 }
 
++ (NSInteger)getNumberOfDaysForMonth:(NSInteger)month year:(NSInteger)year
+{
+    NSCalendar* cal = [NSCalendar currentCalendar];
+    NSRange range = [cal rangeOfUnit:NSDayCalendarUnit
+                              inUnit:NSMonthCalendarUnit
+                             forDate:[MineTimeUtil getDateForYear:year month:month day:1]];
+    return range.length;
+}
+
 @end

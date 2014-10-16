@@ -95,7 +95,7 @@
 {
     NSInteger month = [[MinePreferenceService sharedManager] displayMonth];
     NSInteger year = [[MinePreferenceService sharedManager] displayYear];
-    NSInteger amount = [[MineTransactionInfo sharedManager] getIncomeForYear:year month:month];
+    NSInteger amount = [[MineTransactionInfo sharedManager] getIncomeSumForYear:year month:month];
     self.incomeLabel.text = [NSString stringWithFormat:@"%ld$", amount];
 }
 
@@ -103,7 +103,7 @@
 {
     NSInteger month = [[MinePreferenceService sharedManager] displayMonth];
     NSInteger year = [[MinePreferenceService sharedManager] displayYear];
-    NSInteger amount = [[MineTransactionInfo sharedManager] getOutcomeForYear:year month:month];
+    NSInteger amount = [[MineTransactionInfo sharedManager] getOutcomeSumForYear:year month:month];
     self.expenseLabel.text = [NSString stringWithFormat:@"%ld$", amount];
 }
 
