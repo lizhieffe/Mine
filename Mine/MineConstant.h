@@ -16,6 +16,7 @@ extern NSString *const MineNotificationAddTransactionDidSucceed;
 extern NSString *const MineNotificationGetAllTransactionsDidSucceed;
 extern NSString *const MineNotificationDeleteTransactionDidSucceed;
 extern NSString *const MineNotificationDownViewDidHide;
+extern NSString *const MineNotificationShowLoginView;
 
 #pragma mark - request parameter -
 

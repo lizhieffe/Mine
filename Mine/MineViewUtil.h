@@ -13,4 +13,6 @@
 + (void)showActivityIndicatorView:(UIActivityIndicatorView *)activityIndicatorView inView:(UIView *)view;
 + (void)hideActivityIndicatorView:(UIActivityIndicatorView *)activityIndicatorView;
 
++ (void)presentMonthViewControllerFormViewController:(UIViewController *)from year:(NSInteger)year month:(NSInteger)month;
+
 @end

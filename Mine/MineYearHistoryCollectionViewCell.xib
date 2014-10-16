@@ -38,11 +38,15 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="JAN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QvA-ta-cKq">
-                        <rect key="frame" x="8" y="0.0" width="39" height="21"/>
+                        <rect key="frame" x="8" y="7" width="39" height="21"/>
                         <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="14"/>
                         <color key="textColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RVh-Wb-jdu">
+                        <rect key="frame" x="8" y="-1" width="84" height="3"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -52,7 +56,7 @@
                 <outlet property="monthLabel" destination="QvA-ta-cKq" id="Aw3-HH-Ryb"/>
                 <outlet property="outcomeLabel" destination="gSu-bZ-DJg" id="VjV-pS-78K"/>
             </connections>
-            <point key="canvasLocation" x="299" y="186"/>
+            <point key="canvasLocation" x="299" y="187"/>
         </collectionViewCell>
     </objects>
 </document>

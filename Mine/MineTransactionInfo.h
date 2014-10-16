@@ -17,6 +17,7 @@
 - (void)addTransactionItem:(MineTransactionItem *)item;
 - (void)saveTransactionsFromJson:(NSDictionary *)json;
 - (void)deleteTransactionWithId:(long)transactionId;
+- (void)clearTransactions;
 
 - (NSMutableArray *)getAllTransactionsForYear:(NSInteger)year month:(NSInteger)month;
 

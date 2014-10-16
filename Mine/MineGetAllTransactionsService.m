@@ -37,7 +37,8 @@
 - (void)updateParameters
 {
     [super updateParameters];
-    [self.requestParameters setObject:self.token forKey:MineRequestParameterToken];
+    if(self.token)
+        [self.requestParameters setObject:self.token forKey:MineRequestParameterToken];
 }
 
 - (void (^)(NSMutableDictionary *json, NSURLResponse *response))completionBlockForSuccess

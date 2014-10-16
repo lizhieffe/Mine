@@ -20,13 +20,18 @@
 #import "UITableView+Mine.h"
 #import "MineHistogramViewController.h"
 #import "MineTransactionInfo.h"
+#import "MineSettingsViewController.h"
+#import "MineViewUtil.h"
 
 @interface MineYearViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *yearlyHistoryTable;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *histogramBtn;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *todayBtn;
+@property (strong, nonatomic) IBOutlet UIView *infoIconView;
 
 @property (strong, nonatomic) UIBarButtonItem *addBtn;
+@property (strong, nonatomic) UIBarButtonItem *settingBtn;
 
 @property (assign, nonatomic) BOOL justLoaded;
 
@@ -46,10 +51,24 @@
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Hiragino Kaku Gothic ProN" size:17], NSFontAttributeName, UIColorFromRGB(0xFF3300), NSForegroundColorAttributeName, nil]];
     
     self.addBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBtnTapped)];
-    self.navigationItem.rightBarButtonItem = self.addBtn;
+    self.settingBtn = [[UIBarButtonItem alloc] initWithCustomView:self.infoIconView];
+    
+    NSMutableArray *rightBtns = [[NSMutableArray alloc] init];
+    [rightBtns addObject:self.addBtn];
+    [rightBtns addObject:self.settingBtn];
+    [self.navigationItem setRightBarButtonItems:rightBtns];
+    
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(settingBtnTapped)];
+    singleTap.numberOfTapsRequired = 1;
+    singleTap.numberOfTouchesRequired = 1;
+    [self.settingBtn.customView addGestureRecognizer:singleTap];
+    [self.settingBtn.customView setUserInteractionEnabled:YES];
     
     self.histogramBtn.target = self;
     self.histogramBtn.action = @selector(histogramBtnTapped);
+    
+    self.todayBtn.target = self;
+    self.todayBtn.action = @selector(todayBtnTapped);
     
     self.yearlyHistoryTable.delegate = self;
     self.yearlyHistoryTable.dataSource = self;
@@ -75,28 +94,32 @@
     
     /* notification */
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAllTransactionsDidSucceed:) name:MineNotificationGetAllTransactionsDidSucceed object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentLoginViewController) name:MineNotificationShowLoginView object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    MineGetAllTransactionsService *service = [[MineGetAllTransactionsService alloc] init];
-    service.ignoreCache = self.justLoaded;
-    [service getAllTransactions];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.yearlyHistoryTable reloadData];
-        
-        /* go to the current year when loaded the first time */
-        if (self.justLoaded) {
-            [self.yearlyHistoryTable scrollToBottomAnimated:NO];
-            self.justLoaded = NO;
-        }
-    });
-}
+    if (![MinePreferenceService isUserLoggedIn]) {
+        [MinePreferenceService cleanCurrentUserInfo];
+        [self presentLoginViewController];
+    }
+    else {
+        [self.navigationController setNavigationBarHidden:NO];
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+        MineGetAllTransactionsService *service = [[MineGetAllTransactionsService alloc] init];
+        service.ignoreCache = self.justLoaded;
+        [service getAllTransactions];
+    
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.yearlyHistoryTable reloadData];
+        
+            /* go to the current year when loaded the first time */
+            if (self.justLoaded) {
+                [self.yearlyHistoryTable scrollToBottomAnimated:NO];
+                self.justLoaded = NO;
+            }
+        });
+    }
 }
 
 # pragma mark - helpers
@@ -120,6 +143,12 @@
     [self.navigationController pushViewController:newTransactionViewController animated:YES];
 }
 
+- (void)settingBtnTapped
+{
+    UIViewController *controller = [[MineSettingsViewController alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
 - (void)histogramBtnTapped {
     NSInteger year = [self getYearOfMostVisibleCell];
     
@@ -135,6 +164,12 @@
     MineHistogramViewController *histogramViewController = [[MineHistogramViewController alloc] initWithXLabelArray:months incomeArray:incomeArray outcomeArray:outcomeArray];
     histogramViewController.year = year;
     [self.navigationController pushViewController:histogramViewController animated:YES];
+}
+
+- (void)todayBtnTapped
+{
+    [self.yearlyHistoryTable scrollToBottomAnimated:NO];
+    [MineViewUtil presentMonthViewControllerFormViewController:self year:[MineTimeUtil getCurrentYear] month:[MineTimeUtil getCurrentMonth]];
 }
 
 - (void)getAllTransactionsDidSucceed:(NSNotification *)notification

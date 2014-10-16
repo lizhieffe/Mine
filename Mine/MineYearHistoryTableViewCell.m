@@ -12,6 +12,7 @@
 #import "MineTransactionInfo.h"
 #import "MineMonthViewController.h"
 #import "MineColorUtil.h"
+#import "MineViewUtil.h"
 
 static BOOL nibCollectionViewCellloaded = NO;
 
@@ -78,11 +79,7 @@ static BOOL nibCollectionViewCellloaded = NO;
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger month = indexPath.row * 3 + indexPath.section + 1;
-    MineMonthViewController *historyViewController = [[MineMonthViewController alloc] initForYear:self.year month:month];
-    
-    self.tableViewContainerController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[@(self.year) stringValue] style:UIBarButtonItemStylePlain target:nil action:nil];
-
-    [self.tableViewContainerController.navigationController pushViewController:historyViewController animated:YES];
+    [MineViewUtil presentMonthViewControllerFormViewController:self.tableViewContainerController year:self.year month:month];
 }
 
 # pragma mark - collection view data source

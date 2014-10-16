@@ -167,17 +167,18 @@
         
         MineGetAllTransactionsService *service = [[MineGetAllTransactionsService alloc] init];
         [service getAllTransactions];
-    }
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (errorCode == 0) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
             [MineViewUtil hideActivityIndicatorView:self.activityIndicatorView];
             [self.navigationController popToRootViewControllerAnimated:YES];
-        }
-        else
+        });
+    }
+    else {
+        dispatch_async(dispatch_get_main_queue(), ^{
             [MineViewUtil hideActivityIndicatorView:self.activityIndicatorView];
             [MineAlertViewUtil showAlertViewWithErrorCode:errorCode delegate:self];
-    });
+        });
+    }
 }
 
 #pragma mark - text field delegate

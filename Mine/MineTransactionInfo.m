@@ -114,6 +114,12 @@ NSString *const MinePersistDataKeyTransactions = @"transactions";
     }
 }
 
+- (void)clearTransactions
+{
+    [self.transactionItems removeAllObjects];
+    [self.transactionItemsHelper removeAllObjects];
+}
+
 - (NSMutableArray *)getAllTransactionsForYear:(NSInteger)year month:(NSInteger)month
 {
     NSDictionary *transactionsForYear = [self.transactionItems objectForKey:[@(year) stringValue]];

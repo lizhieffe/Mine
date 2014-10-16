@@ -7,6 +7,7 @@
 //
 
 #import "MineViewUtil.h"
+#import "MineMonthViewController.h"
 
 @implementation MineViewUtil
 
@@ -30,6 +31,13 @@
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     [activityIndicatorView stopAnimating];
     activityIndicatorView.hidden = YES;
+}
+
++ (void)presentMonthViewControllerFormViewController:(UIViewController *)from year:(NSInteger)year month:(NSInteger)month
+{
+    MineMonthViewController *monthViewController = [[MineMonthViewController alloc] initForYear:year month:month];
+    from.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[@(year) stringValue] style:UIBarButtonItemStylePlain target:nil action:nil];
+    [from.navigationController pushViewController:monthViewController animated:YES];
 }
 
 @end

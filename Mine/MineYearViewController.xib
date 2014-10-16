@@ -8,6 +8,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MineYearViewController">
             <connections>
                 <outlet property="histogramBtn" destination="Dnv-Jo-76M" id="0W5-7d-FSL"/>
+                <outlet property="infoIconView" destination="98E-YK-xTa" id="AEE-eR-OWc"/>
+                <outlet property="todayBtn" destination="d4m-aa-Jf6" id="rEV-Ui-GAt"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="yearlyHistoryTable" destination="5G4-iR-WSF" id="Aa5-QJ-yaH"/>
             </connections>
@@ -30,17 +32,17 @@
                         <barButtonItem title="Peek" id="V6G-OI-PBe">
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </barButtonItem>
-                        <barButtonItem enabled="NO" width="55" id="hau-fp-3BN">
+                        <barButtonItem enabled="NO" width="53" id="hau-fp-3BN">
                             <color key="tintColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                         <barButtonItem title="Histogram" id="Dnv-Jo-76M">
                             <color key="tintColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
-                        <barButtonItem enabled="NO" width="37" id="PZT-t1-jeE">
+                        <barButtonItem enabled="NO" width="46" id="PZT-t1-jeE">
                             <color key="tintColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
-                        <barButtonItem title="add" id="d4m-aa-Jf6">
-                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <barButtonItem title="Today" id="d4m-aa-Jf6">
+                            <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </items>
                 </toolbar>
@@ -48,7 +50,24 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="116" y="-306"/>
         </view>
+        <view contentMode="scaleToFill" id="98E-YK-xTa">
+            <rect key="frame" x="0.0" y="0.0" width="18" height="18"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info-50.png" id="BmM-sX-30N">
+                    <rect key="frame" x="0.0" y="0.0" width="18" height="18"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="8" y="202"/>
+        </view>
     </objects>
+    <resources>
+        <image name="info-50.png" width="50" height="50"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

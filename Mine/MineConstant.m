@@ -16,6 +16,7 @@ NSString *const MineNotificationAddTransactionDidSucceed = @"MineNotificationAdd
 NSString *const MineNotificationGetAllTransactionsDidSucceed = @"MineNotificationGetAllTransactionsDidSucceed";
 NSString *const MineNotificationDeleteTransactionDidSucceed = @"MineNotificationDeleteTransactionDidSucceed";
 NSString *const MineNotificationDownViewDidHide = @"MineNotificationDownViewDidHide";
+NSString *const MineNotificationShowLoginView = @"MineNotificationShowLoginView";
 
 #pragma mark - request parameter -
 
