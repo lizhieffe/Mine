@@ -34,8 +34,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *positiveBtn;
 @property (weak, nonatomic) IBOutlet UIButton *negativeBtn;
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *addBtn;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelBtn;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneBtn;
+//@property (strong, nonatomic) UIBarButtonItem *doneBtn;
 
 @property (weak, nonatomic) IBOutlet UILabel *amount;
 
@@ -99,6 +99,10 @@
     [self.dateBtnTextField setInputView:self.datePicker];
     self.datePicker.datePickerMode = UIDatePickerModeDate;
     
+    self.doneBtn.target = self;
+    self.doneBtn.action = @selector(okBtnTapped);
+    self.navigationItem.rightBarButtonItem = self.doneBtn;
+
     /**
      add guesture to dismiss keyboard
      */
@@ -117,12 +121,6 @@
     
     [self.positiveBtn addTarget:self action:@selector(positiveBtnTapped) forControlEvents:UIControlEventTouchUpInside];
     [self.negativeBtn addTarget:self action:@selector(negativeBtnTapped) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.addBtn.target = self;
-    self.addBtn.action = @selector(okBtnTapped);
-    
-    self.cancelBtn.target = self;
-    self.cancelBtn.action = @selector(cancelBtnTapped);
 
     /* notification */
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addTransactionDidSucceed:) name:MineNotificationAddTransactionDidSucceed object:nil];
@@ -171,11 +169,11 @@
 {
     if (self.amountAbsValue == 0) {
 //        [self.addBtn setBackgroundColor:[UIColor grayColor]];
-        self.addBtn.enabled = NO;
+        self.doneBtn.enabled = NO;
     }
     else {
 //        [self.addBtn setBackgroundColor:UIColorFromRGB(0x00CC33)];
-        self.addBtn.enabled = YES;
+        self.doneBtn.enabled = YES;
     }
 }
 

@@ -145,6 +145,9 @@
 
 - (void)settingBtnTapped
 {
+    NSInteger year = [self getYearOfMostVisibleCell];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[@(year) stringValue] style:UIBarButtonItemStylePlain target:nil action:nil];
+
     UIViewController *controller = [[MineSettingsViewController alloc] init];
     [self.navigationController pushViewController:controller animated:YES];
 }
