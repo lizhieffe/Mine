@@ -31,6 +31,7 @@
         _ignoreCache = NO;
         _expireTimeInterval = -1;
         _token = [MinePreferenceService token];
+        _timeout = 10;
     }
     return self;
 }
@@ -89,7 +90,7 @@
     lastSucceedDate = [self lastSucceedDateInCache];
     if (self.ignoreCache || !lastSucceedDate || self.expireTimeInterval < 0 || [lastSucceedDate timeIntervalSinceNow] * (-1) > self.expireTimeInterval) {
         NSURL *URL = [NSURL URLWithString:[self fullUrl]];
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:self.timeout];
         [request setHTTPMethod:@"POST"];
         NSURLSession *session = [NSURLSession sharedSession];
         NSURLSessionDataTask *task = [session dataTaskWithRequest:request

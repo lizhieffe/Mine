@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MineLoginViewController : UIViewController <UITextFieldDelegate, UIAlertViewDelegate>
+@interface MineLoginViewController : UIViewController <UITextFieldDelegate, UIAlertViewDelegate, NSURLConnectionDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passcodeTextField;

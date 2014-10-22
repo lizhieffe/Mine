@@ -46,6 +46,15 @@ extern NSString *const MineResponseKeyResponseDeletedTransactionId;
 extern NSString *const MineAlertViewTitleGeneralError;
 extern NSString *const MineAlertViewMsgGeneralError;
 
+extern NSString *const MineAlertViewTitleLoginRequestTimeout;
+extern NSString *const MineAlertViewMsgLoginRequestTimeout;
+
+extern NSString *const MineAlertViewTitleSignupRequestTimeout;
+extern NSString *const MineAlertViewMsgSignupRequestTimeout;
+
+extern NSString *const MineAlertViewTitleAddTransactionRequestTimeout;
+extern NSString *const MineAlertViewMsgAddTransactionRequestTimeout;
+
 extern NSString *const MineAlertViewTitleUserNotExist;
 extern NSString *const MineAlertViewMsgUserNotExist;
 

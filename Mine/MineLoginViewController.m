@@ -76,6 +76,8 @@
      start service
      */
     MineLoginService *service = [[MineLoginService alloc] init];
+    __weak MineLoginViewController *weakSelf = self;
+    service.connectionDelegate = weakSelf;
     [service loginWithUsername:self.usernameTextField.text passcode:self.passcodeTextField.text];
 }
 
@@ -220,5 +222,12 @@
 //    if (buttonIndex == 0)
 //        [alertView removeFromSuperview];
 //}
+
+# pragma mark - NSURLConnectionDelegate
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    [MineAlertViewUtil showAlertViewWithErrorCode:10 delegate:self];
+}
 
 @end

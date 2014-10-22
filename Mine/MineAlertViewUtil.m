@@ -25,6 +25,12 @@
         return @"";
     else if (errorCode == 1)
         return MineAlertViewTitleGeneralError;
+    else if (errorCode == 10)
+        return MineAlertViewTitleLoginRequestTimeout;
+    else if (errorCode == 11)
+        return MineAlertViewTitleSignupRequestTimeout;
+    else if (errorCode == 12)
+        return MineAlertViewTitleAddTransactionRequestTimeout;
     else if (errorCode == 101)
         return MineAlertViewTitleUserNotExist;
     else if (errorCode == 102)
@@ -39,6 +45,12 @@
         return @"";
     else if (errorCode == 1)
         return MineAlertViewMsgGeneralError;
+    else if (errorCode == 10)
+        return MineAlertViewMsgLoginRequestTimeout;
+    else if (errorCode == 11)
+        return MineAlertViewMsgSignupRequestTimeout;
+    else if (errorCode == 12)
+        return MineAlertViewMsgAddTransactionRequestTimeout;
     else if (errorCode == 101)
         return MineAlertViewMsgUserNotExist;
     else if (errorCode == 102)

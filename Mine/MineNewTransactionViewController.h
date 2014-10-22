@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MineNewTransactionViewController : UIViewController <UITextFieldDelegate, UIAlertViewDelegate>
+@interface MineNewTransactionViewController : UIViewController <UITextFieldDelegate, UIAlertViewDelegate, NSURLConnectionDelegate>
 
 - (id)initWithDate:(NSDate *)date;
 

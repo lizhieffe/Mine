@@ -251,7 +251,7 @@
 {
     [self hideKeyboard];
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-    [self showActivityIndicatorView];
+//    [self showActivityIndicatorView];
     
     /**
      start service
@@ -260,6 +260,8 @@
     NSInteger price = self.isAmountPositive ? self.amountAbsValue : (-1) * self.amountAbsValue;
     
     MineAddTransactionService *service = [[MineAddTransactionService alloc] init];
+    __weak MineNewTransactionViewController *weakself = self;
+    service.connectionDelegate = weakself;
     [service addTransactionWithTimestamp:timestamp price:price];
 }
 
@@ -343,6 +345,13 @@
     }
     [self updateOkBtn];
     return YES;
+}
+
+# pragma mark - NSURLConnectionDelegate
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    [MineAlertViewUtil showAlertViewWithErrorCode:12 delegate:self];
 }
 
 @end

@@ -15,6 +15,8 @@
 @property (nonatomic, assign) BOOL ignoreCache;
 @property (assign, nonatomic) NSInteger expireTimeInterval;
 @property (strong, nonatomic) NSString *token;
+@property (assign, nonatomic) NSInteger timeout;
+@property (weak, nonatomic) id <NSURLConnectionDelegate> connectionDelegate;
 
 - (NSString *)hostUrl;
 - (NSString *)apiPath;

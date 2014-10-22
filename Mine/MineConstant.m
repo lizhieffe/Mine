@@ -47,6 +47,18 @@ NSString *const MineResponseKeyResponseDeletedTransactionId = @"deleted_transact
 NSString *const MineAlertViewTitleGeneralError = @"User doesn't exist";
 NSString *const MineAlertViewMsgGeneralError = @"Please make sure your username is correct";
 
+// 10
+NSString *const MineAlertViewTitleLoginRequestTimeout = @"Cannot log in user due to network issue";
+NSString *const MineAlertViewMsgLoginRequestTimeout = @"Please try again later";
+
+// 11
+NSString *const MineAlertViewTitleSignupRequestTimeout = @"Cannot sign up new user due to network issue";
+NSString *const MineAlertViewMsgSignupRequestTimeout = @"Please try again later";
+
+// 12
+NSString *const MineAlertViewTitleAddTransactionRequestTimeout = @"Cannot add new transaction due to network issue";
+NSString *const MineAlertViewMsgAddTransactionRequestTimeout = @"Please try again later";
+
 // 101
 NSString *const MineAlertViewTitleUserNotExist = @"User doesn't exist";
 NSString *const MineAlertViewMsgUserNotExist = @"Please make sure your username is correct";
