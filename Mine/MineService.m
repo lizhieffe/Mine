@@ -12,6 +12,7 @@
 #import "MinePreferenceService.h"
 #import "MineConstant.h"
 #import "MineServiceManager.h"
+#import "AFNetworkReachabilityManager.h"
 
 @interface MineService ()
 
@@ -89,6 +90,7 @@
     
     lastSucceedDate = [self lastSucceedDateInCache];
     if (self.ignoreCache || !lastSucceedDate || self.expireTimeInterval < 0 || [lastSucceedDate timeIntervalSinceNow] * (-1) > self.expireTimeInterval) {
+        
         NSURL *URL = [NSURL URLWithString:[self fullUrl]];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:self.timeout];
         [request setHTTPMethod:@"POST"];
@@ -179,6 +181,14 @@
     NSString *className = NSStringFromClass([self class]);
     NSString *path = [NSString stringWithFormat:@"%@_lastSucceedJson", className];
     [MinePersistDataUtil setObject:json forKey:path];
+}
+
+- (BOOL) connectedToNetwork{
+    AFNetworkReachabilityStatus reachability = [[AFNetworkReachabilityManager sharedManager] networkReachabilityStatus];
+    if (reachability == AFNetworkReachabilityStatusUnknown || reachability == AFNetworkReachabilityStatusNotReachable)
+        return false;
+    else
+        return true;
 }
 
 @end
