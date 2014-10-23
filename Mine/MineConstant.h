@@ -46,6 +46,9 @@ extern NSString *const MineResponseKeyResponseDeletedTransactionId;
 extern NSString *const MineAlertViewTitleGeneralError;
 extern NSString *const MineAlertViewMsgGeneralError;
 
+extern NSString *const MineAlertViewTitleInternetNotAvailable;
+extern NSString *const MineAlertViewMsgInternetNotAvailable;
+
 extern NSString *const MineAlertViewTitleLoginRequestTimeout;
 extern NSString *const MineAlertViewMsgLoginRequestTimeout;
 

@@ -25,6 +25,8 @@
         return @"";
     else if (errorCode == 1)
         return MineAlertViewTitleGeneralError;
+    else if (errorCode == 9)
+        return MineAlertViewTitleInternetNotAvailable;
     else if (errorCode == 10)
         return MineAlertViewTitleLoginRequestTimeout;
     else if (errorCode == 11)
@@ -45,6 +47,8 @@
         return @"";
     else if (errorCode == 1)
         return MineAlertViewMsgGeneralError;
+    else if (errorCode == 9)
+        return MineAlertViewMsgInternetNotAvailable;
     else if (errorCode == 10)
         return MineAlertViewMsgLoginRequestTimeout;
     else if (errorCode == 11)

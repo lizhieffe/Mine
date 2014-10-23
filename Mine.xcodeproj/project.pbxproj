@@ -57,6 +57,7 @@
 		DC50980F19E21F0C00EBD4DE /* MineColorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DC50980E19E21F0C00EBD4DE /* MineColorUtil.m */; };
 		DC50981219E224A600EBD4DE /* MineAddTransactionService.m in Sources */ = {isa = PBXBuildFile; fileRef = DC50981119E224A600EBD4DE /* MineAddTransactionService.m */; };
 		DC50981519E2280C00EBD4DE /* MineViewUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DC50981419E2280C00EBD4DE /* MineViewUtil.m */; };
+		DC61AF2E19F8869300799E79 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = DC61AF2D19F8869300799E79 /* Reachability.m */; };
 		DC99468A19E6CA1000559AA8 /* MineServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DC99468919E6CA1000559AA8 /* MineServiceManager.m */; };
 		DC99468D19EB78B900559AA8 /* MineDeleteTransactionService.m in Sources */ = {isa = PBXBuildFile; fileRef = DC99468C19EB78B900559AA8 /* MineDeleteTransactionService.m */; };
 		DC99469919ECA8B700559AA8 /* loginViewBackground_744x1392.png in Resources */ = {isa = PBXBuildFile; fileRef = DC99469819ECA8B700559AA8 /* loginViewBackground_744x1392.png */; };
@@ -201,6 +202,8 @@
 		DC50981119E224A600EBD4DE /* MineAddTransactionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineAddTransactionService.m; sourceTree = "<group>"; };
 		DC50981319E2280C00EBD4DE /* MineViewUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewUtil.h; sourceTree = "<group>"; };
 		DC50981419E2280C00EBD4DE /* MineViewUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewUtil.m; sourceTree = "<group>"; };
+		DC61AF2C19F8869300799E79 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		DC61AF2D19F8869300799E79 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		DC99468819E6CA1000559AA8 /* MineServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineServiceManager.h; sourceTree = "<group>"; };
 		DC99468919E6CA1000559AA8 /* MineServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineServiceManager.m; sourceTree = "<group>"; };
 		DC99468B19EB78B900559AA8 /* MineDeleteTransactionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineDeleteTransactionService.h; sourceTree = "<group>"; };
@@ -332,6 +335,8 @@
 		DC15A1F2198449FB007FA1AC /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				DC61AF2C19F8869300799E79 /* Reachability.h */,
+				DC61AF2D19F8869300799E79 /* Reachability.m */,
 				DC15A1F319844A9C007FA1AC /* MineConstant.h */,
 				DC15A1F419844A9C007FA1AC /* MineConstant.m */,
 				DC15A1FB19855697007FA1AC /* MineAlertViewUtil.h */,
@@ -792,6 +797,7 @@
 				DCE2403F19E4FE25009DB1E4 /* MinePersistDataUtil.m in Sources */,
 				DC9946AB19ECDCB000559AA8 /* MineYearHistoryTableViewCell.m in Sources */,
 				DC99469D19ECB5F100559AA8 /* UITextField+Mine.m in Sources */,
+				DC61AF2E19F8869300799E79 /* Reachability.m in Sources */,
 				DC15A20C1985CC86007FA1AC /* MineSignUpService.m in Sources */,
 				DC406F2219EF966200B70F36 /* MineSettingsViewController.m in Sources */,
 				DC15A2331988BB33007FA1AC /* MKMapView+Mine.m in Sources */,

@@ -47,6 +47,10 @@ NSString *const MineResponseKeyResponseDeletedTransactionId = @"deleted_transact
 NSString *const MineAlertViewTitleGeneralError = @"User doesn't exist";
 NSString *const MineAlertViewMsgGeneralError = @"Please make sure your username is correct";
 
+// 9
+NSString *const MineAlertViewTitleInternetNotAvailable = @"Internet access is not available";
+NSString *const MineAlertViewMsgInternetNotAvailable = @"Please connect to internet and try again";
+
 // 10
 NSString *const MineAlertViewTitleLoginRequestTimeout = @"Cannot log in user due to network issue";
 NSString *const MineAlertViewMsgLoginRequestTimeout = @"Please try again later";

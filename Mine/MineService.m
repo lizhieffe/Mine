@@ -12,7 +12,8 @@
 #import "MinePreferenceService.h"
 #import "MineConstant.h"
 #import "MineServiceManager.h"
-#import "AFNetworkReachabilityManager.h"
+#import "MineAlertViewUtil.h"
+#import "Reachability.h"
 
 @interface MineService ()
 
@@ -90,6 +91,11 @@
     
     lastSucceedDate = [self lastSucceedDateInCache];
     if (self.ignoreCache || !lastSucceedDate || self.expireTimeInterval < 0 || [lastSucceedDate timeIntervalSinceNow] * (-1) > self.expireTimeInterval) {
+        
+        if (![self connectedToNetwork]) {
+            [MineAlertViewUtil showAlertViewWithErrorCode:9 delegate:nil];
+            return;
+        }
         
         NSURL *URL = [NSURL URLWithString:[self fullUrl]];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:self.timeout];
@@ -183,12 +189,11 @@
     [MinePersistDataUtil setObject:json forKey:path];
 }
 
-- (BOOL) connectedToNetwork{
-    AFNetworkReachabilityStatus reachability = [[AFNetworkReachabilityManager sharedManager] networkReachabilityStatus];
-    if (reachability == AFNetworkReachabilityStatusUnknown || reachability == AFNetworkReachabilityStatusNotReachable)
-        return false;
-    else
-        return true;
+- (BOOL)connectedToNetwork
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
 }
 
 @end
