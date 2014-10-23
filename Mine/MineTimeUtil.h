@@ -28,4 +28,6 @@
 
 + (NSInteger)getNumberOfDaysForMonth:(NSInteger)month year:(NSInteger)year;
 
++ (BOOL)isDate:(NSDate *)date1 theSameWithDate:(NSDate *)date2;
+
 @end

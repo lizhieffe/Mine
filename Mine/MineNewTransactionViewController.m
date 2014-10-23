@@ -16,8 +16,11 @@
 #import "MineTransactionInfo.h"
 #import "MineAlertViewUtil.h"
 #import "MineGetAllTransactionsService.h"
+#import "UIView+FindFirstResponder.h"
 
 @interface MineNewTransactionViewController ()
+
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (weak, nonatomic) IBOutlet UIButton *monthBtn;
 @property (weak, nonatomic) IBOutlet UIButton *dateBtn;
@@ -48,6 +51,9 @@
 @property (strong, nonatomic) UIDatePicker *datePicker;
 @property (strong, nonatomic) UIPopoverController *popOverForDatePicker;
 
+@property (nonatomic) BOOL keyboardOnScreen;
+@property (nonatomic, assign) NSInteger keyboardHeight;
+
 @end
 
 @implementation MineNewTransactionViewController
@@ -62,6 +68,7 @@
     self = [super init];
     if (self) {
         _date = date;
+        _keyboardOnScreen = NO;
     }
     return self;
 }
@@ -103,6 +110,14 @@
     self.doneBtn.action = @selector(okBtnTapped);
     self.navigationItem.rightBarButtonItem = self.doneBtn;
 
+    
+    
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    
+    [self adjustScrollView];
+    
     /**
      add guesture to dismiss keyboard
      */
@@ -124,12 +139,13 @@
 
     /* notification */
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addTransactionDidSucceed:) name:MineNotificationAddTransactionDidSucceed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
 }
 
-- (void)didReceiveMemoryWarning
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+//    [self.scrollView setContentOffset:CGPointMake(0,0)];
 }
 
 - (void)datePickerValueChanged
@@ -227,12 +243,10 @@
 
 - (void)otherBtnTapped
 {
-    
 }
 
 - (void)otherBtnTextFieldTapped
 {
-    
 }
 
 - (void)positiveBtnTapped
@@ -290,6 +304,47 @@
     return self.isAmountPositive ? self.amountAbsValue : (-1) * self.amountAbsValue;
 }
 
+# pragma mark - UI
+
+- (void)keyboardDidShow:(NSNotification *)notification
+{
+    _keyboardOnScreen = YES;
+    
+    NSDictionary *keyboardInfo = [notification userInfo];
+    NSValue *keyboardFrameBegin = [keyboardInfo valueForKeyPath:UIKeyboardFrameBeginUserInfoKey];
+    self.keyboardHeight = [keyboardFrameBegin CGRectValue].size.height;
+    
+    [self adjustScrollView];
+}
+
+- (void)keyboardDidHide:(NSNotification *)notification
+{
+    _keyboardOnScreen = NO;
+    [self adjustScrollView];
+}
+
+- (void)adjustScrollView
+{
+    if (self.keyboardOnScreen == YES) {
+        NSInteger maxOffsetInVerticalDirection = NSIntegerMax;
+        UIView *activeTextField = [self.view findFirstResponder];
+        
+        maxOffsetInVerticalDirection = [activeTextField convertRect:activeTextField.bounds toView:activeTextField.superview].origin.y;
+        if (self.navigationController && self.navigationController.navigationBar.hidden == NO) {
+            UINavigationBar *bar = self.navigationController.navigationBar;
+            
+            maxOffsetInVerticalDirection = maxOffsetInVerticalDirection - [bar convertRect:bar.bounds toView:bar.superview].size.height - [bar convertRect:bar.bounds toView:bar.superview].origin.y;
+        }
+        
+        CGPoint offset = CGPointMake(0, (maxOffsetInVerticalDirection < (self.keyboardHeight) ? maxOffsetInVerticalDirection : (self.keyboardHeight)) - 100);
+        
+        [self.scrollView setContentOffset:offset animated:YES];
+    }
+    else {
+        [self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    }
+}
+
 # pragma mark - NSNotification
 
 - (void)addTransactionDidSucceed:(NSNotification *)notification
@@ -345,6 +400,13 @@
     }
     [self updateOkBtn];
     return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    self.amountAbsValue = 0;
+    [self updateAmountLabel];
+    [self updateOkBtn];
 }
 
 # pragma mark - NSURLConnectionDelegate

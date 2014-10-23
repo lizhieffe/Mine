@@ -19,7 +19,6 @@
 
 @property (strong, nonatomic) NSString *fullUrl;
 
-
 @end
 
 @implementation MineService

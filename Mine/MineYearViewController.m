@@ -22,6 +22,7 @@
 #import "MineTransactionInfo.h"
 #import "MineSettingsViewController.h"
 #import "MineViewUtil.h"
+#import "MineCreateTransactionViewController.h"
 
 @interface MineYearViewController ()
 
@@ -138,9 +139,12 @@
     NSInteger month = [MineTimeUtil getCurrentMonth];
     NSInteger day = [MineTimeUtil getCurrentDay];
     NSDate *date = [MineTimeUtil getDateForYear:year month:month day:day];
-    
+//
     MineNewTransactionViewController *newTransactionViewController = [[MineNewTransactionViewController alloc] initWithDate:date];
     [self.navigationController pushViewController:newTransactionViewController animated:YES];
+    
+//    MineCreateTransactionViewController *controller = [[MineCreateTransactionViewController alloc] initWithDate:date];
+//    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)settingBtnTapped

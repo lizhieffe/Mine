@@ -136,4 +136,12 @@
     return range.length;
 }
 
++ (BOOL)isDate:(NSDate *)date1 theSameWithDate:(NSDate *)date2
+{
+    if ([MineTimeUtil getDay:date1] == [MineTimeUtil getDay:date2] && [MineTimeUtil getMonth:date1] == [MineTimeUtil getMonth:date2] && [MineTimeUtil getYear:date1] == [MineTimeUtil getYear:date2])
+        return YES;
+    else
+        return NO;
+}
+
 @end
